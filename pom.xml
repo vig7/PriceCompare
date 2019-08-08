@@ -7,13 +7,12 @@
     <groupId>Mobile</groupId>
     <artifactId>Compare</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <dependencies>
-        <dependency>
-            <groupId>com.aafanasev</groupId>
-            <artifactId>fonoapi-retrofit</artifactId>
-            <version>1.0</version>
-            <type>pom</type>
-        </dependency>
+    <dependencies><dependency>
+        <groupId>com.aafanasev</groupId>
+        <artifactId>fonoapi-retrofit</artifactId>
+        <version>1.0</version>
+        <type>pom</type>
+    </dependency>
         <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
         <dependency>
             <groupId>org.jsoup</groupId>

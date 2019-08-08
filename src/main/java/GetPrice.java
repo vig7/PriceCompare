@@ -9,14 +9,13 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class GetPrice {
-    public static  void main(String args[]){
+    void EnterCsv(String pageurl){
         String html="";
         String webPage = "";
     try {
-        File file = new File("PriceSpec.csv");
-        FileWriter outputfile = new FileWriter("PriceSpec.csv");
-        // create CSVWriter object filewriter object as parameter
-        CSVWriter writer = new CSVWriter(outputfile);
+        //File file = new File("PriceSpec.csv");
+        String csv = "PriceSpec.csv";
+        CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
 
         // adding header to csv
 
@@ -28,31 +27,23 @@ public class GetPrice {
 
         // closing writer connection
 
-
-
-        String url = "https://www.gsmarena.com/samsung_galaxy_note10+_5g-9787.php";
-
-        Document document = Jsoup.connect(url).get();
-        Elements links = document.select("td.nfo");
-
-        Elements linkq = document.select("td.ttl");
+        ArrayList<String> checker = new ArrayList<String>(
+                Arrays.asList("Dimensions","Weight","Build","SIM","Type","Size","Resolution","Protection","OS","Chipset","CPU","GPU","Card slot","Internal","Features","Video","Single","Features","Video","Loudspeaker","3.5mm jack","WLAN","Bluetooth","GPS","NFC","Radio","USB","Sensors","Charging","Colors","Models","Price","Performance","Camera","Loudspeaker","Audio quality","Battery life"));
+        String[] header ={"Dimensions","Weight","Build","SIM","Type","Size","Resolution","Protection","OS","Chipset","CPU","GPU","Card slot","Internal","Features","Video","Single","Features","Video","Loudspeaker","3.5mm jack","WLAN","Bluetooth","GPS","NFC","Radio","USB","Sensors","Charging","Colors","Models","Price","Performance","Camera","Loudspeaker","Audio quality","Battery life"};
+        
         ArrayList<String> b=new ArrayList<String>();
-        for (Element link : linkq) {
-            if(link.text()!="")
-                b.add(link.text());
+        //writer.writeNext(header);
+        Document document = Jsoup.connect(pageurl).get();
+        Elements lin1 = document.select("tr");
+        for(Element link:lin1){
+            Elements ttl=link.select("td.ttl");
+            Elements nfo=link.select("td.nfo");
+            if(checker.indexOf(ttl.text())!=-1&&ttl.text().length()!=0)
+                b.add(nfo.text());
         }
-
-        String[] header=GetStringArray(b);
-
-        writer.writeNext(header);
-        b.clear();
-        for (Element link : links) {
-            if(link.text()!="")
-            b.add(link.text());
-        }
-        header=GetStringArray(b);
-
-        writer.writeNext(header);
+        System.out.println(b);
+        String[] data =GetStringArray(b);
+        writer.writeNext(data);
         writer.close();
     }
     catch (Exception e){
