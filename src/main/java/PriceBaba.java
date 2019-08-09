@@ -7,8 +7,8 @@ import java.util.*;
 import java.io.*;
 import java.util.ArrayList;
 
-public class GetPrice {
-    void EnterCsv(String pageurl){
+public class PriceBaba {
+    void get(String pageurl){
         String html="";
         String webPage = "";
         try {
