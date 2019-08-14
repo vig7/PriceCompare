@@ -1,10 +1,3 @@
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.util.ArrayList;
-
 public class GetPageUrl {
     public static void main(String args[]) {
         PriceBaba get=new PriceBaba();
@@ -21,7 +14,7 @@ public class GetPageUrl {
 //                }
 //            }
 //        }
-        CrawlingSpecs cs=new CrawlingSpecs();
+        AmazonProductDetails cs=new AmazonProductDetails();
         cs.getAmazonPrice();
     }
     catch (Exception e){
