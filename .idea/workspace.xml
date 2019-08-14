@@ -19,10 +19,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/UpdateRam.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
+            <state relative-caret-position="318">
               <caret line="24" column="65" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -52,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/DBOperations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+            <state relative-caret-position="381">
+              <caret line="35" column="13" lean-forward="true" selection-start-line="35" selection-start-column="13" selection-end-line="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,11 +61,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-146">
-              <caret line="562" column="25" selection-start-line="562" selection-start-column="25" selection-end-line="562" selection-end-column="25" />
+            <state relative-caret-position="398">
+              <caret line="602" column="10" selection-start-line="602" selection-start-column="10" selection-end-line="602" selection-end-column="10" />
+              <folding>
+                <element signature="e#6377#6383#0" expanded="true" />
+                <element signature="e#6383#6389#0" expanded="true" />
+                <element signature="e#6409#6415#0" expanded="true" />
+                <element signature="e#6421#6427#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -443,21 +449,21 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/PriceSpec.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html" />
     <entry file="file://$PROJECT_DIR$/PriceSpec.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="72131">
           <caret line="4243" column="266" selection-start-line="4243" selection-start-column="266" selection-end-line="4243" selection-end-column="266" />
         </state>
+      </provider>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
       <provider editor-type-id="text-editor" />
     </entry>
@@ -487,8 +493,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-146">
-          <caret line="562" column="25" selection-start-line="562" selection-start-column="25" selection-end-line="562" selection-end-column="25" />
+        <state relative-caret-position="398">
+          <caret line="602" column="10" selection-start-line="602" selection-start-column="10" selection-end-line="602" selection-end-column="10" />
+          <folding>
+            <element signature="e#6377#6383#0" expanded="true" />
+            <element signature="e#6383#6389#0" expanded="true" />
+            <element signature="e#6409#6415#0" expanded="true" />
+            <element signature="e#6421#6427#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -508,8 +520,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DBOperations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        <state relative-caret-position="381">
+          <caret line="35" column="13" lean-forward="true" selection-start-line="35" selection-start-column="13" selection-end-line="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -518,7 +530,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UpdateRam.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
+        <state relative-caret-position="318">
           <caret line="24" column="65" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
