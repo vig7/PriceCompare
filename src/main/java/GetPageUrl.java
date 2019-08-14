@@ -14,7 +14,7 @@ public class GetPageUrl {
             //CrawlSnap snap=new CrawlSnap();
             //snap.test();
             CrawlFlipk flipk=new CrawlFlipk();
-           String[] val =flipk.getPrice("redmi note 7 pro");
+           String[] val =flipk.getPrice("redmi note 5");
             //CrawlPaytm paytm=new CrawlPaytm();
             //paytm.test();
        // UpdateRam ram=new UpdateRam();
