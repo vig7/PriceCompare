@@ -1,21 +1,25 @@
 import java.util.Date;
 
 public class ValidateName {
-    boolean check(String productName,String databseName){
-        productName=productName.toLowerCase();
+    boolean check(String websiteName,String databseName){
+        websiteName=websiteName.toLowerCase();
         databseName=databseName.toLowerCase();
-        String[] value=productName.split("\\(");
-        String temp="";
+        String[] value=websiteName.split("\\(");
+        String restOfval="";
         for(int i=1;i<value.length;i++){
-
-            temp+=value[i];
+            restOfval+=value[i];
         }
-        if(databseName.length()<=productName.length())
-        if(value[0].equals(databseName.substring(0,value[0].length()))){
-            if(temp.replaceAll("\\s+","").contains(databseName.substring(value[0].length()).replaceAll("\\s+","")))
-                return true;
+        if(databseName.length()<=websiteName.length()&&databseName.contains(value[0].trim())) {
+            String restofData=databseName.substring(value[0].length()-1,databseName.length());
+            if(restofData.length()==0){
+                if(value[0].trim().equals(databseName.trim()))
+                    return true;
+            }
+            else if (value[0].equals(databseName.substring(0, value[0].length()))) {
+                if(restOfval.replaceAll("\\s","").contains(databseName))
+                    return true;
+            }
         }
-
         return false;
     }
 }
