@@ -30,7 +30,7 @@ public class DBOperations {
 
             log("\n---------- Let's get Data from DB ----------");
             getDataFromDB();
-
+            addDataToDB();
             crunchifyPrepareStat.close();
             crunchifyConn.close(); // connection close
 
