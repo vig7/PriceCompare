@@ -1,6 +1,7 @@
 public class GetPageUrl {
     public static void main(String args[]) {
-        PriceBaba get=new PriceBaba();
+
+        //PriceBaba get=new PriceBaba();
     try {
 //        for(int i=104;i<=108;i++) {
 //            Document document = Jsoup.connect("https://pricebaba.com/mobile/pricelist/all-mobiles-sold-in-india?page="+i).get();
