@@ -25,7 +25,6 @@ public class DBOperations {
             makeJDBCConnection();
 
 //            log("\n---------- Adding company 'Crunchify LLC' to DB ----------");
-            addDataToDB("Crunchify");
 //            addDataToDB("Google Inc.", "Mountain View, CA, US", 50000, "https://google.com");
 //            addDataToDB("Apple Inc.", "Cupertino, CA, US", 30000, "http://apple.com");
 
@@ -54,7 +53,7 @@ public class DBOperations {
 
         try {
             // DriverManager: The basic service for managing a set of JDBC drivers.
-            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test1", "root", "");
+            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pricemobiile", "root", "");
             if (crunchifyConn != null) {
                 log("Connection Successful! Enjoy. Now it's time to push data");
             } else {
@@ -91,7 +90,7 @@ public class DBOperations {
 
         try {
             // MySQL Select Query Tutorial
-            String getQueryStatement = "SELECT * FROM helloworld";
+            String getQueryStatement = "SELECT * FROM pricespec";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 
@@ -100,11 +99,10 @@ public class DBOperations {
 
             // Let's iterate through the java ResultSet
             while (rs.next()) {
-                int id = rs.getInt("id");
                 String name = rs.getString("name");
 
                 // Simply Print the results
-                System.out.format("%s, %s, %s, %s\n", name);
+                System.out.format("%s \n", name);
             }
 
         } catch (
