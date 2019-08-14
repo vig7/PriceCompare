@@ -29,7 +29,7 @@ public class DBOperations {
 //            addDataToDB("Apple Inc.", "Cupertino, CA, US", 30000, "http://apple.com");
 
             log("\n---------- Let's get Data from DB ----------");
-            getDataFromDB();
+
             addDataToDB();
             crunchifyPrepareStat.close();
             crunchifyConn.close(); // connection close
@@ -67,18 +67,17 @@ public class DBOperations {
 
     }
 
-    private static void addDataToDB(String name) {
+    private static void addDataToDB() {
 
         try {
             String insertQueryStatement = "INSERT  INTO  helloworld  VALUES  (?)";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
-            crunchifyPrepareStat.setString(1, name);
-
+            crunchifyPrepareStat.setString(1, "sda");
 
             // execute insert SQL statement
             crunchifyPrepareStat.executeUpdate();
-            log(name + " added successfully");
+            log("ds" + " added successfully");
         } catch (
 
                 SQLException e) {

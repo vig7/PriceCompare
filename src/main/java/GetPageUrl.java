@@ -13,12 +13,12 @@ public class GetPageUrl {
     public static void main(String args[]) {
             //CrawlSnap snap=new CrawlSnap();
             //snap.test();
-            //CrawlFlipk flipk=new CrawlFlipk();
-            //flipk.test();
+            CrawlFlipk flipk=new CrawlFlipk();
+           String[] val =flipk.getPrice("redmi note 7 pro");
             //CrawlPaytm paytm=new CrawlPaytm();
             //paytm.test();
-        UpdateRam ram=new UpdateRam();
-        ram.updateRam();
+       // UpdateRam ram=new UpdateRam();
+       // ram.updateRam();
         try {
             for(int i=1;i<=0;i++) {
                 Document document = Jsoup.connect("https://pricebaba.com/mobile/pricelist/all-mobiles-sold-in-india?page="+i).get();
