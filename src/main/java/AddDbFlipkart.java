@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-//import static com.sun.activation.registries.LogSupport.log;
+import static com.sun.activation.registries.LogSupport.log;
 
 public class AddDbFlipkart {
 
