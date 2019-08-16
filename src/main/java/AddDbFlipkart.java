@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-import static com.sun.activation.registries.LogSupport.log;
 
 public class AddDbFlipkart {
 
@@ -16,13 +15,9 @@ public class AddDbFlipkart {
     void AaddDbFlipkart(){
 
         try {
-            log("-------- Simple Crunchify Tutorial on how to make JDBC connection to MySQL DB locally on macOS ------------");
             makeJDBCConnection();
 
-//            log("\n---------- Adding company 'Crunchify LLC' to DB ----------");
-//            addDataToDB("Google Inc.", "Mountain View, CA, US", 50000, "https://google.com");
-//            addDataToDB("Apple Inc.", "Cupertino, CA, US", 30000, "http://apple.com");
-
+//
 
             crunchifyPrepareStat.close();
             crunchifyConn.close(); // connection close

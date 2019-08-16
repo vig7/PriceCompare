@@ -5,9 +5,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import javax.xml.ws.Response;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
+
+
 
 public class GetPageUrl {
     public static void main(String args[]) {
@@ -16,8 +15,8 @@ public class GetPageUrl {
             //CrawlFlipk flipk=new CrawlFlipk();
             //CrawlPaytm paytm=new CrawlPaytm();
             //paytm.test();
-       UpdateRam ram=new UpdateRam();
-       ram.updateRam();
+//       UpdateRam ram=new UpdateRam();
+//       ram.updateRam();
         try {
             for(int i=1;i<=0;i++) {
                 Document document = Jsoup.connect("https://pricebaba.com/mobile/pricelist/all-mobiles-sold-in-india?page="+i).get();
