@@ -5,7 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import javax.xml.ws.Response;
+//import javax.xml.ws.Response;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
@@ -13,8 +13,8 @@ public class GetPageUrl {
     public static void main(String args[]) {
             //CrawlSnap snap=new CrawlSnap();
             //snap.test();
-            CrawlFlipk flipk=new CrawlFlipk();
-           String[] val =flipk.getPrice("redmi note 5");
+//            CrawlFlipk flipk=new CrawlFlipk();
+//           String[] val =flipk.getPrice("redmi note 5");
             //CrawlPaytm paytm=new CrawlPaytm();
             //paytm.test();
        // UpdateRam ram=new UpdateRam();
