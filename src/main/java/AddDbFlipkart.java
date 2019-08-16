@@ -1,26 +1,19 @@
-
-
 import java.sql.Connection;
-        import java.sql.DriverManager;
-        import java.sql.PreparedStatement;
-        import java.sql.ResultSet;
-        import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author Crunchify.com
- * Simple Hello World MySQL Tutorial on how to make JDBC connection, Add and Retrieve Data by App Shah
- *
- */
+import static com.sun.activation.registries.LogSupport.log;
 
-public class DBOperations {
+public class AddDbFlipkart {
 
+     Connection crunchifyConn = null;
+     PreparedStatement crunchifyPrepareStat = null;
 
-    static Connection crunchifyConn = null;
-    static PreparedStatement crunchifyPrepareStat = null;
-
-    public static void main(String[] argv) {
+    void AaddDbFlipkart(){
 
         try {
             log("-------- Simple Crunchify Tutorial on how to make JDBC connection to MySQL DB locally on macOS ------------");
@@ -30,7 +23,6 @@ public class DBOperations {
 //            addDataToDB("Google Inc.", "Mountain View, CA, US", 50000, "https://google.com");
 //            addDataToDB("Apple Inc.", "Cupertino, CA, US", 30000, "http://apple.com");
 
-            log("\n---------- Let's get Data from DB ----------");
 
             crunchifyPrepareStat.close();
             crunchifyConn.close(); // connection close
@@ -41,7 +33,7 @@ public class DBOperations {
         }
     }
 
-    private static void makeJDBCConnection() {
+      void makeJDBCConnection() {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -68,24 +60,30 @@ public class DBOperations {
 
     }
 
-    private static void addDataToDB(String Price, String Link, String Name, Date Time ) {
+    void addDataToDB(String Name,String Price, String Link,  Date Time ) {
 
         try {
-
-            String insertQueryStatement ="update pricespec set flipkartPrice="+Price+",FlipkartLink="+Link+",FlipkartTimeStamp="+Time+"where name="+Name;
+            if(Price!=null)
+            Price=Price.substring(1);
+            String insertQueryStatement ="update pricespec set flipkartPrice='"+Price+"',FlipkartLink='"+Link+"',FlipkartTimeStamp='"+Time+"' where Name='"+Name+"' ";
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
+            System.out.println(Name);
+            Thread.sleep(1000);
 
             // execute insert SQL statement
             crunchifyPrepareStat.executeUpdate();
             log("ds" + " added successfully");
+            crunchifyPrepareStat.close();
+            crunchifyConn.close(); // connection close
+
         } catch (
 
-                SQLException e) {
+                Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void getDataFromDB() {
+     void getDataFromDB() {
 
         try {
             // MySQL Select Query Tutorial
@@ -117,4 +115,5 @@ public class DBOperations {
         System.out.println(string);
 
     }
+
 }
