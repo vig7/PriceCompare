@@ -1,23 +1,28 @@
-
-
 import java.sql.Connection;
-        import java.sql.DriverManager;
-        import java.sql.PreparedStatement;
-        import java.sql.ResultSet;
-        import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
-public class DBOperations {
+//import static com.sun.activation.registries.LogSupport.log;
 
+public class AddDbFlipkart {
 
-    static Connection crunchifyConn = null;
-    static PreparedStatement crunchifyPrepareStat = null;
+     Connection crunchifyConn = null;
+     PreparedStatement crunchifyPrepareStat = null;
 
-    public static void main(String[] argv) {
+    void AaddDbFlipkart(){
 
         try {
+            log("-------- Simple Crunchify Tutorial on how to make JDBC connection to MySQL DB locally on macOS ------------");
             makeJDBCConnection();
-//            addDataToDB();
-            //getDataFromDB();
+
+//            log("\n---------- Adding company 'Crunchify LLC' to DB ----------");
+//            addDataToDB("Google Inc.", "Mountain View, CA, US", 50000, "https://google.com");
+//            addDataToDB("Apple Inc.", "Cupertino, CA, US", 30000, "http://apple.com");
+
 
             crunchifyPrepareStat.close();
             crunchifyConn.close(); // connection close
@@ -28,7 +33,7 @@ public class DBOperations {
         }
     }
 
-    protected static Connection makeJDBCConnection() {
+      void makeJDBCConnection() {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -36,12 +41,12 @@ public class DBOperations {
         } catch (ClassNotFoundException e) {
             log("Sorry, couldn't found JDBC driver. Make sure you have added JDBC Maven Dependency Correctly");
             e.printStackTrace();
-            return null;
+            return;
         }
 
         try {
             // DriverManager: The basic service for managing a set of JDBC drivers.
-            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test1", "root", "");
+            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pricemobiile", "root", "");
             if (crunchifyConn != null) {
                 log("Connection Successful! Enjoy. Now it's time to push data");
             } else {
@@ -50,35 +55,39 @@ public class DBOperations {
         } catch (SQLException e) {
             log("MySQL Connection Failed!");
             e.printStackTrace();
-            return null ;
+            return;
         }
-        return crunchifyConn;
 
     }
 
-    private static void addDataToDB(String tablename) {
+    void addDataToDB(String Name,String Price, String Link,  Date Time ) {
 
         try {
-            String insertQueryStatement = "INSERT  INTO  "+tablename+"  VALUES  (?)";
-
+            if(Price!=null)
+            Price=Price.substring(1);
+            String insertQueryStatement ="update pricespec set flipkartPrice='"+Price+"',FlipkartLink='"+Link+"',FlipkartTimeStamp='"+Time+"' where Name='"+Name+"' ";
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
-            crunchifyPrepareStat.setString(1, "sda");
+            System.out.println(Name);
+            Thread.sleep(1000);
 
             // execute insert SQL statement
             crunchifyPrepareStat.executeUpdate();
             log("ds" + " added successfully");
+            crunchifyPrepareStat.close();
+            crunchifyConn.close(); // connection close
+
         } catch (
 
-                SQLException e) {
+                Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void getDataFromDB() {
+     void getDataFromDB() {
 
         try {
             // MySQL Select Query Tutorial
-            String getQueryStatement = "SELECT Name  FROM table2 where Name like '%price'";
+            String getQueryStatement = "SELECT * FROM pricespec";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 
@@ -87,16 +96,10 @@ public class DBOperations {
 
             // Let's iterate through the java ResultSet
             while (rs.next()) {
-                String getQueryStat = "UPDATE table2 SET Name=SUBSTRING(Name,0,Length(Name)-5) where Name='"+rs.getString("Name")+"'";
-
-                crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStat);
-
-                // Execute the Query, and get a java ResultSet
-                 crunchifyPrepareStat.executeUpdate();
-
+                String name = rs.getString("name");
 
                 // Simply Print the results
-
+                System.out.format("%s \n", name);
             }
 
         } catch (
@@ -112,4 +115,5 @@ public class DBOperations {
         System.out.println(string);
 
     }
+
 }
