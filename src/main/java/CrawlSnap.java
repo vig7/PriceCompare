@@ -1,4 +1,4 @@
-import com.sun.org.apache.xpath.internal.operations.Mod;
+//import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -33,7 +33,7 @@ class Model{
 
 public class CrawlSnap {
     DBOperations db = new DBOperations();
-    java.sql.Connection Conn =db.makeJDBCConnection();;
+    java.sql.Connection Conn =db.makeJDBCConnection();
     PreparedStatement PrepareStat = null;
     HashMap<String, Model> mobileCollection=new HashMap<String, Model>();
     Date date= new Date();
@@ -42,7 +42,7 @@ public class CrawlSnap {
     void test() throws SQLException {
 
         String getQueryStatement = "SELECT * FROM finaltab ";
-        String brandName = "";
+        String brandName ;
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -60,29 +60,34 @@ public class CrawlSnap {
                 for (Element link : maintag) {
                     if (no_of_links <= 2) {
                         Elements name = link.select("div.product-tuple-description > div.product-desc-rating > a > p");
-                        Elements stock = link.select("div.product-tuple-image >  a > span.badge-soldout");
-
                         System.out.println(name.text());
                         ValidateName vm=new ValidateName();
                         if (vm.check(name.text(), brandName)) {
                             Elements ttl = link.select("div.product-tuple-description > div.product-tuple-image > a > span");
+                            Elements stock = link.select("div.product-tuple-image >  a > span.badge-soldout");
+                            Elements mainLink=link.select("div.product-tuple-description > div.product-desc-rating >  a.noUdLine");
+                            String linksbrand = mainLink.attr("href");
+
                             if (!ttl.isEmpty())
-                                mobileCollection.put(brandName,new Model("0","0",url));
+                                updatePrice(brandName,"0","0",linksbrand);
+                               // mobileCollection.put(brandName,new Model("0","0",url));
                             else {
                                 Elements price = link.select("div.product-tuple-description > div.product-desc-rating > a > div.product-price-row > div.lfloat > span.product-price");
                                 System.out.println(price.text());
                                 if (!price.isEmpty()) {
                                     if (!stock.isEmpty())
-                                        mobileCollection.put(brandName, new Model(price.text(), stock.text(),url));
+                                        updatePrice(brandName,price.text(),stock.text(),linksbrand);
+                                        //mobileCollection.put(brandName, new Model(price.text(), stock.text(),url));
                                     else
-                                        mobileCollection.put(brandName, new Model(price.text(), "1",url));
+                                        updatePrice(brandName,price.text(),"1",linksbrand);
+                                        //mobileCollection.put(brandName, new Model(price.text(), "1",url));
                                 }
                             }
                             break;
                         }
                     }
                 }
-                Thread.sleep(10000);
+                Thread.sleep(5000);
 
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -91,38 +96,35 @@ public class CrawlSnap {
         System.out.println(mobileCollection);
     }
 
-    private void updatePrice() throws SQLException {
+    private void updatePrice(String bName,String bprice,String bstock,String burl) throws SQLException {
 
-//        mobileCollection.put("Realme C2","Rs. 7,500");
-//        mobileCollection.put("Vivo S1","Rs. 17,990");
-//        mobileCollection.put("Realme 3 Pro","Rs. 17,199");
-//        mobileCollection.put("Realme 3i","Rs. 11,503");
-//        mobileCollection.put("Realme 3","Rs. 10,999");
-
-        Iterator it = mobileCollection.entrySet().iterator();
-        while (it.hasNext()) {
+//        Iterator it = mobileCollection.entrySet().iterator();
+//        while (it.hasNext()) {
             try {
-                Map.Entry pair = (Map.Entry) it.next();
-                Model m=(Model)pair.getValue();
+//                Map.Entry pair = (Map.Entry) it.next();
+//                Model m=(Model)pair.getValue();
 
-                String getQueryStatement = "Update finaltab set SnapPrice='" + m.getPrices() + "' " +
-                        "', SnapTimestamp='" + ts + "' ,SnapStock='"+m.getStock()+"',SnapLink='"+m.getUrl()+
-                        "where Name = '" + pair.getKey() + "'";
-                System.out.println("Updated");
+                String getQueryStatement = "Update finaltab set SnapPrice='" + bprice
+                        +"', SnapTimestamp='" + ts
+                        + "' ,SnapStock='"+bstock
+                        +"',SnapLink='"
+                        +burl+ "' where Name = '" + bName + "'";
+
                 PrepareStat = Conn.prepareStatement(getQueryStatement);
                 PrepareStat.executeUpdate();
+                System.out.println("Updated");
             }
             catch(Exception e){
                 System.out.println(e);
             }
-        }
+       // }
     }
 
     public static void main(String args[]) throws SQLException {
         CrawlSnap cs=new CrawlSnap();
         cs.test();
 
-        cs.updatePrice();
+       // cs.updatePrice("realme","Rs.15,000","0","hhtp");
 
     }
 }
