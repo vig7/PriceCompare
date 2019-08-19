@@ -41,7 +41,7 @@ public class DBOperations {
         }
     }
 
-    private static void makeJDBCConnection() {
+    protected static Connection makeJDBCConnection() {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -49,7 +49,7 @@ public class DBOperations {
         } catch (ClassNotFoundException e) {
             log("Sorry, couldn't found JDBC driver. Make sure you have added JDBC Maven Dependency Correctly");
             e.printStackTrace();
-            return;
+            return null;
         }
 
         try {
@@ -63,8 +63,9 @@ public class DBOperations {
         } catch (SQLException e) {
             log("MySQL Connection Failed!");
             e.printStackTrace();
-            return;
+            return null;
         }
+        return crunchifyConn;
 
     }
 
