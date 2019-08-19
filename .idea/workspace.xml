@@ -24,7 +24,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
@@ -59,11 +59,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="361">
-              <caret line="780" column="10" selection-start-line="780" selection-start-column="10" selection-end-line="780" selection-end-column="10" />
+              <caret line="778" column="10" selection-start-line="778" selection-start-column="10" selection-end-line="778" selection-end-column="10" />
+              <folding>
+                <element signature="e#4752#4758#0" expanded="true" />
+                <element signature="e#4758#4764#0" expanded="true" />
+                <element signature="e#4784#4790#0" expanded="true" />
+                <element signature="e#4796#4802#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -553,11 +559,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/PriceSpec.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -576,16 +582,22 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
-          <caret line="780" column="10" selection-start-line="780" selection-start-column="10" selection-end-line="780" selection-end-column="10" />
+          <caret line="778" column="10" selection-start-line="778" selection-start-column="10" selection-end-line="778" selection-end-column="10" />
+          <folding>
+            <element signature="e#4752#4758#0" expanded="true" />
+            <element signature="e#4758#4764#0" expanded="true" />
+            <element signature="e#4784#4790#0" expanded="true" />
+            <element signature="e#4796#4802#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PriceSpec.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Jdbc.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -616,13 +628,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FinalSpec.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
           <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/sql/PreparedStatement.java">
