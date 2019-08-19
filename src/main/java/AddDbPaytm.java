@@ -1,20 +1,17 @@
-import javafx.scene.paint.Stop;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static com.sun.activation.registries.LogSupport.log;
 
-public class AddDbFlipkart {
+public class AddDbPaytm {
 
-     Connection crunchifyConn = null;
-     PreparedStatement crunchifyPrepareStat = null;
+    Connection crunchifyConn = null;
+    PreparedStatement crunchifyPrepareStat = null;
 
     void AaddDbFlipkart(){
 
@@ -36,7 +33,7 @@ public class AddDbFlipkart {
         }
     }
 
-      void makeJDBCConnection() {
+    void makeJDBCConnection() {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -60,16 +57,12 @@ public class AddDbFlipkart {
             e.printStackTrace();
             return;
         }
-
     }
-
-    void addDataToDB(String Name,String Price, String Link,  Date Time ,Boolean stock) {
+    void addDataToDB(String Name,String Price, String Link,  Date Time ) {
 
         try {
-
-            //String insertQueryStatement ="update finaltab set flipkartPrice='"+Price+"',FlipkartLink='"+Link+"',FlipkartTimeStamp='"+Time+"' where Name='"+Name+"' ";
-            String insertQueryStatement ="update finaltab set flipkartStock="+stock+" where FlipkartLink='"+Link+"'";
-            System.out.println(insertQueryStatement);
+            System.out.println( Name+Price);
+            String insertQueryStatement ="update finaltab set PaytmPrice='"+Price+"',PaytmLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
 
             Thread.sleep(1000);
@@ -77,57 +70,31 @@ public class AddDbFlipkart {
             // execute insert SQL statement
             crunchifyPrepareStat.executeUpdate();
             log("ds" + " added successfully");
-             // connection close
+            crunchifyPrepareStat.close();
+            crunchifyConn.close(); // connection close
 
-        } catch (
-
-                Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-     ArrayList<String> getDataFromDB() {
-         ArrayList<String> links=new ArrayList<String>();
+
+    void getDataFromDB() {
+
         try {
             // MySQL Select Query Tutorial
-            String getQueryStatement = "SELECT * from finaltab";
+            String getQueryStatement = "SELECT * FROM pricespec";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 
             // Execute the Query, and get a java ResultSet
             ResultSet rs = crunchifyPrepareStat.executeQuery();
-                        // Let's iterate through the java ResultSet
-            while (rs.next()) {
-                String link = rs.getString("flipkartlink");
-                String stock = rs.getString("flipkartStock");
 
-                // Simply Print the results
-                links.add(link);
-            }
-
-        } catch (
-
-                SQLException e) {
-            e.printStackTrace();
-        }
-        return links;
-
-    }
-    ArrayList<String> getStock(){
-        ArrayList<String> stock=new ArrayList<String>();
-        try {
-            // MySQL Select Query Tutorial
-            String getQueryStatement = "SELECT * from finaltab";
-
-            crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
-
-            // Execute the Query, and get a java ResultSet
-            ResultSet rs = crunchifyPrepareStat.executeQuery();
             // Let's iterate through the java ResultSet
             while (rs.next()) {
-                String s = rs.getString("flipkartStock");
+                String name = rs.getString("name");
 
                 // Simply Print the results
-                stock.add(s);
+                System.out.format("%s \n", name);
             }
 
         } catch (
@@ -135,7 +102,7 @@ public class AddDbFlipkart {
                 SQLException e) {
             e.printStackTrace();
         }
-        return stock;
+
     }
 
     // Simple log utility
@@ -143,13 +110,5 @@ public class AddDbFlipkart {
         System.out.println(string);
 
     }
-    void close(){
-        try{
-            crunchifyPrepareStat.close();
-            crunchifyConn.close();
-        }
-        catch (Exception e){
 
-        }
-    }
 }
