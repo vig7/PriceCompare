@@ -6,7 +6,9 @@ import spark.Spark;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import static spark.Spark.*;
@@ -40,6 +42,10 @@ class PhoneDetails{
         this.specialFeat=specialFeat;
         this.FlipkartLink=FlipkartLink;
         this.SnapLink=SnapLink;
+    }
+    PhoneDetails(int id,String Name){
+        this.id=id;
+        this.Name=Name;
     }
 }
 
@@ -91,32 +97,141 @@ public class GetPhoneSpecs {
         String getQueryStatement = "SELECT * FROM finaltab where phone_id="+id;
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
-        while (rs.next()) {
-            list.add(new PhoneDetails(rs.getInt("phone_id")
-                    ,rs.getString("Name")
-                    ,rs.getString("Operating_System")
-                    ,rs.getString("Display")
-                    ,rs.getString("Camera")
-                    ,rs.getString("Battery")
-                    ,rs.getString("Special_Features_Mobile_Phones")
-                    ,rs.getString("RAM")
-                    ,rs.getString("flipkartPrice")
-                    ,rs.getString("flipkartStock")
-                    ,rs.getString("FlipkartLink")
-                    ,rs.getString("SnapPrice")
-                    ,rs.getString("SnapStock")
-                    ,rs.getString("SnapLink")));
+        boolean flag=false;
+        while(rs.next()) {
+            Timestamp last_updated_ts=rs.getTimestamp("SnapTimestamp");
+            Timestamp current_ts=new Timestamp(new Date().getTime());
+            if(last_updated_ts.getDate()<current_ts.getDate()){
+                int time_diff=last_updated_ts.getHours()-current_ts.getHours();
+                    if(rs.getString("SnapLink")!=" ") {
+                        new CrawlSnapUrl().crawl(rs.getString("SnapLink"), rs.getString("Name"));
+                    }
+                flag=true;
+                    break;
+            }
+            else if(last_updated_ts.getDate()==current_ts.getDate()){
+                int time_diff=last_updated_ts.getHours()-current_ts.getHours();
+                if(time_diff>0) {
+                    if (rs.getString("SnapLink") != " ") {
+                        new CrawlSnapUrl().crawl(rs.getString("SnapLink"), rs.getString("Name"));
+                    }
+                }
+                flag=true;
+            }
+            else {
+                list.add(new PhoneDetails(rs.getInt("phone_id")
+                        , rs.getString("Name")
+                        , rs.getString("Operating_System")
+                        , rs.getString("Display")
+                        , rs.getString("Camera")
+                        , rs.getString("Battery")
+                        , rs.getString("Special_Features_Mobile_Phones")
+                        , rs.getString("RAM")
+                        , rs.getString("flipkartPrice")
+                        , rs.getString("flipkartStock")
+                        , rs.getString("FlipkartLink")
+                        , rs.getString("SnapPrice")
+                        , rs.getString("SnapStock")
+                        , rs.getString("SnapLink")));
+            }
+        }
+        if(flag==true){
+            PrepareStat = Conn.prepareStatement(getQueryStatement);
+            rs = PrepareStat.executeQuery();
+            while(rs.next()) {
+                list.add(new PhoneDetails(rs.getInt("phone_id")
+                        , rs.getString("Name")
+                        , rs.getString("Operating_System")
+                        , rs.getString("Display")
+                        , rs.getString("Camera")
+                        , rs.getString("Battery")
+                        , rs.getString("Special_Features_Mobile_Phones")
+                        , rs.getString("RAM")
+                        , rs.getString("flipkartPrice")
+                        , rs.getString("flipkartStock")
+                        , rs.getString("FlipkartLink")
+                        , rs.getString("SnapPrice")
+                        , rs.getString("SnapStock")
+                        , rs.getString("SnapLink")));
+            }
         }
         return  list;
     }
 
     private static ArrayList getSearchResults(String name) throws SQLException {
-        ArrayList<String> list=new ArrayList();
-        String getQueryStatement = "SELECT Name FROM finaltab where phone_id like '"+name+"%'";
+        System.out.println(name);
+        ArrayList<PhoneDetails> list=new ArrayList();
+        String getQueryStatement = "SELECT phone_id,Name FROM finaltab where Name like '"+name+"%'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
-            list.add(rs.getString("Name"));
+            list.add(new PhoneDetails(rs.getInt("phone_id"),rs.getString("Name")));
+        }
+        return  list;
+    }
+
+    private static ArrayList getSearchSpecificResults(String name) throws SQLException {
+        ArrayList<PhoneDetails> list=new ArrayList();
+        String getQueryStatement = "SELECT * FROM finaltab where Name = '"+name+"'";
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
+        ResultSet rs = PrepareStat.executeQuery();
+        boolean flag=false;
+        while(rs.next()) {
+            Timestamp last_updated_ts=rs.getTimestamp("SnapTimestamp");
+            Timestamp current_ts=new Timestamp(new Date().getTime());
+            if(last_updated_ts.getDate()<current_ts.getDate()){
+                int time_diff=last_updated_ts.getHours()-current_ts.getHours();
+                if(rs.getString("SnapLink")!=" ") {
+                    new CrawlSnapUrl().crawl(rs.getString("SnapLink"), rs.getString("Name"));
+                }
+                flag=true;
+                break;
+            }
+            else if(last_updated_ts.getDate()==current_ts.getDate()){
+                int time_diff=last_updated_ts.getHours()-current_ts.getHours();
+                if(time_diff>0) {
+                    if (rs.getString("SnapLink") != " ") {
+                        new CrawlSnapUrl().crawl(rs.getString("SnapLink"), rs.getString("Name"));
+                    }
+                }
+                flag=true;
+            }
+            else {
+                list.add(new PhoneDetails(rs.getInt("phone_id")
+                        , rs.getString("Name")
+                        , rs.getString("Operating_System")
+                        , rs.getString("Display")
+                        , rs.getString("Camera")
+                        , rs.getString("Battery")
+                        , rs.getString("Special_Features_Mobile_Phones")
+                        , rs.getString("RAM")
+                        , rs.getString("flipkartPrice")
+                        , rs.getString("flipkartStock")
+                        , rs.getString("FlipkartLink")
+                        , rs.getString("SnapPrice")
+                        , rs.getString("SnapStock")
+                        , rs.getString("SnapLink")));
+            }
+        }
+        if(flag==true){
+            PrepareStat = Conn.prepareStatement(getQueryStatement);
+            rs = PrepareStat.executeQuery();
+            while(rs.next()) {
+                list.add(new PhoneDetails(rs.getInt("phone_id")
+                        , rs.getString("Name")
+                        , rs.getString("Operating_System")
+                        , rs.getString("Display")
+                        , rs.getString("Camera")
+                        , rs.getString("Battery")
+                        , rs.getString("Special_Features_Mobile_Phones")
+                        , rs.getString("RAM")
+                        , rs.getString("flipkartPrice")
+                        , rs.getString("flipkartStock")
+                        , rs.getString("FlipkartLink")
+                        , rs.getString("SnapPrice")
+                        , rs.getString("SnapStock")
+                        , rs.getString("SnapLink")));
+            }
         }
         return  list;
     }
@@ -141,8 +256,15 @@ public class GetPhoneSpecs {
         });
 
         Spark.get("/SearchResults", (request, response) -> {
-            String serachKey=request.queryParams("searckKey");
+            String serachKey=request.queryParams("searchKey");
             ArrayList list=getSearchResults(serachKey);
+            gson=new Gson();
+            return gson.toJson(list);
+
+        });
+        Spark.get("/SearchSpecificResults", (request, response) -> {
+            String serachKey=request.queryParams("searchKey");
+            ArrayList list=getSearchSpecificResults(serachKey);
             gson=new Gson();
             return gson.toJson(list);
 

@@ -10,13 +10,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="assets/JSFiles/Functions.js"></script>
+    <script src="assets/JSFiles/Functionalities.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script></script>
     </head>
 <body>
-
-
     <div class="navbar navbar-default"><!--header-middle-->
         <div class="container">
             <div class="row">
@@ -37,7 +35,7 @@
                     <div class="shop-menu pull-right collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav navbar-right">
                              <li><a href=""><i class="fa fa-crosshairs"></i> Help</a></li>
-                             <li><a href="{{url ('cart') }}"><i class="fa fa-shopping-cart"></i> News</a></li>
+                             <li><a href="comparePrices.html"><i class="fa fa-shopping-cart"></i> Compare</a></li>
                              <li><a href="{{url ('orders') }}"><i class="fa fa-user"></i> Deals</a></li>
                              <li><a href="{{url ('auth/google') }}"><i class="fa fa-lock"></i> Feedback</a></li>
                             
@@ -53,31 +51,20 @@
                 <div class="col-sm-12">
                     <div clas="search-area-fix">
                             <form id="form">
-                                    <div class="col-sm-4">
-                                            <select class="form-control" id="mobile-brands" onchange="getSearchValue()">
-                                                    <option>Select Brand</option>
-                                                    <option>Samsung</option>
-                                                    <option>Nokia</option>
-                                                    <option>Huwaei</option>
-                                                    <option>Xiaomi</option>
-                                            </select>
-                                        <br>
-                                        
-                                    </div>
-                                    <div class="col-sm-4">
-                                            <select class="form-control" id="mobile-models">
-                                            </select>
-                                        <br>
-                                        
-                                    </div>
+                                   <div class="col-sm-12 input-group">
+                                <input type="text" class="form-control" id="mobile-brands" onkeyup="dynamicSearch(this.value)"  placeholder="Search for brands.." title="Type in a mobile brand" autocomplete="off" required>        
+                                <span class="input-group-addon" id="searchres">
+                                        <i class="fa fa-search"></i>
+                                </span>
+                            </div>
+                            <div  class= "col-sm-12" id="livesearch"></div>
                              </form>
-                        <div class="col-sm-2">
-                                <button type="button" class="btn btn-primary" onclick="search()">Search</button>
-                        </div>
+                        
                     </div>
                 </div>    
             </div>
         </div>
+        <br>
         <!--Body-->
         <div class="container">
             <div class="shadow-effect description-padding-fix mobile-view-desSet" >
@@ -104,7 +91,7 @@
                                 <div class="col-sm-4" style="margin-bottom: 10px;">
                                         <h5 id="prodPrice"></h5>
                                 </div>
-                                <div class="col-sm-4" data-toggle="modal" data-target="#myModal" style="margin-bottom: 10px;">
+                                <div class="col-sm-4" data-toggle="modal" data-target="#myModal" style="margin-bottom: 10px;" id="show-deal"> 
                                     <button class="btn btn-primary" onclick="showDeals()">Deals</button>
                                 </div>
                                 <div class="modal fade" id="myModal" role="dialog">
@@ -143,8 +130,8 @@
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                                 <div class="row" style="padding:20px">
-                                    <div class="col-sm-3">
-                                        <button class="btn btn-primary">Compare</button>
+                                    <div class="col-sm-3" id="show-compare">
+                                       
                                     </div>
                                 </div> 
                                 <form action="">
@@ -358,7 +345,18 @@
 </footer>
 
 
-<script>window.onload=showSpecifications;</script>
+<script>window.onload=showMobilePage;</script>
+<script>
+    $(document).ready(function(){
+      $("#searchres").click(function(){
+        $('#search-result').load("searchResults.html #load-results");
+        var str = $('#mobile-brands').val();
+        showSearchResultPage(str);
+      
+   
+      });
+    });
+</script>
 </body>
 </html>
    
