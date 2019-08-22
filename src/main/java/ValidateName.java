@@ -1,5 +1,5 @@
 public class ValidateName {
-    boolean check(String websiteName,String databseName){
+    static boolean check(String websiteName,String databseName){
         String nickname = databseName.substring(databseName.indexOf(' ')+1);
         databseName=databseName.replaceAll("\\s","");
         websiteName=websiteName.replaceAll("\\s","");

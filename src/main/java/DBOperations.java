@@ -54,7 +54,7 @@ public class DBOperations {
 
         try {
             // DriverManager: The basic service for managing a set of JDBC drivers.
-            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pricemobiile", "root", "");
+            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test1", "root", "");
             if (crunchifyConn != null) {
                 log("Connection Successful! Enjoy. Now it's time to push data");
             } else {
