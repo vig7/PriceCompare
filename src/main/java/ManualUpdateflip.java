@@ -1,27 +1,11 @@
 import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.WriteAbortedException;
-import java.lang.ref.WeakReference;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.zip.CheckedInputStream;
 
-public class UpdateRam {
-    void updateRam(){
+public class ManualUpdateflip {
+    void update(){
         ArrayList<String> data=new ArrayList<String>();
         CrawlFlipk flipk=new CrawlFlipk();
         Jdbc jdbc=new Jdbc();
@@ -32,8 +16,16 @@ public class UpdateRam {
             CSVReader reader = new CSVReader(new FileReader("FinalSpec.csv"));
             String[] d=new String[3];
                 int j=0;
+                int k=0;
                 while (j<4321){
+
                     String[] name=reader.readNext();
+                    if (k<1){
+                        if(name[0].equals("Jivi X606 Plus"))
+                            k=2;
+                        else
+                            continue;
+                    }
                             j++;
                           String[] value=flipk.getPrice(name[0]);
                           if(!value[0].equals("-1")){

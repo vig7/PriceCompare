@@ -14,14 +14,15 @@ public class CrawlFlipk {
             //Elements stock=document.select("img._1Nyybr");
             int i=0;
             for (Element l:look) {
-                Elements links=l.select("div._1vC4OE._2rQ-NK");
-                Elements n=l.select("div._3wU53n");
-                String a="flipkart.com"+l.select("a._31qSD5").attr("href");
-                value[1]=links.text();
-                value[0]=n.text();
-                value[2]=a;
+                Elements price=l.select("div._1vC4OE._2rQ-NK");
+                Elements name=l.select("div._3wU53n");
+                String link="flipkart.com"+l.select("a._31qSD5").attr("href");
+
+                value[0]=name.text();
+                value[1]=price.text();
+                value[2]=link;
                 i++;
-                if(validate.check(n.text(),product)){
+                if(validate.check(name.text(),product)){
                     return value;
                 }
                 if(i>3){

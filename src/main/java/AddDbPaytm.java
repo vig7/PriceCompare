@@ -1,12 +1,5 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
-import java.util.List;
-
-import static com.sun.activation.registries.LogSupport.log;
 
 public class AddDbPaytm {
 
@@ -31,6 +24,69 @@ public class AddDbPaytm {
 
             e.printStackTrace();
         }
+    }
+    String getTimestamp(String name) {
+        String data="";
+
+        String getQueryStatement = "SELECT * from finaltab where name='"+name+"'";
+        System.out.println(getQueryStatement);
+        try{
+            crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
+
+            // Execute the Query, and get a java ResultSet
+            ResultSet rs = crunchifyPrepareStat.executeQuery();
+            if(rs.next()){
+                data = rs.getString("TimeStamp");
+
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return data;
+
+    }
+    void addStockandPrice(String Name,String Price,  Timestamp Time) {
+
+        try {
+            String insertQueryStatement ="update finaltab set paytmPrice='"+Price+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
+            System.out.println(insertQueryStatement);
+            crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
+
+            Thread.sleep(1000);
+
+            // execute insert SQL statement
+            crunchifyPrepareStat.executeUpdate();
+            log("ds" + " added successfully");
+            // connection close
+
+        } catch (
+
+                Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    String getLink(String name) {
+        String data="";
+
+        String getQueryStatement = "SELECT * from finaltab where name='"+name+"'";
+        System.out.println(getQueryStatement+name);
+        try{
+            crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
+
+            // Execute the Query, and get a java ResultSet
+            ResultSet rs = crunchifyPrepareStat.executeQuery();
+            if(rs.next()) {
+                data = rs.getString("paytmLink");
+            }
+            System.out.println(data);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return data;
+
     }
 
     void makeJDBCConnection() {
@@ -109,6 +165,16 @@ public class AddDbPaytm {
     private static void log(String string) {
         System.out.println(string);
 
+    }
+    void close(){
+        try{
+            crunchifyPrepareStat.close();
+            crunchifyConn.close(); // connection close
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,660 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
   <component name="ChangeListManager">
     <list default="true" id="a771a355-2162-49d6-88e3-ac1add83d5af" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/AutoUpdateFlipkart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ManualUpdatePaytm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/NullCheckFlip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/NullCheckPaytm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/PaytmInsert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/flipkartinsert.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AddDbFlipkart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AddDbFlipkart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AddDbPaytm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AddDbPaytm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AddStockFlipk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AddStockFlipk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AutoUpdatePaytm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AutoUpdatePaytm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CrawlFlipk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CrawlFlipk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GetPageUrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetPageUrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UpdateRam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ManualUpdateflip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ValidateName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ValidateName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AddDbFlipkart.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AddDbFlipkart.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AddDbPaytm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AddDbPaytm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AddStockFlipk.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AddStockFlipk.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AmazonProductDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AmazonProductDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AutoUpdatePaytm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AutoUpdatePaytm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CheckIfValidRow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CheckIfValidRow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CrawlFlipk.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CrawlFlipk.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CrawlPaytm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CrawlPaytm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CrawlSnap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CrawlSnap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CrawlTata.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CrawlTata.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBOperations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GetImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GetImage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GetPageUrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GetPageUrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GetPhoneSpecs.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GetPhoneSpecs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jdbc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Jdbc.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/Compare.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PriceBaba.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/PriceBaba.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UpdateRam.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ValidateName.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ValidateName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ValidateNamePaytm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ValidateNamePaytm.class" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ValidateName.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/NullCheckPaytm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+            <state relative-caret-position="272">
+              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AutoUpdatePaytm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="62" selection-start-line="62" selection-end-line="62" />
+            <state relative-caret-position="205">
+              <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2993#3001#0" expanded="true" />
-                <element signature="e#3857#3865#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/GetPageUrl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/PaytmInsert.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AddStockFlipk.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Jdbc.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="51">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AddDbPaytm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="593">
+              <caret line="175" column="32" selection-start-line="175" selection-start-column="32" selection-end-line="175" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ManualUpdatePaytm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="26" column="22" lean-forward="true" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/CrawlFlipk.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/NullCheckFlip.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/CrawlPaytm.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="542">
-              <caret line="762" column="10" selection-start-line="762" selection-start-column="10" selection-end-line="762" selection-end-column="10" />
-              <folding>
-                <element signature="e#4956#4962#0" expanded="true" />
-                <element signature="e#4962#4968#0" expanded="true" />
-                <element signature="e#4988#4994#0" expanded="true" />
-                <element signature="e#5000#5006#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-=======
-    <component name="ChangeListManager">
-        <list default="true" id="a771a355-2162-49d6-88e3-ac1add83d5af" name="Default Changelist" comment="">
-            <change afterPath="$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java" afterDir="false" />
-            <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-            <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-            <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-            <change beforePath="$PROJECT_DIR$/src/main/java/CrawlSnap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CrawlSnap.java" afterDir="false" />
-            <change beforePath="$PROJECT_DIR$/src/main/java/DBOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBOperations.java" afterDir="false" />
-            <change beforePath="$PROJECT_DIR$/src/main/java/ValidateName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ValidateName.java" afterDir="false" />
-        </list>
-        <ignored path="$PROJECT_DIR$/out/" />
-        <ignored path="$PROJECT_DIR$/target/" />
-        <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-        <option name="SHOW_DIALOG" value="false" />
-        <option name="HIGHLIGHT_CONFLICTS" value="true" />
-        <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
-        <option name="LAST_RESOLUTION" value="IGNORE" />
-    </component>
-    <component name="DefaultGradleProjectSettings">
-        <option name="isMigrated" value="true" />
-    </component>
-    <component name="FileEditorManager">
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/main/java/GetPageUrl.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="176">
-                            <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/main/java/AmazonProductDetails.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="-346">
-                            <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
-                            <folding>
-                                <element signature="imports" expanded="true" />
-                            </folding>
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/main/java/CrawlSnap.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="240">
-                            <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
-                            <folding>
-                                <element signature="imports" expanded="true" />
-                                <element signature="e#518#519#0" expanded="true" />
-                                <element signature="e#550#551#0" expanded="true" />
-                                <element signature="e#573#574#0" expanded="true" />
-                                <element signature="e#605#606#0" expanded="true" />
-                                <element signature="e#726#727#0" expanded="true" />
-                                <element signature="e#759#760#0" expanded="true" />
-                                <element signature="e#891#906#0" expanded="true" />
-                            </folding>
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="420">
-                            <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="264">
-                            <caret line="12" selection-start-line="12" selection-end-line="12" />
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/src/main/java/ValidateName.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="66">
-                            <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="-300">
-                            <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-                            <folding>
-                                <element signature="imports" expanded="true" />
-                            </folding>
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/main/java/DBOperations.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="282">
-                            <caret line="20" selection-start-line="20" selection-end-line="20" />
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/index.html">
-                    <provider selected="true" editor-type-id="text-editor" />
-                </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="420">
-                            <caret line="724" column="10" selection-start-line="724" selection-start-column="10" selection-end-line="724" selection-end-column="10" />
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-        </leaf>
-    </component>
-    <component name="FileTemplateManagerImpl">
-        <option name="RECENT_TEMPLATES">
-            <list>
-                <option value="Class" />
-            </list>
-        </option>
-    </component>
-    <component name="FindInProjectRecents">
-        <findStrings>
-            <find>writeNext</find>
-            <find>&quot;&quot;</find>
-            <find>&quot;triple&quot;</find>
-            <find>nokia</find>
-            <find>title</find>
-            <find>titleSection</find>
-            <find>getPrice</find>
-        </findStrings>
-    </component>
-    <component name="Git.Settings">
-        <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    </component>
-    <component name="IdeDocumentHistory">
-        <option name="CHANGED_PATHS">
-            <list>
-                <option value="$PROJECT_DIR$/src/main/java/CrawlTest.java" />
-                <option value="$PROJECT_DIR$/PriceSpec.csv" />
-                <option value="$PROJECT_DIR$/src/main/java/GetPrice.java" />
-                <option value="$PROJECT_DIR$/src/main/java/PriceBaba.java" />
-                <option value="$PROJECT_DIR$/src/main/java/CrawlingSpecs.java" />
-                <option value="$PROJECT_DIR$/src/main/java/AmazonProductDetails.java" />
-                <option value="$PROJECT_DIR$/FinalSpec.csv" />
-                <option value="$PROJECT_DIR$/src/main/java/UpdateRam.java" />
-                <option value="$PROJECT_DIR$/src/main/java/CrawlFlipk.java" />
-                <option value="$PROJECT_DIR$/src/main/java/GetPageUrl.java" />
-                <option value="$PROJECT_DIR$/pom.xml" />
-                <option value="$PROJECT_DIR$/.idea/misc.xml" />
-                <option value="$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java" />
-                <option value="$PROJECT_DIR$/src/main/java/ValidateName.java" />
-                <option value="$PROJECT_DIR$/src/main/java/DBOperations.java" />
-                <option value="$PROJECT_DIR$/src/main/java/CrawlSnap.java" />
-            </list>
-        </option>
-    </component>
-    <component name="MavenImportPreferences">
-        <option name="generalSettings">
-            <MavenGeneralSettings>
-                <option name="userSettingsFile" value="C:\Users\vignesh.ra\.m2\setting.xml" />
-            </MavenGeneralSettings>
-        </option>
-        <option name="importingSettings">
-            <MavenImportingSettings>
-                <option name="importAutomatically" value="true" />
-                <option name="vmOptionsForImporter" value="-Xmx768m" />
-            </MavenImportingSettings>
-        </option>
-    </component>
-    <component name="MavenProjectNavigator">
-        <treeState>
-            <expand>
-                <path>
-                    <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-                    <item name="Compare" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-                </path>
-            </expand>
-            <select />
-        </treeState>
-    </component>
-    <component name="ProjectFrameBounds" extendedState="6">
-        <option name="x" value="240" />
-        <option name="y" value="128" />
-        <option name="width" value="1440" />
-        <option name="height" value="773" />
-    </component>
-    <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-    <component name="ProjectView">
-        <navigator proportions="" version="1">
-            <foldersAlwaysOnTop value="true" />
-        </navigator>
-        <panes>
-            <pane id="PackagesPane" />
-            <pane id="Scope" />
-            <pane id="ProjectPane">
-                <subPane>
-                    <expand>
-                        <path>
-                            <item name="PriceCompare" type="b2602c69:ProjectViewProjectNode" />
-                            <item name="PriceCompare" type="462c0819:PsiDirectoryNode" />
-                        </path>
-                        <path>
-                            <item name="PriceCompare" type="b2602c69:ProjectViewProjectNode" />
-                            <item name="PriceCompare" type="462c0819:PsiDirectoryNode" />
-                            <item name=".idea" type="462c0819:PsiDirectoryNode" />
-                        </path>
-                        <path>
-                            <item name="PriceCompare" type="b2602c69:ProjectViewProjectNode" />
-                            <item name="PriceCompare" type="462c0819:PsiDirectoryNode" />
-                            <item name="src" type="462c0819:PsiDirectoryNode" />
-                        </path>
-                        <path>
-                            <item name="PriceCompare" type="b2602c69:ProjectViewProjectNode" />
-                            <item name="PriceCompare" type="462c0819:PsiDirectoryNode" />
-                            <item name="src" type="462c0819:PsiDirectoryNode" />
-                            <item name="main" type="462c0819:PsiDirectoryNode" />
-                        </path>
-                        <path>
-                            <item name="PriceCompare" type="b2602c69:ProjectViewProjectNode" />
-                            <item name="PriceCompare" type="462c0819:PsiDirectoryNode" />
-                            <item name="src" type="462c0819:PsiDirectoryNode" />
-                            <item name="main" type="462c0819:PsiDirectoryNode" />
-                            <item name="java" type="462c0819:PsiDirectoryNode" />
-                        </path>
-                    </expand>
-                    <select />
-                </subPane>
-            </pane>
-        </panes>
-    </component>
-    <component name="PropertiesComponent">
-        <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-        <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-        <property name="project.structure.last.edited" value="Modules" />
-        <property name="project.structure.proportion" value="0.0" />
-        <property name="project.structure.side.proportion" value="0.0" />
-        <property name="settings.editor.selected.configurable" value="MavenSettings" />
-    </component>
-    <component name="RunDashboard">
-        <option name="ruleStates">
-            <list>
-                <RuleState>
-                    <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-                </RuleState>
-                <RuleState>
-                    <option name="name" value="StatusDashboardGroupingRule" />
-                </RuleState>
-            </list>
-        </option>
-    </component>
-    <component name="RunManager" selected="Application.CrawlSnap">
-        <configuration name="CrawlSnap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-            <option name="MAIN_CLASS_NAME" value="CrawlSnap" />
-            <module name="Compare" />
-            <method v="2">
-                <option name="Make" enabled="true" />
-            </method>
-        </configuration>
-        <configuration name="DBOperations " type="Application" factoryName="Application" temporary="true">
-            <option name="ALTERNATIVE_JRE_PATH" value="12" />
-            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-            <option name="MAIN_CLASS_NAME" value="DBOperations" />
-            <module name="Compare" />
-            <method v="2">
-                <option name="Make" enabled="true" />
-            </method>
-        </configuration>
-        <configuration name="DBOperations" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-            <option name="MAIN_CLASS_NAME" value="GetPageUrl" />
-            <module name="MobileCompare" />
-            <method v="2">
-                <option name="Make" enabled="true" />
-            </method>
-        </configuration>
-        <configuration name="GetPageUrl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-            <option name="ALTERNATIVE_JRE_PATH" value="12" />
-            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-            <option name="MAIN_CLASS_NAME" value="GetPageUrl" />
-            <module name="Compare" />
-            <method v="2">
-                <option name="Make" enabled="true" />
-            </method>
-        </configuration>
-        <list>
-            <item itemvalue="Application.DBOperations" />
-            <item itemvalue="Application.GetPageUrl" />
-            <item itemvalue="Application.CrawlSnap" />
-            <item itemvalue="Application.DBOperations " />
-        </list>
-        <recent_temporary>
-            <list>
-                <item itemvalue="Application.CrawlSnap" />
-                <item itemvalue="Application.DBOperations " />
-                <item itemvalue="Application.GetPageUrl" />
-                <item itemvalue="Application.DBOperations" />
-            </list>
-        </recent_temporary>
-    </component>
-    <component name="SvnConfiguration">
-        <configuration />
-    </component>
-    <component name="TaskManager">
-        <task active="true" id="Default" summary="Default task">
-            <changelist id="a771a355-2162-49d6-88e3-ac1add83d5af" name="Default Changelist" comment="" />
-            <created>1565246299492</created>
-            <option name="number" value="Default" />
-            <option name="presentableId" value="Default" />
-            <updated>1565246299492</updated>
-        </task>
-        <servers />
-    </component>
-    <component name="ToolWindowManager">
-        <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-        <layout>
-            <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
-            <window_info id="Image Layers" order="1" />
-            <window_info id="Designer" order="2" />
-            <window_info id="UI Designer" order="3" />
-            <window_info id="Capture Tool" order="4" />
-            <window_info id="Favorites" order="5" side_tool="true" />
-            <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.26283783" />
-            <window_info anchor="bottom" id="Message" order="0" />
-            <window_info anchor="bottom" id="Find" order="1" />
-            <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42562592" />
-            <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
-            <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-            <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-            <window_info anchor="bottom" id="TODO" order="6" />
-            <window_info anchor="bottom" id="Terminal" order="7" />
-            <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-            <window_info anchor="bottom" id="Version Control" order="9" />
-            <window_info anchor="bottom" id="Messages" order="10" weight="0.22385861" />
-            <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-            <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-            <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-            <window_info anchor="right" id="Palette" order="3" />
-            <window_info anchor="right" id="Theme Preview" order="4" />
-            <window_info anchor="right" id="Capture Analysis" order="5" />
-            <window_info anchor="right" id="Palette&#9;" order="6" />
-            <window_info anchor="right" id="Maven" order="7" weight="0.32972974" />
-        </layout>
-        <layout-to-restore>
-            <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
-            <window_info id="Image Layers" order="1" />
-            <window_info id="Designer" order="2" />
-            <window_info id="UI Designer" order="3" />
-            <window_info id="Capture Tool" order="4" />
-            <window_info id="Favorites" order="5" side_tool="true" />
-            <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.2837838" />
-            <window_info anchor="bottom" id="Message" order="0" />
-            <window_info anchor="bottom" id="Find" order="1" />
-            <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.23564065" />
-            <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
-            <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-            <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-            <window_info anchor="bottom" id="TODO" order="6" />
-            <window_info anchor="bottom" id="Terminal" order="7" />
-            <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-            <window_info anchor="bottom" id="Version Control" order="9" />
-            <window_info anchor="bottom" id="Messages" order="10" weight="0.32547864" />
-            <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-            <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-            <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-            <window_info anchor="right" id="Palette" order="3" />
-            <window_info anchor="right" id="Theme Preview" order="4" />
-            <window_info anchor="right" id="Capture Analysis" order="5" />
-            <window_info anchor="right" id="Palette&#9;" order="6" />
-            <window_info anchor="right" id="Maven" order="7" weight="0.32972974" />
-        </layout-to-restore>
-    </component>
-    <component name="XDebuggerManager">
-        <breakpoint-manager>
-            <breakpoints>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-                    <line>45</line>
-                    <properties />
-                    <option name="timeStamp" value="4" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-                    <line>46</line>
-                    <properties />
-                    <option name="timeStamp" value="5" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-                    <line>47</line>
-                    <properties />
-                    <option name="timeStamp" value="6" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-                    <line>48</line>
-                    <properties />
-                    <option name="timeStamp" value="8" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-                    <line>49</line>
-                    <properties />
-                    <option name="timeStamp" value="9" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-                    <line>51</line>
-                    <properties />
-                    <option name="timeStamp" value="11" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-                    <line>50</line>
-                    <properties />
-                    <option name="timeStamp" value="12" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
-                    <line>17</line>
-                    <properties />
-                    <option name="timeStamp" value="15" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
-                    <line>19</line>
-                    <properties />
-                    <option name="timeStamp" value="16" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
-                    <line>18</line>
-                    <properties />
-                    <option name="timeStamp" value="17" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
-                    <line>23</line>
-                    <properties />
-                    <option name="timeStamp" value="18" />
-                </line-breakpoint>
-                <line-breakpoint enabled="true" type="java-line">
-                    <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
-                    <line>22</line>
-                    <properties />
-                    <option name="timeStamp" value="24" />
-                </line-breakpoint>
-            </breakpoints>
-        </breakpoint-manager>
-    </component>
-    <component name="editorHistoryManager">
-        <entry file="file://$PROJECT_DIR$/target/classes/GetPrice.class" />
-        <entry file="jar://$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.11.3/jsoup-1.11.3.jar!/org/jsoup/select/Elements.class">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="184">
-                    <caret line="183" selection-start-line="183" selection-end-line="183" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="jar://$MAVEN_REPOSITORY$/com/opencsv/opencsv/4.1/opencsv-4.1.jar!/com/opencsv/CSVWriter.class">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="133">
-                    <caret line="79" column="32" lean-forward="true" selection-start-line="79" selection-start-column="32" selection-end-line="79" selection-end-column="32" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/CrawlTest.java" />
-        <entry file="jar://$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.11.3/jsoup-1.11.3.jar!/org/jsoup/nodes/Node.class">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="310">
-                    <caret line="48" column="52" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/net/SocketInputStream.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="133">
-                    <caret line="93" column="23" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/index.html">
-            <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/sql/DriverManager.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="152">
-                    <caret line="246" column="16" selection-start-line="246" selection-start-column="16" selection-end-line="246" selection-end-column="16" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/sql/PreparedStatement.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="152">
-                    <caret line="235" column="9" selection-start-line="235" selection-start-column="9" selection-end-line="235" selection-end-column="9" />
-                </state>
-            </provider>
->>>>>>> 8830e93951c7ff6f529d438aa4e3bf81a350ae83
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/GetImage.java" />
-        <entry file="file://$PROJECT_DIR$/src/main/java/PriceBaba.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="399">
-                    <caret line="47" column="21" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/FinalSpec.csv" />
-        <entry file="file://$PROJECT_DIR$/src/main/java/PriceSpec.csv">
-            <provider selected="true" editor-type-id="csv-text-editor" />
-            <provider editor-type-id="text-editor" />
-            <provider editor-type-id="csv-table-editor">
-                <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/PriceSpec.sql">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="357">
-                    <caret line="646" column="20" selection-start-line="646" selection-start-column="20" selection-end-line="646" selection-end-column="20" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/PriceSpec.csv">
-            <provider selected="true" editor-type-id="csv-text-editor" />
-            <provider editor-type-id="text-editor" />
-            <provider editor-type-id="csv-table-editor">
-                <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/Jdbc.java" />
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/String.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="152">
-                    <caret line="1962" column="18" selection-start-line="1962" selection-start-column="18" selection-end-line="1962" selection-end-column="18" />
-                    <folding>
-                        <element signature="e#23072#23073#0" expanded="true" />
-                        <element signature="e#23112#23113#0" expanded="true" />
-                    </folding>
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/ImageStore/Obi Worldphone MV1.png" />
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="420">
-                    <caret line="724" column="10" selection-start-line="724" selection-start-column="10" selection-end-line="724" selection-end-column="10" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/UpdateRam.java" />
-        <entry file="file://$PROJECT_DIR$/src/main/java/CrawlFlipk.java" />
-        <entry file="file://$PROJECT_DIR$/src/main/java/GetPageUrl.java">
-<<<<<<< HEAD
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/UpdateRam.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="52" column="68" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="342">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
@@ -670,12 +164,15 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>writeNext</find>
-      <find>&quot;&quot;</find>
-      <find>&quot;triple&quot;</find>
-      <find>nokia</find>
-      <find>title</find>
-      <find>titleSection</find>
+      <find>get</find>
+      <find>main</find>
+      <find>order</find>
+      <find>stock</find>
+      <find>adddata</find>
+      <find>ad</find>
+      <find>timestamp</find>
+      <find>adds</find>
+      <find>close</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -684,35 +181,34 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/CrawlTest.java" />
-        <option value="$PROJECT_DIR$/PriceSpec.csv" />
-        <option value="$PROJECT_DIR$/src/main/java/GetPrice.java" />
-        <option value="$PROJECT_DIR$/src/main/java/PriceBaba.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/Temp.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/CrawlingSpecs.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AmazonProductDetails.java" />
-        <option value="$PROJECT_DIR$/FinalSpec.csv" />
-        <option value="$PROJECT_DIR$/src/main/java/GetPageUrl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Jdbc.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AutoAddFlipkart.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DBOperations.java" />
-        <option value="$PROJECT_DIR$/src/main/java/UpdateRam.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Extension.java" />
         <option value="$PROJECT_DIR$/src/main/java/ValidateName.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CrawlFlipk.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java" />
+        <option value="$PROJECT_DIR$/src/main/java/PaytmINsert.java" />
+        <option value="$PROJECT_DIR$/src/main/java/PaytmIsert.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AutoUpdateFlipkart.java" />
         <option value="$PROJECT_DIR$/src/main/java/AddDbFlipkart.java" />
+        <option value="$PROJECT_DIR$/src/main/java/UpdateRam.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CrawlFlipk.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AddStockFlipk.java" />
+        <option value="$PROJECT_DIR$/src/main/java/NullCheckFlip.java" />
+        <option value="$PROJECT_DIR$/src/main/java/flipkartinsert.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CrawlPaytm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AddDbPaytm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AutoUpdatePaytm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/PaytmInsert.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GetPageUrl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/NullCheckPaytm.java" />
       </list>
     </option>
   </component>
   <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="userSettingsFile" value="C:\Users\vignesh.ra\.m2\setting.xml" />
-      </MavenGeneralSettings>
-    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
-        <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
   </component>
@@ -723,15 +219,20 @@
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="Compare" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Compare" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
       </expand>
       <select />
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="240" />
-    <option name="y" value="128" />
+    <option name="y" value="126" />
     <option name="width" value="1440" />
-    <option name="height" value="773" />
+    <option name="height" value="775" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -739,7 +240,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -756,26 +256,46 @@
             <path>
               <item name="MobileCompare" type="b2602c69:ProjectViewProjectNode" />
               <item name="MobileCompare" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MobileCompare" type="b2602c69:ProjectViewProjectNode" />
               <item name="MobileCompare" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="generated-sources" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MobileCompare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MobileCompare" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MobileCompare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MobileCompare" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MobileCompare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MobileCompare" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="GetPhoneSpecs.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RunDashboard">
@@ -790,35 +310,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GetPageUrl">
-    <configuration name="DBOperations (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DBOperations" />
+  <component name="RunManager">
+    <configuration name="PriceCompare" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="AutoUpdatePaytm" />
       <module name="MobileCompare" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DBOperations" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GetPageUrl" />
-      <module name="MobileCompare" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GetPageUrl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GetPageUrl" />
-      <module name="MobileCompare" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.GetPageUrl" />
-        <item itemvalue="Application.DBOperations (1)" />
-        <item itemvalue="Application.DBOperations" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -826,10 +325,10 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a771a355-2162-49d6-88e3-ac1add83d5af" name="Default Changelist" comment="" />
-      <created>1565246299492</created>
+      <created>1566372222821</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1565246299492</updated>
+      <updated>1566372222821</updated>
     </task>
     <servers />
   </component>
@@ -842,18 +341,18 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.20067114" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.20604026" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.37252125" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.32286024" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.33144477" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50067115" side_tool="true" weight="0.37252125" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50067115" side_tool="true" weight="0.42492917" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32286024" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.7959732" weight="0.22379604" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -861,27 +360,27 @@
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven" order="7" weight="0.32972974" />
+      <window_info anchor="right" id="Maven" order="7" weight="0.3295302" />
     </layout>
     <layout-to-restore>
-      <window_info id="Debug" order="0" sideWeight="0.5007949" side_tool="true" weight="0.12633263" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.49920508" visible="true" weight="0.12633263" />
+      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="1" />
+      <window_info id="Designer" order="2" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.20604026" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31852654" />
-      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="5" />
-      <window_info anchor="bottom" id="Terminal" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.32286024" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.33144477" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50067115" side_tool="true" weight="0.42492917" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.7959732" weight="0.22379604" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -889,194 +388,356 @@
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven" order="7" weight="0.32972974" />
+      <window_info anchor="right" id="Maven" order="7" weight="0.3295302" />
     </layout-to-restore>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-          <line>45</line>
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>70</line>
           <properties />
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>71</line>
+          <properties />
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>72</line>
+          <properties />
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>75</line>
+          <properties />
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>74</line>
+          <properties />
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>78</line>
+          <properties />
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>79</line>
+          <properties />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>80</line>
+          <properties />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>83</line>
+          <properties />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>84</line>
+          <properties />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>81</line>
+          <properties />
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>82</line>
+          <properties />
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
           <line>46</line>
           <properties />
-          <option name="timeStamp" value="5" />
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
           <line>47</line>
           <properties />
-          <option name="timeStamp" value="6" />
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
           <line>48</line>
           <properties />
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-          <line>49</line>
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>92</line>
           <properties />
-          <option name="timeStamp" value="9" />
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-          <line>51</line>
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>95</line>
           <properties />
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PriceBaba.java</url>
-          <line>50</line>
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>93</line>
           <properties />
-          <option name="timeStamp" value="12" />
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>96</line>
+          <properties />
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>98</line>
+          <properties />
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>99</line>
+          <properties />
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>97</line>
+          <properties />
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>53</line>
+          <properties />
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>56</line>
+          <properties />
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>57</line>
+          <properties />
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
+          <line>267</line>
+          <properties />
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
+          <line>269</line>
+          <properties />
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
+          <line>272</line>
+          <properties />
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
+          <line>276</line>
+          <properties />
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
+          <line>277</line>
+          <properties />
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>30</line>
+          <properties />
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>29</line>
+          <properties />
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>28</line>
+          <properties />
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>33</line>
+          <properties />
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extension.java</url>
+          <line>34</line>
+          <properties />
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
-          <line>17</line>
+          <line>10</line>
           <properties />
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
-          <line>19</line>
+          <line>11</line>
           <properties />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
-          <line>18</line>
-          <properties />
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
-          <line>23</line>
-          <properties />
-          <option name="timeStamp" value="18" />
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
           <line>22</line>
           <properties />
-          <option name="timeStamp" value="19" />
+          <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
-          <line>67</line>
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>24</line>
           <properties />
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
-          <line>68</line>
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>27</line>
           <properties />
-          <option name="timeStamp" value="21" />
+          <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/UpdateRam.java</url>
-          <line>52</line>
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>26</line>
           <properties />
-          <option name="timeStamp" value="25" />
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/UpdateRam.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>25</line>
+          <properties />
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>12</line>
+          <properties />
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>14</line>
+          <properties />
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>13</line>
+          <properties />
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>28</line>
+          <properties />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
           <line>39</line>
           <properties />
-          <option name="timeStamp" value="26" />
+          <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/UpdateRam.java</url>
-          <line>40</line>
+          <url>file://$PROJECT_DIR$/src/main/java/ValidateName.java</url>
+          <line>17</line>
           <properties />
-          <option name="timeStamp" value="27" />
+          <option name="timeStamp" value="91" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/UpdateRam.java</url>
-          <line>41</line>
+          <url>file://$PROJECT_DIR$/src/main/java/NullCheckPaytm.java</url>
+          <line>5</line>
           <properties />
-          <option name="timeStamp" value="28" />
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/CrawlFlipk.java</url>
-          <line>19</line>
+          <url>file://$PROJECT_DIR$/src/main/java/NullCheckPaytm.java</url>
+          <line>6</line>
           <properties />
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/CrawlFlipk.java</url>
-          <line>20</line>
-          <properties />
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/CrawlFlipk.java</url>
-          <line>21</line>
-          <properties />
-          <option name="timeStamp" value="31" />
+          <option name="timeStamp" value="93" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/target/classes/GetPrice.class" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.11.3/jsoup-1.11.3.jar!/org/jsoup/select/Elements.class">
+    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="183" selection-start-line="183" selection-end-line="183" />
+        <state relative-caret-position="255">
+          <caret line="510" column="28" selection-start-line="510" selection-start-column="28" selection-end-line="510" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/opencsv/opencsv/4.1/opencsv-4.1.jar!/com/opencsv/CSVWriter.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/CrawlSnap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="79" column="32" lean-forward="true" selection-start-line="79" selection-start-column="32" selection-end-line="79" selection-end-column="32" />
+        <state relative-caret-position="341">
+          <caret line="120" column="27" selection-start-line="120" selection-start-column="27" selection-end-line="120" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CrawlTest.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.11.3/jsoup-1.11.3.jar!/org/jsoup/nodes/Node.class">
+    <entry file="file://$USER_HOME$/.m2/setting.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="48" column="52" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
+        <state relative-caret-position="323">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/net/SocketInputStream.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/CheckIfValidRow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="93" column="23" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/AmazonProductDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="43" column="21" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/sql/DriverManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="246" column="16" selection-start-line="246" selection-start-column="16" selection-end-line="246" selection-end-column="16" />
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
@@ -1087,166 +748,175 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/PriceBaba.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Temp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="47" column="21" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/PriceSpec.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/String.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-io/9.4.15.v20190215/jetty-io-9.4.15.v20190215.jar!/org/eclipse/jetty/io/AbstractConnection.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="1962" column="18" selection-start-line="1962" selection-start-column="18" selection-end-line="1962" selection-end-column="18" />
+        <state relative-caret-position="127">
+          <caret line="225" selection-start-line="225" selection-end-line="225" />
           <folding>
-            <element signature="e#23072#23073#0" expanded="true" />
-            <element signature="e#23112#23113#0" expanded="true" />
+            <element signature="e#6059#6060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ImageStore/Obi Worldphone MV1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Extension.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="762" column="10" selection-start-line="762" selection-start-column="10" selection-end-line="762" selection-end-column="10" />
-          <folding>
-            <element signature="e#4956#4962#0" expanded="true" />
-            <element signature="e#4962#4968#0" expanded="true" />
-            <element signature="e#4988#4994#0" expanded="true" />
-            <element signature="e#5000#5006#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="157">
+          <caret line="55" column="18" lean-forward="true" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PriceSpec.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Jdbc.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="78" selection-start-line="12" selection-start-column="78" selection-end-line="12" selection-end-column="78" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/sql/Date.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="75" column="13" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/Date.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="177" column="16" selection-start-line="177" selection-start-column="8" selection-end-line="177" selection-end-column="16" />
-          <folding>
-            <element signature="e#6844#6845#0" expanded="true" />
-            <element signature="e#6875#6876#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FinalSpec.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
         <state>
-          <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/sql/PreparedStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="94" column="8" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GetPageUrl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../mysql-connector-java-5.1.38.jar!/com/mysql/jdbc/PreparedStatement.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="942" selection-start-line="942" selection-end-line="942" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DBOperations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="119" column="1" lean-forward="true" selection-start-line="119" selection-start-column="1" selection-end-line="119" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CrawlFlipk.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <caret line="24" column="4" lean-forward="true" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ValidateName.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+        <state relative-caret-position="255">
+          <caret line="32" column="32" lean-forward="true" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UpdateRam.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/DBOperations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="52" column="68" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
+        <state relative-caret-position="17">
+          <caret line="13" column="2" lean-forward="true" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="166" column="63" lean-forward="true" selection-start-line="166" selection-start-column="63" selection-end-line="166" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pricespec.sql">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ManualUpdateflip.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="646" column="20" selection-start-line="646" selection-start-column="20" selection-end-line="646" selection-end-column="20" />
+        <state relative-caret-position="305">
+          <caret line="29" column="55" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AddStockFlipk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AutoUpdateFlipkart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="25" column="55" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/flipkartinsert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="6" column="29" lean-forward="true" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        <state relative-caret-position="122">
+          <caret line="75" column="14" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Jdbc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CrawlFlipk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/NullCheckFlip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AddDbPaytm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="593">
+          <caret line="175" column="32" selection-start-line="175" selection-start-column="32" selection-end-line="175" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ManualUpdatePaytm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="26" column="22" lean-forward="true" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CrawlPaytm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/PaytmInsert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2993#3001#0" expanded="true" />
-            <element signature="e#3857#3865#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AutoUpdatePaytm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GetPageUrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/NullCheckPaytm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1267,6 +937,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1278,6 +949,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
+          <last-edited>scala-sdk-2.13.0</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1289,6 +961,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1305,7 +978,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1313,6 +985,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>Maven: com.opencsv:opencsv:4.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1324,165 +997,8 @@
       </state>
     </states>
   </component>
-=======
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="176">
-                    <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="266">
-                    <caret line="41" selection-start-line="41" selection-end-line="41" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-300">
-                    <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-                    <folding>
-                        <element signature="imports" expanded="true" />
-                    </folding>
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="264">
-                    <caret line="12" selection-start-line="12" selection-end-line="12" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/CrawlTata.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="44">
-                    <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="420">
-                    <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/DBOperations.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="282">
-                    <caret line="20" selection-start-line="20" selection-end-line="20" />
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/AmazonProductDetails.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-346">
-                    <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
-                    <folding>
-                        <element signature="imports" expanded="true" />
-                    </folding>
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/CrawlSnap.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="240">
-                    <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
-                    <folding>
-                        <element signature="imports" expanded="true" />
-                        <element signature="e#518#519#0" expanded="true" />
-                        <element signature="e#550#551#0" expanded="true" />
-                        <element signature="e#573#574#0" expanded="true" />
-                        <element signature="e#605#606#0" expanded="true" />
-                        <element signature="e#726#727#0" expanded="true" />
-                        <element signature="e#759#760#0" expanded="true" />
-                        <element signature="e#891#906#0" expanded="true" />
-                    </folding>
-                </state>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/main/java/ValidateName.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="66">
-                    <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-                </state>
-            </provider>
-        </entry>
-    </component>
-    <component name="masterDetails">
-        <states>
-            <state key="ArtifactsStructureConfigurable.UI">
-                <settings>
-                    <artifact-editor />
-                    <splitter-proportions>
-                        <option name="proportions">
-                            <list>
-                                <option value="0.2" />
-                            </list>
-                        </option>
-                    </splitter-proportions>
-                </settings>
-            </state>
-            <state key="FacetStructureConfigurable.UI">
-                <settings>
-                    <splitter-proportions>
-                        <option name="proportions">
-                            <list>
-                                <option value="0.2" />
-                            </list>
-                        </option>
-                    </splitter-proportions>
-                </settings>
-            </state>
-            <state key="GlobalLibrariesConfigurable.UI">
-                <settings>
-                    <splitter-proportions>
-                        <option name="proportions">
-                            <list>
-                                <option value="0.2" />
-                            </list>
-                        </option>
-                    </splitter-proportions>
-                </settings>
-            </state>
-            <state key="JdkListConfigurable.UI">
-                <settings>
-                    <splitter-proportions>
-                        <option name="proportions">
-                            <list>
-                                <option value="0.2" />
-                            </list>
-                        </option>
-                    </splitter-proportions>
-                </settings>
-            </state>
-            <state key="ModuleStructureConfigurable.UI">
-                <settings>
-                    <last-edited>MobileCompare</last-edited>
-                    <splitter-proportions>
-                        <option name="proportions">
-                            <list>
-                                <option value="0.2" />
-                                <option value="0.6" />
-                            </list>
-                        </option>
-                    </splitter-proportions>
-                </settings>
-            </state>
-            <state key="ProjectLibrariesConfigurable.UI">
-                <settings>
-                    <splitter-proportions>
-                        <option name="proportions">
-                            <list>
-                                <option value="0.2" />
-                            </list>
-                        </option>
-                    </splitter-proportions>
-                </settings>
-            </state>
-        </states>
-    </component>
->>>>>>> 8830e93951c7ff6f529d438aa4e3bf81a350ae83
+  <component name="mavenExecuteGoalHistory">
+    <option value="$PROJECT_DIR$" />
+    <option value="clean" />
+  </component>
 </project>
