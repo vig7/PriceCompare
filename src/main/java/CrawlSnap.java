@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 class Model{
     private String price;private String stock,url;
@@ -19,7 +17,6 @@ class Model{
         this.stock=stock;
         this.url=url;
     }
-
     String getPrices(){
         return this.price;
     }
@@ -32,6 +29,7 @@ class Model{
 }
 
 public class CrawlSnap {
+    boolean flag=false;
     DBOperations db = new DBOperations();
     java.sql.Connection Conn =db.makeJDBCConnection();
     PreparedStatement PrepareStat = null;
@@ -41,8 +39,10 @@ public class CrawlSnap {
 
     void test() throws SQLException {
 
-        String getQueryStatement = "SELECT * FROM finaltab ";
+        String getQueryStatement = "SELECT * FROM finaltab where phone_id>1150 ";
         String brandName ;
+
+
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -70,7 +70,7 @@ public class CrawlSnap {
 
                             if (!ttl.isEmpty())
                                 updatePrice(brandName,"0","0",linksbrand);
-                               // mobileCollection.put(brandName,new Model("0","0",url));
+                                // mobileCollection.put(brandName,new Model("0","0",url));
                             else {
                                 Elements price = link.select("div.product-tuple-description > div.product-desc-rating > a > div.product-price-row > div.lfloat > span.product-price");
                                 System.out.println(price.text());
@@ -80,14 +80,15 @@ public class CrawlSnap {
                                         //mobileCollection.put(brandName, new Model(price.text(), stock.text(),url));
                                     else
                                         updatePrice(brandName,price.text(),"1",linksbrand);
-                                        //mobileCollection.put(brandName, new Model(price.text(), "1",url));
+                                    //mobileCollection.put(brandName, new Model(price.text(), "1",url));
                                 }
                             }
                             break;
                         }
+                        else flag=true;
                     }
                 }
-                Thread.sleep(5000);
+                Thread.sleep(1000);
 
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -96,20 +97,76 @@ public class CrawlSnap {
         System.out.println(mobileCollection);
     }
 
-    private void updatePrice(String bName,String bprice,String bstock,String burl) throws SQLException {
 
-//        Iterator it = mobileCollection.entrySet().iterator();
-//        while (it.hasNext()) {
+    void test(String brandName)  {
             try {
-//                Map.Entry pair = (Map.Entry) it.next();
-//                Model m=(Model)pair.getValue();
+                String url = "https://www.snapdeal.com/search?keyword=" + brandName + "&santizedKeyword=&catId=&categoryId=175&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy#bcrumbSearch" + brandName;
+                Document document = Jsoup.connect(url)
+                        .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
+                        .get();
+                Elements maintag = document.select("div.product-tuple-listing");
+                int no_of_links=0;
 
+                for (Element link : maintag) {
+                    if (no_of_links <= 2) {
+                        Elements name = link.select("div.product-tuple-description > div.product-desc-rating > a > p");
+                        System.out.println(name.text());
+
+                        if (ValidateName.check(name.text(), brandName)) {
+                            Elements ttl = link.select("div.product-tuple-description > div.product-tuple-image > a > span");
+                            Elements stock = link.select("div.product-tuple-image >  a > span.badge-soldout");
+                            Elements mainLink=link.select("div.product-tuple-description > div.product-desc-rating >  a.noUdLine");
+                            String linksbrand = mainLink.attr("href");
+
+                            if (!ttl.isEmpty())
+                                updatePrice(brandName,"0","0",linksbrand);
+                            else {
+                                Elements price = link.select("div.product-tuple-description > div.product-desc-rating > a > div.product-price-row > div.lfloat > span.product-price");
+                                System.out.println(price.text());
+                                if (!price.isEmpty()) {
+                                    if (!stock.isEmpty())
+                                        updatePrice(brandName,price.text(),stock.text(),linksbrand);
+
+                                    else
+                                        updatePrice(brandName,price.text(),"1",linksbrand);
+
+                                }
+                            }
+
+                        }
+                        else flag=true;
+                        no_of_links++;
+                    }
+                    else break;
+                    Thread.sleep(1000);
+                }
+                if(flag==true)
+                    updatePrice(brandName);
+
+
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+
+    private void updatePrice(String bName) throws SQLException {
+        try {
+            String getQueryStatement = "Update finaltab set SnapTimestamp='" + ts +"' where Name = '" + bName + "'";
+            PrepareStat = Conn.prepareStatement(getQueryStatement);
+            PrepareStat.executeUpdate();
+            System.out.println("Updated");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    private void updatePrice(String bName,String bprice,String bstock,String burl) throws SQLException {
+            try {
                 String getQueryStatement = "Update finaltab set SnapPrice='" + bprice
                         +"', SnapTimestamp='" + ts
                         + "' ,SnapStock='"+bstock
                         +"',SnapLink='"
                         +burl+ "' where Name = '" + bName + "'";
-
                 PrepareStat = Conn.prepareStatement(getQueryStatement);
                 PrepareStat.executeUpdate();
                 System.out.println("Updated");
@@ -117,14 +174,10 @@ public class CrawlSnap {
             catch(Exception e){
                 System.out.println(e);
             }
-       // }
     }
 
     public static void main(String args[]) throws SQLException {
         CrawlSnap cs=new CrawlSnap();
-        cs.test();
-
-       // cs.updatePrice("realme","Rs.15,000","0","hhtp");
-
+      //  cs.test();
     }
 }

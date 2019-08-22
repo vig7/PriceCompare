@@ -1,7 +1,7 @@
 import java.util.Date;
 
 public class ValidateName {
-    boolean check(String websiteName,String databseName){
+    static boolean check(String websiteName,String databseName){
         String nickname = databseName.substring(databseName.indexOf(' ')+1);
         databseName=databseName.replaceAll("\\s","");
         websiteName=websiteName.replaceAll("\\s","");
@@ -13,10 +13,24 @@ public class ValidateName {
         for(int i=1;i<value.length;i++){
             restOfval+=value[i];
         }
-
         if(databseName.length()<=websiteName.length()&&databseName.contains(value[0].trim())) {
             String restofData=databseName.substring(value[0].length(),databseName.length());
+            String restofnick;
+            try {
+                restofnick = nickname.substring(value[0].length(), nickname.length());
+            }
+            catch (Exception e){
+                restofnick="-1";
+            }
             if(restofData.length()==0){
+                if(value[0].trim().equals(databseName.trim())||value[0].trim().equals(nickname.trim()))
+                    return true;
+            }
+            else if (value[0].equals(databseName.substring(0, value[0].length()))) {
+                if(restOfval.replaceAll("\\s","").contains(databseName))
+                    return true;
+            }
+            if(restofnick.length()==0&&!restofnick.equals("-1")){
                 if(value[0].trim().equals(databseName.trim())||value[0].trim().equals(nickname.trim()))
                     return true;
             }
