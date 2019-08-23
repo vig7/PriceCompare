@@ -10,7 +10,7 @@ boolean test(String link){
         if(!link.equals("null")){
             try {
                 System.out.println(link);
-                Document document = Jsoup.connect("https://www."+link).get();
+                Document document = Jsoup.connect(link).get();
                 String look=document.select("div._9-sL7L").text();
                 Date date=new Date();
                 System.out.println(i++);

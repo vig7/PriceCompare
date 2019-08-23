@@ -88,7 +88,7 @@ public class AmazonProductDetails {
 
     private void updatePrice(String bName) throws SQLException {
         try {
-            String getQueryStatement = "Update finaltab set SnapTimestamp='" + ts +"' where Name = '" + bName + "'";
+            String getQueryStatement = "Update phonedatabase set SnapTimestamp='" + ts +"' where Name = '" + bName + "'";
             PrepareStat = Conn.prepareStatement(getQueryStatement);
             PrepareStat.executeUpdate();
             System.out.println("Updated");
@@ -100,7 +100,7 @@ public class AmazonProductDetails {
 
     private void updatePrice(String bName,String bprice,String bstock,String burl) throws SQLException {
         try {
-            String getQueryStatement = "Update finaltab set SnapPrice='" + bprice
+            String getQueryStatement = "Update phonedatabase set SnapPrice='" + bprice
                     +"', AmazonTimestamp='" + ts
                     + "' ,AmazonStock='"+bstock
                     +"',AmazonLink='"
@@ -117,7 +117,7 @@ public class AmazonProductDetails {
         try {
             Date date= new Date();
             Timestamp ts = new Timestamp(date.getTime());
-            String getQueryStatement = "Update finaltab set AmazonPrice='" + bprice
+            String getQueryStatement = "Update phonedatabase set AmazonPrice='" + bprice
                     +"', AmazonTimestamp='" + ts
                     + "' ,AmazonStock='"+bstock +"' where Name = '" + bName + "'";
             PrepareStat = Conn.prepareStatement(getQueryStatement);

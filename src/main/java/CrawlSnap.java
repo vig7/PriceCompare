@@ -39,7 +39,7 @@ public class CrawlSnap {
 
     void test() throws SQLException {
 
-        String getQueryStatement = "SELECT * FROM finaltab where phone_id>1150 ";
+        String getQueryStatement = "SELECT * FROM phonedatabase where phone_id>1150 ";
         String brandName ;
 
 
@@ -151,7 +151,7 @@ public class CrawlSnap {
 
     private void updatePrice(String bName) throws SQLException {
         try {
-            String getQueryStatement = "Update finaltab set SnapTimestamp='" + ts +"' where Name = '" + bName + "'";
+            String getQueryStatement = "Update phonedatabase set SnapTimestamp='" + ts +"' where Name = '" + bName + "'";
             PrepareStat = Conn.prepareStatement(getQueryStatement);
             PrepareStat.executeUpdate();
             System.out.println("Updated");
@@ -162,7 +162,7 @@ public class CrawlSnap {
     }
     private void updatePrice(String bName,String bprice,String bstock,String burl) throws SQLException {
             try {
-                String getQueryStatement = "Update finaltab set SnapPrice='" + bprice
+                String getQueryStatement = "Update phonedatabase set SnapPrice='" + bprice
                         +"', SnapTimestamp='" + ts
                         + "' ,SnapStock='"+bstock
                         +"',SnapLink='"

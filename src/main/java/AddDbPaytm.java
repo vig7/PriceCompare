@@ -28,7 +28,7 @@ public class AddDbPaytm {
     String getTimestamp(String name) {
         String data="";
 
-        String getQueryStatement = "SELECT * from finaltab where name='"+name+"'";
+        String getQueryStatement = "SELECT * from phonedatabase where name='"+name+"'";
         System.out.println(getQueryStatement);
         try{
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
@@ -49,7 +49,7 @@ public class AddDbPaytm {
     void addStockandPrice(String Name,String Price,  Timestamp Time) {
 
         try {
-            String insertQueryStatement ="update finaltab set paytmPrice='"+Price+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
+            String insertQueryStatement ="update phonedatabase set paytmPrice='"+Price+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
             System.out.println(insertQueryStatement);
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
 
@@ -70,7 +70,7 @@ public class AddDbPaytm {
     String getLink(String name) {
         String data="";
 
-        String getQueryStatement = "SELECT * from finaltab where name='"+name+"'";
+        String getQueryStatement = "SELECT * from phonedatabase where name='"+name+"'";
         System.out.println(getQueryStatement+name);
         try{
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
@@ -118,7 +118,7 @@ public class AddDbPaytm {
 
         try {
             System.out.println( Name+Price);
-            String insertQueryStatement ="update finaltab set PaytmPrice='"+Price+"',PaytmLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
+            String insertQueryStatement ="update phonedatabase set PaytmPrice='"+Price+"',PaytmLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
 
             Thread.sleep(1000);

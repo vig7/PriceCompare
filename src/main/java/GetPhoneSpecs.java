@@ -1,5 +1,4 @@
 import com.google.gson.Gson;
-import com.sun.org.apache.regexp.internal.RE;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -13,7 +12,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import static spark.Spark.*;
+
+import static spark.Spark.port;
 
 class PhoneDetails{
     private int id;
@@ -80,7 +80,7 @@ public class GetPhoneSpecs {
 
     private static ArrayList getPhoneDetails() throws SQLException {
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement = "SELECT phone_id,Name,flipkartPrice,flipkartStock,SnapPrice,SnapStock FROM finaltab limit 8 ";
+        String getQueryStatement = "SELECT phone_id,Name,flipkartPrice,flipkartStock,SnapPrice,SnapStock FROM phonedatabase limit 8 ";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -150,7 +150,7 @@ public class GetPhoneSpecs {
 
     private static ArrayList getPhoneSpecs(int id) throws SQLException, IOException {
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement = "SELECT * FROM finaltab where phone_id="+id;
+        String getQueryStatement = "SELECT * FROM phonedatabase where phone_id="+id;
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         boolean flag=false,aflag=false;
@@ -202,7 +202,7 @@ public class GetPhoneSpecs {
     private static ArrayList getSearchResults(String name) throws SQLException {
         System.out.println(name);
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement = "SELECT phone_id,Name FROM finaltab where Name like '"+name+"%'";
+        String getQueryStatement = "SELECT phone_id,Name FROM phonedatabase where Name like '"+name+"%'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -214,7 +214,7 @@ public class GetPhoneSpecs {
 
     private static ArrayList getprice(String name) throws SQLException {
         ArrayList<String> list = new ArrayList();
-        String getQueryStatement = "SELECT * FROM finaltab where name ='" + name + "'";
+        String getQueryStatement = "SELECT * FROM phonedatabase where name ='" + name + "'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -223,6 +223,11 @@ public class GetPhoneSpecs {
             list.add(rs.getString("FlipkartLink"));
             list.add(rs.getString("PaytmPrice"));
             list.add(rs.getString("PaytmLink"));
+            list.add(rs.getString("SnapPrice"));
+            list.add(rs.getString("SnapLink"));
+            list.add(rs.getString("AmazonPrice"));
+            list.add(rs.getString("AmazonLink"));
+
 
         }
         return list;
@@ -230,7 +235,7 @@ public class GetPhoneSpecs {
 
             private static ArrayList getSearchSpecificResults(String name) throws SQLException, IOException {
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement = "SELECT * FROM finaltab where Name = '"+name+"'";
+        String getQueryStatement = "SELECT * FROM phonedatabase where Name = '"+name+"'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         boolean flag=false,aflag=false;

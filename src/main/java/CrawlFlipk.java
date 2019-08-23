@@ -16,7 +16,7 @@ public class CrawlFlipk {
             for (Element l:look) {
                 Elements price=l.select("div._1vC4OE._2rQ-NK");
                 Elements name=l.select("div._3wU53n");
-                String link="flipkart.com"+l.select("a._31qSD5").attr("href");
+                String link="https:/www.flipkart.com"+l.select("a._31qSD5").attr("href");
 
                 value[0]=name.text();
                 value[1]=price.text();
