@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 
 
 public class GetPageUrl {
-    public static void main(String args[]) {
+    void hit() {
             //CrawlSnap snap=new CrawlSnap();
             //snap.test();
             //CrawlFlipk flipk=new CrawlFlipk();

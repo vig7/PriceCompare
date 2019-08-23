@@ -285,7 +285,10 @@ public class GetPhoneSpecs {
     }
 
     public static void main(String[] arg) {
-        port(5678);
+        Port port=new Port();
+        port.getHerokuAssignedPort();
+        port(port.getHerokuAssignedPort());
+
         GetPhoneSpecs.apply();
         Spark.get("/FeaturedPhones", (request, response) -> {
             ArrayList list=getPhoneDetails();
@@ -322,6 +325,19 @@ public class GetPhoneSpecs {
             System.out.println(list);
             gson=new Gson();
             return gson.toJson(list);
+        });
+
+            Spark.get("/UpdateFlip", (request, response) -> {
+                String name=request.queryParams("Name");
+                AutoUpdateFlipkart updateflip=new AutoUpdateFlipkart();
+                updateflip.check(name);
+                return "1";
+            });
+        Spark.get("/UpdatePaytm", (request, response) -> {
+            String name=request.queryParams("Name");
+            AutoUpdatePaytm updatepaytm=new AutoUpdatePaytm();
+            updatepaytm.check(name);
+            return "1";
         });
 
 //        post("/usersignup/username", (request, response) -> {

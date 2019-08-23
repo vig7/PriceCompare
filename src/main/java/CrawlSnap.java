@@ -176,8 +176,4 @@ public class CrawlSnap {
             }
     }
 
-    public static void main(String args[]) throws SQLException {
-        CrawlSnap cs=new CrawlSnap();
-      //  cs.test();
-    }
 }

@@ -37,7 +37,8 @@ public class AddDbFlipkart {
 
         try {
             // DriverManager: The basic service for managing a set of JDBC drivers.
-            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pricemobiile", "root", "");
+
+            crunchifyConn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/HHs0I2HNbt?useSSL=false", "HHs0I2HNbt", "Z4x5imlcY7");
             if (crunchifyConn != null) {
                 log("Connection Successful! Enjoy. Now it's time to push data");
             } else {
@@ -89,9 +90,7 @@ public class AddDbFlipkart {
             log("ds" + " added successfully");
             // connection close
 
-        } catch (
-
-                Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

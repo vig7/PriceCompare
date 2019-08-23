@@ -15,26 +15,6 @@ public class DBOperations {
     static Connection crunchifyConn = null;
     static PreparedStatement crunchifyPrepareStat = null;
 
-    public static void main(String[] argv) {
-
-        try {
-            log("-------- Simple Crunchify Tutorial on how to make JDBC connection to MySQL DB locally on macOS ------------");
-            makeJDBCConnection();
-
-//            log("\n---------- Adding company 'Crunchify LLC' to DB ----------");
-//            addDataToDB("Google Inc.", "Mountain View, CA, US", 50000, "https://google.com");
-//            addDataToDB("Apple Inc.", "Cupertino, CA, US", 30000, "http://apple.com");
-
-            log("\n---------- Let's get Data from DB ----------");
-
-            crunchifyPrepareStat.close();
-            crunchifyConn.close(); // connection close
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        }
-    }
 
     protected static Connection makeJDBCConnection() {
 
@@ -49,7 +29,8 @@ public class DBOperations {
 
         try {
             // DriverManager: The basic service for managing a set of JDBC drivers.
-            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pricemobiile", "root", "");
+
+            crunchifyConn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/HHs0I2HNbt?useSSL=false", "HHs0I2HNbt", "Z4x5imlcY7");
             if (crunchifyConn != null) {
                 log("Connection Successful! Enjoy. Now it's time to push data");
             } else {
