@@ -24,15 +24,16 @@ public class CrawlSnapUrl {
                 Document document = Jsoup.connect(url)
                         .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
                         .get();
-
                 Elements price = document.select("div.pdp-e-i-PAY-r > span.pdp-final-price > span.payBlkBig");
                 Elements stock = document.select("div.pdp-elec-topcenter-inner > span.sold-out-err");
                 System.out.println(price.text());
                 CrawlSnapUrl csu=new CrawlSnapUrl();
-                if(stock.isEmpty())
-                    csu.updatePrice(price.text(),"1",name);
-                else
-                    csu.updatePrice(price.text(),"0",name);
+                if(price.isEmpty())
+                    csu.updatePrice("","1",name);
+                else {
+                    String prices=price.text().substring(4);
+                    csu.updatePrice(prices, "0", name);
+                }
 
 
 

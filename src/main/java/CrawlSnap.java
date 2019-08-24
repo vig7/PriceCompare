@@ -64,17 +64,15 @@ public class CrawlSnap {
                             String linksbrand = mainLink.attr("href");
                             if (!ttl.isEmpty())
                                 updatePrice(brandName,"0","0",linksbrand);
-                                // mobileCollection.put(brandName,new Model("0","0",url));
                             else {
                                 Elements price = link.select("div.product-tuple-description > div.product-desc-rating > a > div.product-price-row > div.lfloat > span.product-price");
                                 System.out.println(price.text());
                                 if (!price.isEmpty()) {
                                     if (!stock.isEmpty())
                                         updatePrice(brandName,price.text(),stock.text(),linksbrand);
-                                        //mobileCollection.put(brandName, new Model(price.text(), stock.text(),url));
+
                                     else
                                         updatePrice(brandName,price.text(),"1",linksbrand);
-                                    //mobileCollection.put(brandName, new Model(price.text(), "1",url));
                                 }
                             }
                             break;
@@ -94,39 +92,39 @@ public class CrawlSnap {
 
     void test(String brandName)  {
             try {
+                brandName=brandName.replaceAll(" ","%20");
                 String url = "https://www.snapdeal.com/search?keyword=" + brandName + "&santizedKeyword=&catId=&categoryId=175&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy#bcrumbSearch" + brandName;
+                System.out.println(url);
                 Document document = Jsoup.connect(url)
                         .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
                         .get();
+
                 Elements maintag = document.select("div.product-tuple-listing");
                 int no_of_links=0;
 
                 for (Element link : maintag) {
+
                     if (no_of_links <= 2) {
                         Elements name = link.select("div.product-tuple-description > div.product-desc-rating > a > p");
                         System.out.println(name.text());
 
                         if (ValidateName.check(name.text(), brandName)) {
+                            System.out.println("inside");
                             Elements ttl = link.select("div.product-tuple-description > div.product-tuple-image > a > span");
                             Elements stock = link.select("div.product-tuple-image >  a > span.badge-soldout");
                             Elements mainLink=link.select("div.product-tuple-description > div.product-desc-rating >  a.noUdLine");
                             String linksbrand = mainLink.attr("href");
-
-                            if (!ttl.isEmpty())
-                                updatePrice(brandName,"","0",linksbrand);
-                            else {
-                                Elements price = link.select("div.product-tuple-description > div.product-desc-rating > a > div.product-price-row > div.lfloat > span.product-price");
-                                System.out.println(price.text());
+                            Elements price = link.select("div.product-tuple-description > div.product-desc-rating > a > div.product-price-row > div.lfloat > span.product-price");
+                            if(stock.isEmpty()) {
                                 if (!price.isEmpty()) {
-                                    if (!stock.isEmpty())
-                                        updatePrice(brandName,price.text(),stock.text(),linksbrand);
-
-                                    else
-                                        updatePrice(brandName,price.text(),"1",linksbrand);
-
+                                    String prices = price.text().substring(4);
+                                    updatePrice(brandName, prices, "1", linksbrand);
                                 }
                             }
-
+                            else {
+                                    updatePrice(brandName, "", "0", linksbrand);
+                                }
+                            break;
                         }
                         else flag=true;
                         no_of_links++;
@@ -145,10 +143,11 @@ public class CrawlSnap {
 
     private void updatePrice(String bName) throws SQLException {
         try {
+            bName=bName.replaceAll("%20"," ");
             String getQueryStatement = "Update phonedatabase set Timestamp='" + ts +"' where Name = '" + bName + "'";
             PrepareStat = Conn.prepareStatement(getQueryStatement);
             PrepareStat.executeUpdate();
-            System.out.println("Updated");
+            System.out.println("Updated ts");
         }
         catch(Exception e){
             System.out.println(e);
@@ -156,6 +155,7 @@ public class CrawlSnap {
     }
     private void updatePrice(String bName,String bprice,String bstock,String burl) throws SQLException {
             try {
+                bName=bName.replaceAll("%20"," ");
                 String getQueryStatement = "Update phonedatabase set SnapPrice='" + bprice
                         +"', Timestamp='" + ts
                         + "' ,SnapStock='"+bstock
@@ -168,10 +168,5 @@ public class CrawlSnap {
             catch(Exception e){
                 System.out.println(e);
             }
-    }
-
-    public static void main(String args[]) throws SQLException {
-        CrawlSnap cs=new CrawlSnap();
-      //  cs.test();
     }
 }

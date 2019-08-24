@@ -1,5 +1,4 @@
 import com.google.gson.Gson;
-import com.sun.org.apache.regexp.internal.RE;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -89,7 +88,7 @@ public class GetPhoneSpecs {
 
     private static ArrayList getPhoneDetails() throws SQLException {
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement = "SELECT phone_id,Name,flipkartPrice,flipkartStock,SnapPrice,SnapStock FROM phonedatabase limit 8 ";
+        String getQueryStatement = "SELECT phone_id,Name,flipkartPrice,flipkartStock,SnapPrice,SnapStock,AmazonStock,AmazonPrice,PaytmPrice FROM phonedatabase limit 8 ";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {

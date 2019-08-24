@@ -22,6 +22,8 @@ public class AmazonProductDetails {
     void getAmazonPrice(String brandName)  {
        // String brandName="iphone+6";
         try {
+//            brandName=brandName.replaceAll(" ","%20");
+
             Connection.Response response =
                     Jsoup.connect("https://www.amazon.in/s?k=" + brandName + "&ref=nb_sb_noss_2")
                             .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
@@ -47,11 +49,20 @@ public class AmazonProductDetails {
                     Elements prodName = doc.select("#titleSection > h1 > span");
                     Elements prodPrice = doc.select("#priceblock_ourprice");
                     Elements prodStock = doc.select("#availability");
+                    Elements otherprice=doc.select("#olp_feature_div > #olp-new > span.olp-padding-right >span > span");
                     if (ValidateName.check(prodName.text(), brandName)) {
-                        if (prodPrice.text() == null)
-                            updatePrice(brandName, prodPrice.text(), "1", url);
-                        else
-                            updatePrice(brandName, prodPrice.text(), "0", url);
+                        if (prodPrice.isEmpty() && !otherprice.isEmpty()) {
+                            String price=prodPrice.text().substring(2,otherprice.text().length()-1);
+                            updatePrice(brandName, price, "0", url);
+                        }
+                        else if(otherprice.isEmpty() && prodPrice.isEmpty()){
+                            updatePrice(brandName, "", "0", url);
+                        }
+                        else {
+                            String price=prodPrice.text().substring(2,prodPrice.text().length()-1);
+                            updatePrice(brandName, price, "1", url);
+                        }
+                        break;
                     } else
                         flag = true;
                     no_of_pages++;
@@ -78,12 +89,17 @@ public class AmazonProductDetails {
                 Elements prodName = doc.select("#titleSection > h1 > span");
                 Elements prodPrice = doc.select("#priceblock_ourprice");
                 Elements prodStock = doc.select("#availability");
-                if (prodPrice.text() == null)
-                    updatePrice(brandName, prodPrice.text(), "1");
-                else
-                    updatePrice(brandName, prodPrice.text(), "0");
-
-
+                Elements otherprice=doc.select("#olp_feature_div > #olp-new > span.olp-padding-right >span > span");
+                if (prodPrice.isEmpty() && !otherprice.isEmpty()) {
+                    String price=prodPrice.text().substring(2,otherprice.text().length()-1);
+                    updatePrice( price, "0", brandName);
+                }
+                else if (prodPrice.isEmpty() && otherprice.isEmpty())
+                    updatePrice("", "0", brandName);
+                else {
+                    String price=prodPrice.text().substring(2,prodPrice.text().length()-1);
+                    updatePrice(price, "1", brandName);
+                }
         }
 
     private void updatePrice(String bName) throws SQLException {
@@ -91,7 +107,7 @@ public class AmazonProductDetails {
             String getQueryStatement = "Update phonedatabase set Timestamp='" + ts +"' where Name = '" + bName + "'";
             PrepareStat = Conn.prepareStatement(getQueryStatement);
             PrepareStat.executeUpdate();
-            System.out.println("Updated");
+            System.out.println("Updated ts");
         }
         catch(Exception e){
             System.out.println(e);

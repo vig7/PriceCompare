@@ -1,4 +1,6 @@
+import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class NullCheckPaytm {
         void check (String name){
@@ -14,20 +16,9 @@ public class NullCheckPaytm {
                 db.close();
             }
         }
-}
 
 
-    private static ArrayList getSearchResults(String name) throws SQLException {
-<<<<<<< HEAD
-        ArrayList<String> list=new ArrayList();
-        String getQueryStatement = "SELECT * FROM finaltab where name ='"+name+"'";
-        PrepareStat = Conn.prepareStatement(getQueryStatement);
-        ResultSet rs = PrepareStat.executeQuery();
-        while (rs.next()) {
-            list.add(rs.getString("Name"));
-            list.add(rs.getString("flipkartPrice"));
-            list.add(rs.getString("FlipkartLink"));
-            list.add(rs.getString("PaytmPrice"));
-            list.add(rs.getString("PaytmLink"));
 
+
+    }
 
