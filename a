@@ -1,0 +1,222 @@
+[33mcommit ea41f842ea9f80dcbe400566364b70ee879cfd8a[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Mon Aug 19 19:30:14 2019 +0530
+
+     Removed idea folder
+
+[33mcommit f2a169f1a59d28b54e9bcba2bfb308750c595ccb[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Mon Aug 19 19:27:28 2019 +0530
+
+    t
+
+[33mcommit 8f4b58bb0ca7481d913577789da28a90b71f8903[m
+Merge: ffd1fc1 c813cac
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Mon Aug 19 19:09:05 2019 +0530
+
+    Merge branch 'master' of https://github.com/vig7/PriceCompare
+
+[33mcommit ffd1fc105a7b0091d30cc2355dce29f54b951206[m
+Merge: 98f179c 8830e93
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Mon Aug 19 19:09:00 2019 +0530
+
+    temp
+
+[33mcommit c813cac606756623dd7648963d014903dcdfc2fd[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: isha <isha.she@media.net>
+Date:   Mon Aug 19 19:06:57 2019 +0530
+
+    Search page added
+
+[33mcommit df95e63ab4276cf0e8b109f2eb650a6626eb30af[m
+Author: isha <isha.she@media.net>
+Date:   Mon Aug 19 19:05:57 2019 +0530
+
+    Api created
+
+[33mcommit 98f179c7255fc96dbef6cc87392dce4e7c41d281[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Mon Aug 19 13:10:37 2019 +0530
+
+    Flipdone
+
+[33mcommit 85ac9f87c382873b27215572d85eee08e3f07fb0[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Mon Aug 19 13:02:05 2019 +0530
+
+    temp1
+
+[33mcommit 5c1322fc6e1fb19727c184b78ffbffab718c2219[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Mon Aug 19 13:01:40 2019 +0530
+
+    temp
+
+[33mcommit e992445978bafe4fb3a65c6fef2496bc5964af40[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Mon Aug 19 12:18:25 2019 +0530
+
+    merge
+
+[33mcommit ecc06dcf058355cd22eb8161ee9ba4b968457e96[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Mon Aug 19 12:14:57 2019 +0530
+
+    temp1
+
+[33mcommit 8830e93951c7ff6f529d438aa4e3bf81a350ae83[m
+Author: isha <isha.she@media.net>
+Date:   Fri Aug 16 20:13:01 2019 +0530
+
+    minor changes
+
+[33mcommit 89b83fcba3e7ddc5bda96e25981f4480de0eeb87[m
+Merge: fc311ea 003a833
+Author: isha <isha.she@media.net>
+Date:   Fri Aug 16 20:08:03 2019 +0530
+
+    conflicts
+
+[33mcommit fc311eaf057e6bd89a934f40e50b94e4d92f13e9[m
+Author: isha <isha.she@media.net>
+Date:   Fri Aug 16 19:40:15 2019 +0530
+
+    snapdeal scrapping completed
+
+[33mcommit 85f20032aac0a7bc9aa1c1ddce3b207eae176f93[m
+Author: isha <isha.she@media.net>
+Date:   Fri Aug 16 14:18:07 2019 +0530
+
+    new changes
+
+[33mcommit 003a833d81204cf795d121e92fc812ea863cf36f[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Fri Aug 16 13:52:10 2019 +0530
+
+    Flipkart done and validate
+
+[33mcommit 425c0564ccc9f7a0d29e0bb629e797978566f948[m
+Merge: 85c657c d4c09d2
+Author: isha <isha.she@media.net>
+Date:   Wed Aug 14 18:35:14 2019 +0530
+
+    merge branch 'master' of https://github.com/vig7/pricecompare
+    validate changes
+
+[33mcommit d4c09d2f85387eb038e98ba7da785f4c3343f455[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Wed Aug 14 18:34:46 2019 +0530
+
+    Validate
+
+[33mcommit 85c657c2d64d6941185532b6eff2e1736f39df87[m
+Author: isha <isha.she@media.net>
+Date:   Wed Aug 14 17:50:30 2019 +0530
+
+    snapdeal scraping
+
+[33mcommit 6b62f22819312dc7ae177fd952587644771a45c5[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Wed Aug 14 17:47:12 2019 +0530
+
+    Validate
+
+[33mcommit e9715942fbe8ab0886d340ab22cd24f5b5d279ed[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Wed Aug 14 12:48:54 2019 +0530
+
+    SQL
+
+[33mcommit 353fe82e8914e41b14fa9d55184a96d4c50cd950[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Wed Aug 14 12:44:14 2019 +0530
+
+    SQL
+
+[33mcommit d6ac3d241d717a6a89c7ec3e621bd0b0ca1e5286[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Wed Aug 14 12:34:42 2019 +0530
+
+    before s
+
+[33mcommit 9dc1c7fd08676131aa341908a892909d8abc8391[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Wed Aug 14 12:30:21 2019 +0530
+
+    before pop
+
+[33mcommit 80cf4cd0a5d3283a4dd34c99182b6e9d2408738c[m
+Author: isha <isha.she@media.net>
+Date:   Wed Aug 14 12:20:16 2019 +0530
+
+    db operations
+
+[33mcommit 37d0737492d2fb4a46b960eaab026fd4ca6b4b29[m
+Author: isha <isha.she@media.net>
+Date:   Wed Aug 14 11:05:36 2019 +0530
+
+    added amazon price crawling file
+
+[33mcommit 6338aee9cc387331b0e7987a8ade9483f17dc540[m
+Author: isha <isha.she@media.net>
+Date:   Tue Aug 13 17:53:14 2019 +0530
+
+    minor css changes
+
+[33mcommit 079612e1ee71f5819a88755d2e436b4b62c370d1[m
+Author: isha <isha.she@media.net>
+Date:   Tue Aug 13 12:27:54 2019 +0530
+
+    Index page added
+
+[33mcommit 8bfbbc5b5e2e28fb68e1704ede15fe1351f3d741[m
+Author: isha <isha.she@media.net>
+Date:   Fri Aug 9 18:58:08 2019 +0530
+
+    Amazon crawling
+
+[33mcommit c2bbc0243bbc7e4f56c9b03c288e72bdf59576e7[m
+Author: isha <isha.she@media.net>
+Date:   Fri Aug 9 16:24:36 2019 +0530
+
+    class rename
+
+[33mcommit a9e3f1e26c083882b5747b1bc7dcf445fb122f5d[m
+Merge: c420e21 14425a5
+Author: isha <isha.she@media.net>
+Date:   Fri Aug 9 16:18:18 2019 +0530
+
+    Merge branch 'master' of https://github.com/vig7/PriceCompare
+    data collection
+
+[33mcommit 14425a5dea79cd87237b69b89f048293b1e9967d[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Fri Aug 9 16:17:11 2019 +0530
+
+    Database of specs of mobile
+
+[33mcommit c420e21f5ca7936862c44d0d9be9ceead175f79d[m
+Author: isha <isha.she@media.net>
+Date:   Fri Aug 9 14:04:27 2019 +0530
+
+    modifications
+
+[33mcommit fa4125466b658a1fc835f6f477ca52f00438ecbf[m
+Author: isha <isha.she@media.net>
+Date:   Thu Aug 8 19:04:14 2019 +0530
+
+    Data scrapped
+
+[33mcommit 4d1ffc80d22e3754f744fdcce7695969d7743c9e[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Thu Aug 8 17:47:27 2019 +0530
+
+    CSVdatapull
+
+[33mcommit 60ccb00d5889498ae7a98fe65e6b50def77594fb[m
+Author: vignesh.ra <vignesh.ra@media.net>
+Date:   Thu Aug 8 14:36:12 2019 +0530
+
+    First Commit

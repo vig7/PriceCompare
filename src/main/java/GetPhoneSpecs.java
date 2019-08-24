@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.sun.org.apache.regexp.internal.RE;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -235,7 +236,24 @@ public class GetPhoneSpecs {
         return  list;
     }
 
-    private static ArrayList getSearchSpecificResults(String name) throws SQLException, IOException {
+
+    private static ArrayList getprice(String name) throws SQLException {
+        ArrayList<String> list = new ArrayList();
+        String getQueryStatement = "SELECT * FROM finaltab where name ='" + name + "'";
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
+        ResultSet rs = PrepareStat.executeQuery();
+        while (rs.next()) {
+            list.add(rs.getString("Name"));
+            list.add(rs.getString("flipkartPrice"));
+            list.add(rs.getString("FlipkartLink"));
+            list.add(rs.getString("PaytmPrice"));
+            list.add(rs.getString("PaytmLink"));
+
+        }
+        return list;
+    }
+
+            private static ArrayList getSearchSpecificResults(String name) throws SQLException, IOException {
         ArrayList<PhoneDetails> list=new ArrayList();
         String getQueryStatement = "SELECT * FROM phonedatabase where Name = '"+name+"'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
@@ -302,7 +320,7 @@ public class GetPhoneSpecs {
             ArrayList list=getPhoneDetails();
             gson=new Gson();
             return gson.toJson(list);
-         });
+        });
 
         Spark.get("/MobileSpecs", (request, response) -> {
             int id=Integer.parseInt(request.queryParams("id"));
@@ -321,6 +339,16 @@ public class GetPhoneSpecs {
         Spark.get("/SearchSpecificResults", (request, response) -> {
             String serachKey=request.queryParams("searchKey");
             ArrayList list=getSearchSpecificResults(serachKey);
+            gson=new Gson();
+            return gson.toJson(list);
+        });
+        Spark.get("/Extension", (request, response) -> {
+            String serachKey=request.queryParams("Title");
+            Extension ext=new Extension();
+            System.out.println(serachKey);
+            String res=ext.hit(serachKey);
+            ArrayList list=getprice(res);
+            System.out.println(list);
             gson=new Gson();
             return gson.toJson(list);
         });

@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public class ValidateName {
     static boolean check(String websiteName,String databseName){
         String nickname = databseName.substring(databseName.indexOf(' ')+1);

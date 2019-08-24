@@ -22,7 +22,7 @@ function dynamicSearch(str){
             searchResults(this);
         }
       }
-      xmlhttp.open("GET","http://localhost:5678/SearchResults?searchKey="+str,true);
+      xmlhttp.open("GET","http://mobilepricecompare.herokuapp.com/SearchResults?searchKey="+str,true);
       xmlhttp.send();
 }
 
@@ -67,7 +67,15 @@ function setSearchVal(v,id){
     var button=" ";
     let flipPrice=res[0].flipkartPrice;
     let snapPrice=res[0].SnapPrice;
-    prices[0]="Not Available";
+    let amazonPrice=res[0].AmazonPrice;
+    let paytmprice=res[0].PaytmPrice;
+    if(amazonPrice!=""){
+        prices[0]=amazonPrice;
+        links[0]=res[0].AmazonLink;
+    }
+    else{
+        prices[0]="Not Available";
+    }
     if(flipPrice!="null"){
         prices[1]=flipPrice;
         links[1]=res[0].FlipkartLink;
@@ -82,7 +90,13 @@ function setSearchVal(v,id){
     else{
         prices[2]="Not Available";
     }
-    prices[3]="Not Available";
+    if(paytmprice!="null" && !paytmprice){
+        prices[3]=paytmprice;
+        links[3]=res[0].PaytmLink;
+    }
+    else{
+        prices[3]="Not Available";
+    }
       for(i=0;i<deals.length;i++){
          text+="<p>"+deals[i]+"</p><br>";
          price+="<p>"+prices[i]+"</p><br>";
@@ -120,7 +134,7 @@ function setSearchVal(v,id){
             addFeatures(this); 
         }
     };
-    xmlhttp.open("GET", "http://localhost:5678/FeaturedPhones", true);
+    xmlhttp.open("GET", "http://mobilepricecompare.herokuapp.com/FeaturedPhones", true);
     xmlhttp.send();
  }
 
@@ -128,26 +142,29 @@ function addFeatures(obj){
     var text=" ";
      res= obj.response;
     res=JSON.parse(res);
-    // console.log(res)
+    var price="Rs.";
     for(i=0;i<8;i++){
        let flipPrice=res[i].flipkartPrice;
        let snapPrice=res[i].SnapPrice;
-       let amazonPrice=res[i].amazonPrice;
-       if(flipPrice >= snapPrice && flipPrice!="null" && snapPrice !=""){
-           price=snapPrice;
-       }
-       else if(flipPrice < snapPrice && flipPrice!="null" && snapPrice !=""){
-           price=flipPrice;
-       }
-       else if(flipPrice=="null" && snapPrice!=""){
-           price=snapPrice;
-       }
-        else if(snapPrice=="" && flipPrice!="null"){
-           price=flipPrice;
-        }
-        else
+       let amazonPrice=res[i].AmazonPrice;
+       let paytmprice=res[i].PaytmPrice;
+       if(flipPrice=="null")
+            flipPrice="1000000";
+        if(snapPrice=="")
+            snapPrice="1000000";
+        if(paytmprice=="null" || !paytmprice)
+            paytmprice="1000000";
+        if(amazonPrice=="")
+            amazonPrice="1000000";
+            flipPrice=parseFloat(flipPrice.replace(',',''));
+            snapPrice=parseFloat(snapPrice.replace(',',''));
+            amazonPrice=parseFloat(amazonPrice.replace(',',''));
+            paytmprice=parseFloat(paytmprice.replace(',',''));
+            price=Math.min(flipPrice,snapPrice,amazonPrice,paytmprice);
+           console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
+        if(price=="1000000")
            price="Not Available";
-       text+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="assets/images/lg.jpg" alt="" /><h5 class="card-title">'+price+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
+       text+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" /><h5 class="card-title">'+price+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
     }
     document.getElementById("fix-features").innerHTML=text;
  }
@@ -162,7 +179,7 @@ function addFeatures(obj){
  function showMobilePage() {
     var url="";
     phone_id=localStorage.getItem("prod_id");
-    url= "http://localhost:5678/MobileSpecs?id="+phone_id;
+    url= "http://mobilepricecompare.herokuapp.com/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -176,7 +193,7 @@ function addFeatures(obj){
 
  function showSearchResultPage(val){
     var url="";
-    url="http://localhost:5678/SearchSpecificResults?searchKey="+val;
+    url="http://mobilepricecompare.herokuapp.com/SearchSpecificResults?searchKey="+val;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -208,27 +225,34 @@ function addFeatures(obj){
         var name=res[0].Name;
     else
         var name=val;
-    var price="Best Price: ";
+    var price="Best Price:Rs. ";
     let flipPrice=res[0].flipkartPrice;
-    let snapPrice=res[0].SnapPrice;
-    if(flipPrice >= snapPrice && flipPrice!="null" && snapPrice !=""){
-        price=price+napPrice;
-    }
-    else if(flipPrice < snapPrice && flipPrice!="null" && snapPrice !=""){
-        price=price+"Rs."+flipPrice;
-    }
-    else if(flipPrice=="null" && snapPrice!=""){
-        price=price+snapPrice;
-    }
-    else if(snapPrice=="" && flipPrice!="null"){
-        price=price+"Rs."+flipPrice;
-    }
-    else
-        price="Currently out of stock";    
+    let snapPrice=res[0].flipkartPrice;
+    let amazonPrice=res[0].AmazonPrice;
+    let paytmprice=res[0].PaytmPrice;
+    if(flipPrice=="null")
+         flipPrice="1000000";
+     if(snapPrice=="")
+         snapPrice="1000000";
+     if(paytmprice=="null" || !paytmprice)
+         paytmprice="1000000";
+     if(amazonPrice=="")
+         amazonPrice="1000000";
+         console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
+         flipPrice=parseFloat(flipPrice.replace(',',''));
+         snapPrice=parseFloat(snapPrice.replace(',',''));
+         amazonPrice=parseFloat(amazonPrice.replace(',',''));
+         paytmprice=parseFloat(paytmprice.replace(',',''));
+         price+=Math.min(flipPrice,snapPrice,amazonPrice,paytmprice);
+        console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
+     if(price=="1000000")
+        price="Not Available"; 
+    image='<div class="col-sm-6"><img class="pop-up "  id="description-image-size"  src="ImageStore/'+name+'.PNG" alt="" /></div>';   
     text=' <table class="table table-bordered"> <tbody> <tr style="border: none"><td >Model Name</td><td>'+res[0].Name+'</td></tr><tr><td>Operating System</td><td>'+res[0].operatingSystem+'</td></tr><tr><td>Camera</td><td>'+res[0].Camera+'</td></tr><tr><td>Display</td><td>'+res[0].Display+'</td></tr><tr><td>Battery</td><td>'+res[0].Battery+'</td></tr><tr><td>Special Features</td><td>'+res[0].specialFeat+'</td></tr><tr><td>RAM</td><td>'+res[0].RAM+'</td></tr></tbody></table>';
     document.getElementById("prodName").innerHTML=name;
     document.getElementById("prodPrice").innerHTML=price;
     document.getElementById("showSpecifications").innerHTML=text;
+    document.getElementById("image-pro").innerHTML=image;
     var butvalue=localStorage.getItem("prod_id");
     console.log(butvalue);
     document.getElementById("show-compare").innerHTML='<div class="row" style="padding:20px"><div class="col-sm-3"><button class="btn btn-primary" onclick="obtainSpecs('+"'"+butvalue+"'"+')">Compare</button></div></div>';
@@ -242,7 +266,7 @@ function addFeatures(obj){
  function sendRequest(){
     var url="";
     phone_id=localStorage.getItem("compare_id");
-    url= "http://localhost:5678/MobileSpecs?id="+phone_id;
+    url= "http://mobilepricecompare.herokuapp.com/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

@@ -3,6 +3,48 @@ body {
     font: 400 15px/1.8 Lato, roboto;
     color: #777;
 }
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 12px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 12px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.PName{
+  text-align: center;
+  font-size: 1.5em;
+}
+.ComapreTable{
+  text-align: center;
+}
+.ComapreTable{
+  margin: 10px 30px 10px 10px;
+  border: #777 groove;
+  border-width: thin;
+}
 h3 {
     margin: 10px 0 30px 0;
     letter-spacing: 10px;      

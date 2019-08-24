@@ -1,5 +1,4 @@
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,10 +12,20 @@ public class GetPageUrl {
             //CrawlSnap snap=new CrawlSnap();
             //snap.test();
             //CrawlFlipk flipk=new CrawlFlipk();
+
+/*            CrawlPaytm paytm=new CrawlPaytm();
+           String[] temp= paytm.test("IPHONE 64 GB");
+           System.out.println(temp[0]+" "+temp[2]);
+
+      AutoUpdatePaytm paytm =new AutoUpdatePaytm();
+      paytm.updatePaytm();*/
+        //AddStockFlipk flipk=new AddStockFlipk();
+        //flipk.test();
+
             //CrawlPaytm paytm=new CrawlPaytm();
-            //paytm.test();
-//       UpdateRam ram=new UpdateRam();
-//       ram.updateRam();
+        //paytm.test();
+       /* AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
+        flipkart.check("Itel it2182");*/
         try {
             for(int i=1;i<=0;i++) {
                 Document document = Jsoup.connect("https://pricebaba.com/mobile/pricelist/all-mobiles-sold-in-india?page="+i).get();

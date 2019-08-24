@@ -1,0 +1,33 @@
+import java.sql.Timestamp;
+
+public class NullCheckPaytm {
+        void check (String name){
+            CrawlPaytm paytm=new CrawlPaytm();
+            String[] data = paytm.test(name);
+            if (!data[1].equals("-1")) {
+                AddDbPaytm db=new AddDbPaytm();
+                db.makeJDBCConnection();
+                String link = db.getLink(name);
+                java.util.Date date = new java.util.Date();
+                Timestamp databasetimestamp = new Timestamp(date.getTime());
+                db.addDataToDB(name, data[1], data[2], databasetimestamp);
+                db.close();
+            }
+        }
+}
+
+
+    private static ArrayList getSearchResults(String name) throws SQLException {
+<<<<<<< HEAD
+        ArrayList<String> list=new ArrayList();
+        String getQueryStatement = "SELECT * FROM finaltab where name ='"+name+"'";
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
+        ResultSet rs = PrepareStat.executeQuery();
+        while (rs.next()) {
+            list.add(rs.getString("Name"));
+            list.add(rs.getString("flipkartPrice"));
+            list.add(rs.getString("FlipkartLink"));
+            list.add(rs.getString("PaytmPrice"));
+            list.add(rs.getString("PaytmLink"));
+
+
