@@ -1,9 +1,15 @@
 public class ValidateName {
     static boolean check(String websiteName,String databseName){
+
         String nickname = databseName.substring(databseName.indexOf(' ')+1);
-        databseName=databseName.replaceAll("\\s","");
+//        String nickname2 = nickname.substring(nickname.indexOf(' ')+1);
+//        String finalnickname=databseName.substring(0,databseName.indexOf(' '))+" "+nickname2;
+        databseName=databseName.replaceAll("%20","");
+        databseName=databseName.replaceAll(" ","");
         websiteName=websiteName.replaceAll("\\s","");
-        nickname =nickname.replaceAll("\\s","").toLowerCase();
+        nickname =nickname.replaceAll("%20","").toLowerCase();
+        nickname =nickname.replaceAll(" ","").toLowerCase();
+//        finalnickname =finalnickname.replaceAll("\\s","").toLowerCase();
         websiteName=websiteName.toLowerCase();
         databseName=databseName.toLowerCase();
         String[] value=websiteName.split("\\(");
@@ -12,7 +18,8 @@ public class ValidateName {
             restOfval+=value[i];
         }
         if(databseName.length()<=websiteName.length()&&databseName.contains(value[0].trim())) {
-            String restofData=databseName.substring(value[0].length(),databseName.length());
+            String restofData=databseName.substring(value[0].length());
+            System.out.println(value[0].length()+"="+restofData);
             String restofnick;
             try {
                 restofnick = nickname.substring(value[0].length(), nickname.length());
@@ -25,10 +32,12 @@ public class ValidateName {
                     return true;
             }
             else if (value[0].equals(databseName.substring(0, value[0].length()))) {
-                if(restOfval.replaceAll("\\s","").contains(databseName))
+                if(restOfval.replaceAll("\\s","").contains(restofData))
                     return true;
             }
+
             if(restofnick.length()==0&&!restofnick.equals("-1")){
+
                 if(value[0].trim().equals(databseName.trim())||value[0].trim().equals(nickname.trim()))
                     return true;
             }
@@ -38,5 +47,9 @@ public class ValidateName {
             }
         }
         return false;
+    }
+    public  static void  main(String args[]){
+        CrawlAmazon amazon=new CrawlAmazon();
+        amazon.add("Iphone x");
     }
 }
