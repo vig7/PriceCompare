@@ -1,10 +1,8 @@
 import java.sql.*;
 import java.util.Date;
 
-public class AddDbPaytm {
+public class AddDbPaytm extends  DBOperations{
 
-    Connection crunchifyConn = null;
-    PreparedStatement crunchifyPrepareStat = null;
 
     void AaddDbFlipkart(){
 
@@ -87,32 +85,6 @@ public class AddDbPaytm {
         }
         return data;
 
-    }
-
-    void makeJDBCConnection() {
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            log("Congrats - Seems your MySQL JDBC Driver Registered!");
-        } catch (ClassNotFoundException e) {
-            log("Sorry, couldn't found JDBC driver. Make sure you have added JDBC Maven Dependency Correctly");
-            e.printStackTrace();
-            return;
-        }
-
-        try {
-            // DriverManager: The basic service for managing a set of JDBC drivers.
-            crunchifyConn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/HHs0I2HNbt?useSSL=false", "HHs0I2HNbt", "Z4x5imlcY7");
-            if (crunchifyConn != null) {
-                log("Connection Successful! Enjoy. Now it's time to push data");
-            } else {
-                log("Failed to make connection!");
-            }
-        } catch (SQLException e) {
-            log("MySQL Connection Failed!");
-            e.printStackTrace();
-            return;
-        }
     }
     void addDataToDB(String Name,String Price, String Link,  Date Time ) {
 

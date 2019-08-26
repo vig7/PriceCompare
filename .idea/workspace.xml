@@ -3,49 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a771a355-2162-49d6-88e3-ac1add83d5af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AddDbFlipkart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AddDbFlipkart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CrawlTata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CrawlTata.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Extension.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Extension.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GetPageUrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AutoUpdatedtabse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Compare-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Compare-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Compare-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Compare-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AddDbFlipkart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AddDbPaytm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AddStockFlipk.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AmazonProductDetails.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AutoUpdateFlipkart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AutoUpdatePaytm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CheckIfValidRow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CrawlFlipk.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CrawlPaytm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CrawlSnap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CrawlSnapUrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CrawlTata.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBOperations.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Extension.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GetImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GetPageUrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GetPhoneSpecs$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GetPhoneSpecs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jdbc.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ManualUpdatePaytm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ManualUpdateflip.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NullCheckFlip.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NullCheckPaytm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PaytmInsert.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PhoneDetails.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Port.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PriceBaba.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ValidateName.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ValidateNamePaytm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/flipkartinsert.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/heroku/app/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/target/heroku/app/Procfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/heroku/app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/heroku/app/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/heroku/app/target/Compare-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/heroku/app/target/Compare-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/heroku/app/target/Compare-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/heroku/app/target/Compare-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/heroku/slug.tgz" beforeDir="false" afterPath="$PROJECT_DIR$/target/heroku/slug.tgz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AddDbPaytm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AddDbPaytm.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -72,11 +31,29 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AddDbPaytm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Extension.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+            <state relative-caret-position="132">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -90,28 +67,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="321" column="42" lean-forward="true" selection-start-line="321" selection-start-column="42" selection-end-line="321" selection-end-column="42" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/PriceBaba.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="23" column="56" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AutoUpdatePaytm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+              <caret line="321" column="42" selection-start-line="321" selection-start-column="42" selection-end-line="321" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -166,7 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>order</find>
       <find>stock</find>
       <find>adddata</find>
       <find>ad</find>
@@ -196,6 +151,7 @@
       <find>public staio</find>
       <find>apply</find>
       <find>app</find>
+      <find>makeJDBCConnection();</find>
     </findStrings>
     <replaceStrings>
       <replace>phonedatabase</replace>
@@ -224,7 +180,6 @@
         <option value="$PROJECT_DIR$/src/main/java/CrawlPaytm.java" />
         <option value="$PROJECT_DIR$/src/main/java/CrawlFlipk.java" />
         <option value="$PROJECT_DIR$/src/main/java/Temp.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AddDbPaytm.java" />
         <option value="$PROJECT_DIR$/src/main/java/Port.java" />
         <option value="$PROJECT_DIR$/FinalSpec.csv" />
         <option value="$PROJECT_DIR$/src/main/java/AutoUpdateFlipkart.java" />
@@ -233,11 +188,12 @@
         <option value="$PROJECT_DIR$/src/main/java/DBOperations.java" />
         <option value="$PROJECT_DIR$/src/main/java/CrawlSnap.java" />
         <option value="$PROJECT_DIR$/src/main/java/GetPageUrl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AddDbFlipkart.java" />
         <option value="$PROJECT_DIR$/src/main/java/AutoUpdatedtabse.java" />
         <option value="$PROJECT_DIR$/src/main/java/CrawlTata.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Extension.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AddDbFlipkart.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AddDbPaytm.java" />
       </list>
     </option>
   </component>
@@ -412,10 +368,10 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.21140939" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.21140939" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.33144477" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.33144477" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -623,31 +579,31 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
-          <line>288</line>
+          <line>259</line>
           <properties />
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
-          <line>290</line>
+          <line>261</line>
           <properties />
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
-          <line>293</line>
+          <line>264</line>
           <properties />
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
-          <line>297</line>
+          <line>268</line>
           <properties />
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
-          <line>298</line>
+          <line>269</line>
           <properties />
           <option name="timeStamp" value="68" />
         </line-breakpoint>
@@ -776,6 +732,24 @@
           <line>6</line>
           <properties />
           <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
+          <line>229</line>
+          <properties />
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
+          <line>228</line>
+          <properties />
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java</url>
+          <line>231</line>
+          <properties />
+          <option name="timeStamp" value="96" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -917,13 +891,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AddDbPaytm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="104" column="114" selection-start-line="104" selection-start-column="114" selection-end-line="104" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MobileCompare.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -976,13 +943,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
-          <caret line="106" selection-start-line="106" selection-end-line="106" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/PriceBaba.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1028,9 +988,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ValidateName.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/commons-validator/commons-validator/1.2.0/commons-validator-1.2.0.jar!/org/apache/commons/validator/GenericValidator.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
@@ -1041,17 +998,34 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/GetPhoneSpecs.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="321" column="42" lean-forward="true" selection-start-line="321" selection-start-column="42" selection-end-line="321" selection-end-column="42" />
+          <caret line="321" column="42" selection-start-line="321" selection-start-column="42" selection-end-line="321" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ValidateName.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Extension.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+        <state relative-caret-position="132">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AddDbFlipkart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AddDbPaytm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
         </state>
       </provider>
     </entry>
