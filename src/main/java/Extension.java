@@ -61,6 +61,7 @@ public class Extension {
             if(res==null)
             res=flip.checkExten(phoneName,""+ram,"");
             System.out.println(res);
+            flip.close();
             return res;
 
     }

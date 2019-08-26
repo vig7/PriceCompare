@@ -74,6 +74,28 @@ public class AddDbFlipkart {
             e.printStackTrace();
         }
     }
+    boolean checkIfExist(String name){
+        try {
+            String getQueryStatement ="Select count(*) from phonedatabase where Name='"+name+"' ";
+            //String insertQueryStatement ="update phonedatabase set flipkartStock="+stock+" where FlipkartLink='"+Link+"'";
+            System.out.println(getQueryStatement);
+            crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
+
+            // execute insert SQL statement
+            ResultSet rs = crunchifyPrepareStat.executeQuery();
+            if(rs.next()){
+                if(rs.getString("Count(*)").equals("0")){
+                    return false;
+                }
+                else return true;
+            }
+            // connection close
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
     void addStockandPrice(String Name,String Price,  Timestamp Time,int stock) {
 
         try {
