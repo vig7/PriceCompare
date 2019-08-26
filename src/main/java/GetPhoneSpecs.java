@@ -69,7 +69,7 @@ public class GetPhoneSpecs {
 
     static {
         corsHeaders.put("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-        corsHeaders.put("Access-Control-Allow-Origin", "*");
+//        corsHeaders.put("Access-Control-Allow-Origin", "*");
         corsHeaders.put("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
         corsHeaders.put("Access-Control-Allow-Credentials", "true");
     }
@@ -81,6 +81,7 @@ public class GetPhoneSpecs {
                 corsHeaders.forEach((key, value) -> {
                     response.header(key, value);
                 });
+                response.header("Access-Control-Allow-Origin","*");
             }
         };
         Spark.after(filter);
@@ -223,6 +224,25 @@ public class GetPhoneSpecs {
         return  list;
     }
 
+    private static ArrayList getFullDetails(String name) throws SQLException {
+        ArrayList<PhoneDetails> list=new ArrayList();
+        String getQueryStatement = "SELECT * FROM phonedatabase where Name like '"+name+"%'";
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
+        ResultSet rs = PrepareStat.executeQuery();
+        while (rs.next()) {
+            list.add(new PhoneDetails(rs.getInt("phone_id")
+                    , rs.getString("Name")
+                    , rs.getString("flipkartPrice")
+                    ,rs.getString("flipkartStock")
+                    , rs.getString("SnapPrice")
+                    , rs.getString("SnapStock")
+                    ,rs.getString("AmazonStock")
+                    ,rs.getString("AmazonPrice")
+                    ,rs.getString("PaytmPrice")));
+        }
+        return list;
+    }
+
     private static ArrayList getSearchResults(String name) throws SQLException {
         System.out.println(name);
         ArrayList<PhoneDetails> list=new ArrayList();
@@ -311,12 +331,30 @@ public class GetPhoneSpecs {
         }
         return  list;
     }
+    private static  int  addFeedback(String email,String comment,int rating,int id) throws SQLException {
+        String getQueryStatement="INSERT INTO User_Feedback (User_Email,product_id,feedback,rating) VALUES (?,?,?,?)";
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
+        PrepareStat.setString(1,email);
+        PrepareStat.setString(3,comment);
+        PrepareStat.setInt(4,rating);
+        PrepareStat.setInt(2,id);
+        int count=PrepareStat.executeUpdate();
+        if(count>0)
+            return 1;
+        return 0;
+    }
 
     public static void main(String[] arg) {
         port(5678);
         GetPhoneSpecs.apply();
         Spark.get("/FeaturedPhones", (request, response) -> {
             ArrayList list=getPhoneDetails();
+            gson=new Gson();
+            return gson.toJson(list);
+        });
+
+        Spark.get("/SimilarPhones", (request, response) -> {
+            ArrayList list=getFullDetails(request.queryParams("searchKey"));
             gson=new Gson();
             return gson.toJson(list);
         });
@@ -350,6 +388,20 @@ public class GetPhoneSpecs {
             System.out.println(list);
             gson=new Gson();
             return gson.toJson(list);
+        });
+        Spark.post("/feedback",(request,response)->{
+            String email=request.queryParams("email");
+            int id=Integer.parseInt(request.queryParams("id"));
+            String comment=request.queryParams("comment");
+            int rating=Integer.parseInt(request.queryParams("rating"));
+            System.out.println(email);
+            int res=addFeedback(email,comment,rating,id);
+
+            response.body("Successfully added");
+            response.status((200));
+            if(res==1)
+                return 1;
+            return 0;
         });
 
 //        post("/usersignup/username", (request, response) -> {
