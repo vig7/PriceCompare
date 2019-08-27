@@ -68,21 +68,19 @@
         <br>
         <!--Body-->
     
-        <div class="container" id="search-result">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="productDescription.html">Specification</a></li>
+            </ul>
+        </div>
+    <div class="container"  id="search-result">
+        <div class="container" >
             <div class="shadow-effect description-padding-fix mobile-view-desSet" >
-                <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="productDescription.html">Specification</a></li>
-                </ul>
+               
           
               <div class="main" >
                 <h2 id="prodName"></h2>
-                <p>This sidebar is of full height (100%) and always shown.</p>
-                <p>Scroll down the page to see the result.</p>
-                <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-                <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-                <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-                <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
               </div>
               <div class="row" style="padding-top:30px">
                   <div class="col-sm-6" id="image-pro"></div>
@@ -215,6 +213,7 @@
                     </div>
                 </div>
         </div>
+    </div>
         <br>
         <section id="fix-padding">
                 <div class="container">
@@ -353,9 +352,8 @@
             return;
         }
         else{
-            console.log("search-"+str);
             showSearchResultPage(str);
-            $('#search-result').load("searchResults.html #load-results");
+           
         }
    
       });

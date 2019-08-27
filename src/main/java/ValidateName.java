@@ -19,12 +19,9 @@ public class ValidateName {
         }
         if(databseName.length()<=websiteName.length()&&(databseName.contains(value[0].trim()) || nickname.contains(value[0].trim()))) {
             String restofData=databseName.substring(value[0].length());
-
             String restofnick;
             try {
                 restofnick = nickname.substring(value[0].length());
-
-
             }
             catch (Exception e){
                 restofnick="-1";

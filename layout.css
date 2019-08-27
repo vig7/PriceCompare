@@ -1,6 +1,7 @@
 body { 
     -webkit-backface-visibility: hidden;
     font: 400 15px/1.8 Lato, roboto;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     color: #777;
 }
 form.example input[type=text] {

@@ -9,23 +9,16 @@ public class AddDbFlipkart {
      PreparedStatement crunchifyPrepareStat = null;
 
     void AaddDbFlipkart(){
-
         try {
             makeJDBCConnection();
-
-//
-
             crunchifyPrepareStat.close();
             crunchifyConn.close(); // connection close
-
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
     }
 
       void makeJDBCConnection() {
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
             log("Congrats - Seems your MySQL JDBC Driver Registered!");

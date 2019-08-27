@@ -2,20 +2,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
 
 public class CrawlSnapUrl {
-    DBOperations db = new DBOperations();
-    java.sql.Connection Conn =db.makeJDBCConnection();
-    PreparedStatement PrepareStat = null;
-    HashMap<String, Model> mobileCollection=new HashMap<String, Model>();
-
     void crawl(String snapurl,String name) throws SQLException {
         System.out.println(snapurl);
             try {
@@ -29,38 +18,14 @@ public class CrawlSnapUrl {
                 System.out.println(price.text());
                 CrawlSnapUrl csu=new CrawlSnapUrl();
                 if(price.isEmpty())
-                    csu.updatePrice("","1",name);
+                    SnapDealDB.updatePrice("","1",name);
                 else {
                     String prices=price.text().substring(4);
-                    csu.updatePrice(prices, "0", name);
+                    SnapDealDB.updatePrice(prices, "0", name);
                 }
-
-
-
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-
-
     }
-
-    private void updatePrice(String bprice,String bstock,String bName) throws SQLException {
-        try {
-            Date date= new Date();
-            Timestamp ts = new Timestamp(date.getTime());
-            String getQueryStatement = "Update finaltab set SnapPrice='" + bprice
-                    +"', SnapTimestamp='" + ts
-                    + "' ,SnapStock='"+bstock +"' where Name = '" + bName + "'";
-            PrepareStat = Conn.prepareStatement(getQueryStatement);
-            PrepareStat.executeUpdate();
-            System.out.println("Updated");
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        // }
-    }
-
-
 }
 

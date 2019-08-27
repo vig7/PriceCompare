@@ -8,12 +8,6 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author Crunchify.com
- * Simple Hello World MySQL Tutorial on how to make JDBC connection, Add and Retrieve Data by App Shah
- *
- */
-
 public class DBOperations {
     static Connection crunchifyConn = null;
     static PreparedStatement crunchifyPrepareStat = null;
@@ -41,8 +35,8 @@ public class DBOperations {
             return null;
         }
         return crunchifyConn;
-
     }
+
 
 
 }
