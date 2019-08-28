@@ -106,41 +106,16 @@ public class GetPhoneSpecs {
         Conn.close();
         return  list;
     }
-    private static ArrayList getPhoneDetails(String name) throws SQLException {
-        ArrayList<PhoneDetails> list=new ArrayList();
-        Conn =DBOperations.makeJDBCConnection();
-        String getQueryStatement = "SELECT phone_id,Name,flipkartPrice,flipkartStock,SnapPrice,SnapStock,AmazonStock,AmazonPrice,PaytmPrice FROM phonedatabase where Name like ='"+name+"%' limit 4";
-        PrepareStat = Conn.prepareStatement(getQueryStatement);
-        ResultSet rs = PrepareStat.executeQuery();
-        while (rs.next()) {
-            list.add(new PhoneDetails(rs.getInt("phone_id")
-                    ,rs.getString("Name")
-                    ,rs.getString("flipkartPrice")
-                    ,rs.getString("flipkartStock")
-                    ,rs.getString("SnapPrice")
-                    ,rs.getString("SnapStock")
-                    ,rs.getString("AmazonStock")
-                    ,rs.getString("AmazonPrice")
-                    ,rs.getString("PaytmPrice"),0));
-        }
-        Conn.close();
-        return  list;
-    }
+
    private static void crawlSnap(String url,String name){
         Thread t=null;
         try {
             if (!url.isEmpty()) {
-              //  Runnable runnable = () -> {
-
                     try {
                         new CrawlSnapUrl().crawl(url, name);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-
-//                t = new Thread(runnable);
-//                System.out.println(t.getId()+" started");
-//                t.start();
             } else {
 //                Runnable runnable = () -> {
                     try {
@@ -148,24 +123,16 @@ public class GetPhoneSpecs {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-//                };
-//                 t = new Thread(runnable);
-//                t.start();
-//                System.out.println(t.getId()+" started");
             }
         }catch (Exception e){
             System.out.println(e);
         }
-        finally{
-//            System.out.println(t.getId()+" stopped");
-//            t.stop();
-        }
+
    }
     private static boolean checkSnapTimestamp(Timestamp last_updated_ts,String url,String name,String stock) throws SQLException {
         Timestamp current_ts=new Timestamp(new Date().getTime());
         if(last_updated_ts.getDate()<current_ts.getDate()){
             crawlSnap(url,name);
-            System.out.println("hh");
             return true;
         }
         else if(last_updated_ts.getDate()==current_ts.getDate()){
@@ -174,7 +141,6 @@ public class GetPhoneSpecs {
             int sec_diff=last_updated_ts.getSeconds()-current_ts.getSeconds();
             if(time_diff>0 && min_diff>0 && sec_diff>0) {
                 crawlSnap(url,name);
-                System.out.println("hh1");
             }
             return true;
         }
@@ -217,7 +183,7 @@ public class GetPhoneSpecs {
             PrepareStat = Conn.prepareStatement(getQueryStatement);
             ResultSet rs = PrepareStat.executeQuery();
             boolean flag = false, aflag = false;
-            while (rs.next()) {
+            rs.next();
                 Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
                 if (checkSnapTimestamp(last_updated_ts, rs.getString("SnapLink"), rs.getString("Name"), rs.getString("SnapStock")))
                     flag = true;
@@ -245,7 +211,7 @@ public class GetPhoneSpecs {
                             , rs.getString("PaytmLink"), 0));
                 } else {
                     rs = PrepareStat.executeQuery();
-                    while (rs.next()) {
+                    rs.next();
                         list.add(new PhoneDetails(id
                                 , rs.getString("Name")
                                 , rs.getString("Operating_System")
@@ -265,16 +231,30 @@ public class GetPhoneSpecs {
                                 , rs.getString("AmazonLink")
                                 , rs.getString("PaytmPrice")
                                 , rs.getString("PaytmLink"), 1));
-                    }
+
                 }
+            String name = rs.getString("Name");
+            String getQueryStatementRec = "SELECT * from phonedatabase where RAM in (select RAM from phonedatabase WHERE Name like '" + name + "%' and Name<>+'" + name + "' GROUP by RAM ) limit 4";
+            rs = Conn.prepareStatement(getQueryStatementRec).executeQuery();
+            System.out.println("hello");
+            while (rs.next()) {
+                list.add(new PhoneDetails(rs.getInt("phone_id")
+                        , rs.getString("Name")
+                        , rs.getString("flipkartPrice")
+                        , rs.getString("flipkartStock")
+                        , rs.getString("SnapPrice")
+                        , rs.getString("SnapStock")
+                        , rs.getString("AmazonStock")
+                        , rs.getString("AmazonPrice")
+                        , rs.getString("PaytmPrice"), 0));
             }
+            System.out.println(list);
         }catch(Exception e){
             Conn.close();
         }
         finally{
             Conn.close();
         }
-
         return  list;
     }
 
@@ -406,39 +386,7 @@ public class GetPhoneSpecs {
         return 0;
     }
 
-    private static  ArrayList  showRecommendation(int id) throws SQLException {
-        Connection Conn=DBOperations.makeJDBCConnection();
-        ArrayList list = new ArrayList<>();
-        try {
-            String getQueryStatement = "SELECT Name FROM phonedatabase where phone_id = " + id + "";
-            PrepareStat = Conn.prepareStatement(getQueryStatement);
-            ResultSet rs = PrepareStat.executeQuery();
-            rs.next();
-            String name = rs.getString("Name");
-            String getQueryStatementRec = "SELECT * from phonedatabase where RAM in (select RAM from phonedatabase WHERE Name like '" + name + "%' and Name<>+'" + name + "' GROUP by RAM ) limit 4";
-            rs = Conn.prepareStatement(getQueryStatementRec).executeQuery();
-
-            while (rs.next()) {
-                list.add(new PhoneDetails(rs.getInt("phone_id")
-                        , rs.getString("Name")
-                        , rs.getString("flipkartPrice")
-                        , rs.getString("flipkartStock")
-                        , rs.getString("SnapPrice")
-                        , rs.getString("SnapStock")
-                        , rs.getString("AmazonStock")
-                        , rs.getString("AmazonPrice")
-                        , rs.getString("PaytmPrice"), 0));
-            }
-        }catch (Exception e) {
-            Conn.close();
-        }
-        finally{
-            Conn.close();
-        }
-        return list;
-    }
-
-    public static void main(String[] arg) throws SQLException {
+       public static void main(String[] arg) throws SQLException {
         try {
             port(5678);
             GetPhoneSpecs.apply();
@@ -485,12 +433,6 @@ public class GetPhoneSpecs {
                 gson = new Gson();
                 return gson.toJson(list);
             });
-            Spark.get("/recommendations",((request, response) -> {
-                int id=Integer.parseInt(request.queryParams("searchKey"));
-                gson=new Gson();
-                return gson.toJson(showRecommendation(id));
-            }));
-
             Spark.post("/feedback", (request, response) -> {
                 String email = request.queryParams("email");
                 int id = Integer.parseInt(request.queryParams("id"));

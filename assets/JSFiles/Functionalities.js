@@ -281,40 +281,13 @@ function addFeatures(obj){
      document.getElementById("search-result").innerHTML=text;
 }
 
- function showRecommendations(){
-     var id=localStorage.getItem("prod_id");
-     var url="";
-     console.log(id);
-     url="http://localhost:5678/recommendations?searchKey="+id;
-     var xmlhttp = new XMLHttpRequest();
-     xmlhttp.onreadystatechange = function() {
-         if (this.readyState == 4 && this.status == 200) {   
-              loadRecomendations(this,id);
-            }
-     };
-     xmlhttp.open("GET",url, true);
-     xmlhttp.send();
- }
 
- function loadRecomendations(obj,id){
-    var res=JSON.parse(obj.response);
-    if(Object.keys(res).length==0){
-        return;
-    }
-    var text="";
-    for(i=0;i<4;i++){
-        text+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products">  <div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" alt="" /><h5 class="card-title set-font">RS. 15,000</h5><p class="card-text">'+res[i].Name+'</p><a  href="productDescription.html" class="btn btn-default add-to-cart"><i class="fa fa-shopping"></i>See details</a></div></div></div></div>';
-
-    }   
-   document.getElementById("show-rec").innerHTML=text;
-
- }
 
 function showSpecifications(obj,val){
     var specsObj= obj.response;
     res=JSON.parse(specsObj);
     console.log("in"+res);
-    if(Object.keys(res).length==0){
+    if(Object.keys(res[0]).length==0){
         console.log(res);
         document.getElementById("search-result").innerHTML='<div class="container"><p><b>Nothing relevant could be found!!!!</b></p></div>';
         return;
@@ -344,8 +317,15 @@ function showSpecifications(obj,val){
     var butvalue=localStorage.getItem("prod_id");
     phone_name=name;
     document.getElementById("show-compare").innerHTML='<div class="row" style="padding:20px"><div class="col-sm-3"><button class="btn btn-primary" onclick="obtainSpecs('+"'"+butvalue+"'"+')">Compare</button></div></div>';
+    var text11="";
+    for(i=1;i<5;i++){
+       text11+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products">  <div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" alt="" /><h5 class="card-title set-font">RS. 15,000</h5><p class="card-text">'+res[i].Name+'</p><a  href="productDescription.html" class="btn btn-default add-to-cart"><i class="fa fa-shopping"></i>See details</a></div></div></div></div>';
+
+   }   
+  document.getElementById("show-rec").innerHTML=text11;
 
 }
+
 
  function obtainSpecs(id) {
     phone_id=localStorage.setItem("compare_id",id);
