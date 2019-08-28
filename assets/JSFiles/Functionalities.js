@@ -341,7 +341,6 @@ function showSpecifications(obj,val){
 
 }
 
-<<<<<<< HEAD
 function showupdatedSpecifications(obj,val){
     var specsObj= obj.response;
     res=JSON.parse(specsObj);
@@ -371,9 +370,7 @@ function showupdatedSpecifications(obj,val){
     document.getElementById("show-compare").innerHTML='<div class="row" style="padding:20px"><div class="col-sm-3"><button class="btn btn-primary" onclick="obtainSpecs('+"'"+butvalue+"'"+')">Compare</button></div></div>';
 
 }
-=======
 
->>>>>>> f0a9d0b0ed396aaa9a7c97275ff90e99a5f5ac0c
  function obtainSpecs(id) {
     phone_id=localStorage.setItem("compare_id",id);
     window.location.href="comparePrices.html" 
