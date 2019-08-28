@@ -233,7 +233,7 @@ public class GetPhoneSpecs {
         return list;
     }
 
-            private static ArrayList getSearchSpecificResults(String name) throws SQLException, IOException {
+        private static ArrayList getSearchSpecificResults(String name) throws SQLException, IOException {
         ArrayList<PhoneDetails> list=new ArrayList();
         String getQueryStatement = "SELECT * FROM phonedatabase where Name = '"+name+"'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);

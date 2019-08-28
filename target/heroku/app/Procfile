@@ -1,1 +1,0 @@
-web: java -jar ./target/Compare-1.0-SNAPSHOT-jar-with-dependencies.jar

@@ -49,7 +49,8 @@ public class ValidateName {
         return false;
     }
     public  static void  main(String args[]){
-        CrawlAmazon amazon=new CrawlAmazon();
-        amazon.add("Iphone x");
+
+        ManualUpdateAmazon amazon=new ManualUpdateAmazon();
+        amazon.update();
     }
 }

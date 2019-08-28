@@ -1,46 +1,43 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-
-import java.util.Iterator;
-import java.util.List;
+import net.media.crawler.AsyncCrawler;
+import net.media.crawler.CrawlerConfig;
+import net.media.crawler.data.AsyncCrawlResponse;
+import org.asynchttpclient.ListenableFuture;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class CrawlAmazon {
-    String[] add(String name){
-        System.setProperty("webdriver.chrome.driver",
-
-                "C:\\Users\\vignesh.ra\\Desktop\\chromedriver.exe");
-
-
-        ChromeOptions o = new ChromeOptions();
-        o.addArguments("disable-extensions");
-        o.addArguments("--start-maximized");
-        WebDriver driver = new ChromeDriver(o);
+    String[] add(String name,AsyncCrawler asyncCrawler,CrawlerConfig crawlerConfig){
+        String alterprice;
+        //data 1 is name,2 is price,3 is link
         String[] data=new String[3];
         ValidateName validate=new ValidateName();
-        driver.get("https://www.amazon.in/s?k=" + name + "&ref=nb_sb_noss_2");
+        try {
+            ListenableFuture<AsyncCrawlResponse> future = asyncCrawler.crawl("https://www.amazon.in/s?k="+name+"&ref=nb_sb_noss_2", crawlerConfig);
 
-        List<WebElement> element = driver.findElements(By.cssSelector("div.s-include-content-margin.s-border-bottom"));
-        Iterator<WebElement> iter = element.iterator();
-        while (iter.hasNext()){
-            WebElement product=iter.next();
-            String price=product.findElement(By.cssSelector("span.a-price-whole")).getText();
-            String WebsiteName=product.findElement(By.cssSelector("span.a-size-medium.a-color-base.a-text-normal")).getText();
-            String link=product.findElement(By.cssSelector("a.a-link-normal.a-text-normal")).getText();
-            if(price.length()==0)
-                continue;
-            if(validate.check(WebsiteName,name)){
-                data[0]=WebsiteName;
-                data[1]=price;
-                data[2]=link;
-                driver.quit();
-                return data;
+            String doc=""+future.get().getContent();
+            Document document= Jsoup.parse(doc);
+            Elements block=document.select("div.s-include-content-margin.s-border-bottom");
+            for(Element temp:block){
+                data[0]=temp.select("span.a-size-medium.a-color-base.a-text-normal").text();
+                data[1]=temp.select("span.a-price-whole").text();
+                if(data[1].length()==0)
+                    continue;
+                Elements atab=temp.select("a.a-link-normal");
+                data[2]=atab.attr("href");
+                data[2]="https://www.amazon.in"+data[2];
+                if(validate.check(data[0],name)) {
+                    System.out.println(data[0] + data[1] + data[2]);
+                    return  data;
+                }
             }
+
         }
-        data[1]="-1";
-        driver.quit();
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        data[0]="-1";
         return data;
     }
 }
