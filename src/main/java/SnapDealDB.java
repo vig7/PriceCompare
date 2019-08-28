@@ -2,7 +2,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.format.TextStyle;
 import java.util.Date;
 
 public class SnapDealDB extends DBOperations {
@@ -10,7 +9,7 @@ public class SnapDealDB extends DBOperations {
     static Date date= new Date();
     static Timestamp ts = new Timestamp(date.getTime());
 
-    protected static void updatePrice(String bName) throws SQLException {
+    protected  void updatePrice(String bName) throws SQLException {
         Connection Conn=makeJDBCConnection();
         try {
             bName = bName.replaceAll("%20", " ");
@@ -25,7 +24,7 @@ public class SnapDealDB extends DBOperations {
         }
     }
 
-    protected static void updatePrice(String bName, String bprice, String bstock, String burl) throws SQLException {
+    protected  void updatePrice(String bName, String bprice, String bstock, String burl) throws SQLException {
         Connection Conn=makeJDBCConnection();
         try {
 
@@ -44,7 +43,7 @@ public class SnapDealDB extends DBOperations {
             Conn.close();
         }
     }
-    protected static void updatePrice(String bprice,String bstock,String bName) throws SQLException {
+    protected void updatePrice(String bprice,String bstock,String bName) throws SQLException {
         Connection Conn = makeJDBCConnection();
         try {
             Date date = new Date();

@@ -17,7 +17,7 @@ public class PaytmInsert {
             {
                 try {
 
-                    Document document = Jsoup.connect( link).get();
+                    Document document = Jsoup.connect(link).get();
                     String price = document.select("span._1V3w").text();
                     System.out.println(price);
                     Date date = new Date();
