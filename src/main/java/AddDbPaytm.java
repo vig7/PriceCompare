@@ -1,22 +1,23 @@
 import java.sql.*;
 import java.util.Date;
 
-public class AddDbPaytm extends  DBOperations{
+public class AddDbPaytm {
 
+    DBOperations db=new DBOperations();
 
     void AaddDbFlipkart(){
 
         try {
             log("-------- Simple Crunchify Tutorial on how to make JDBC connection to MySQL DB locally on macOS ------------");
-            makeJDBCConnection();
+            db.makeJDBCConnection();
 
 //            log("\n---------- Adding company 'Crunchify LLC' to DB ----------");
 //            addDataToDB("Google Inc.", "Mountain View, CA, US", 50000, "https://google.com");
 //            addDataToDB("Apple Inc.", "Cupertino, CA, US", 30000, "http://apple.com");
 
 
-            crunchifyPrepareStat.close();
-            crunchifyConn.close(); // connection close
+            db.crunchifyPrepareStat.close();
+            db.crunchifyConn.close(); // connection close
 
         } catch (SQLException e) {
 
@@ -25,14 +26,14 @@ public class AddDbPaytm extends  DBOperations{
     }
     String getTimestamp(String name) {
         String data="";
-
+        db.makeJDBCConnection();
         String getQueryStatement = "SELECT * from phonedatabase where name='"+name+"'";
         System.out.println(getQueryStatement);
         try{
-            crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
+            db.crunchifyPrepareStat = db.crunchifyConn.prepareStatement(getQueryStatement);
 
             // Execute the Query, and get a java ResultSet
-            ResultSet rs = crunchifyPrepareStat.executeQuery();
+            ResultSet rs = db.crunchifyPrepareStat.executeQuery();
             if(rs.next()){
                 data = rs.getString("TimeStamp");
 
@@ -47,14 +48,15 @@ public class AddDbPaytm extends  DBOperations{
     void addStockandPrice(String Name,String Price,  Timestamp Time) {
 
         try {
+            db.makeJDBCConnection();
             String insertQueryStatement ="update phonedatabase set paytmPrice='"+Price+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
             System.out.println(insertQueryStatement);
-            crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
+            db.crunchifyPrepareStat = db.crunchifyConn.prepareStatement(insertQueryStatement);
 
             Thread.sleep(1000);
 
             // execute insert SQL statement
-            crunchifyPrepareStat.executeUpdate();
+            db.crunchifyPrepareStat.executeUpdate();
             log("ds" + " added successfully");
             // connection close
 
@@ -67,14 +69,14 @@ public class AddDbPaytm extends  DBOperations{
 
     String getLink(String name) {
         String data="";
-
+        db.makeJDBCConnection();
         String getQueryStatement = "SELECT * from phonedatabase where name='"+name+"'";
         System.out.println(getQueryStatement+name);
         try{
-            crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
+            db.crunchifyPrepareStat = db.crunchifyConn.prepareStatement(getQueryStatement);
 
             // Execute the Query, and get a java ResultSet
-            ResultSet rs = crunchifyPrepareStat.executeQuery();
+            ResultSet rs = db.crunchifyPrepareStat.executeQuery();
             if(rs.next()) {
                 data = rs.getString("paytmLink");
             }
@@ -91,15 +93,15 @@ public class AddDbPaytm extends  DBOperations{
         try {
             System.out.println( Name+Price);
             String insertQueryStatement ="update phonedatabase set PaytmPrice='"+Price+"',PaytmLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
-            crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
+            db.crunchifyPrepareStat = db.crunchifyConn.prepareStatement(insertQueryStatement);
 
             Thread.sleep(1000);
 
             // execute insert SQL statement
-            crunchifyPrepareStat.executeUpdate();
+            db.crunchifyPrepareStat.executeUpdate();
             log("ds" + " added successfully");
-            crunchifyPrepareStat.close();
-            crunchifyConn.close(); // connection close
+            db.crunchifyPrepareStat.close();
+            db.crunchifyConn.close(); // connection close
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,10 +114,10 @@ public class AddDbPaytm extends  DBOperations{
             // MySQL Select Query Tutorial
             String getQueryStatement = "SELECT * FROM pricespec";
 
-            crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
+            db.crunchifyPrepareStat = db.crunchifyConn.prepareStatement(getQueryStatement);
 
             // Execute the Query, and get a java ResultSet
-            ResultSet rs = crunchifyPrepareStat.executeQuery();
+            ResultSet rs = db.crunchifyPrepareStat.executeQuery();
 
             // Let's iterate through the java ResultSet
             while (rs.next()) {
@@ -140,8 +142,8 @@ public class AddDbPaytm extends  DBOperations{
     }
     void close(){
         try{
-            crunchifyPrepareStat.close();
-            crunchifyConn.close(); // connection close
+            db.crunchifyPrepareStat.close();
+            db.crunchifyConn.close(); // connection close
 
         }
         catch (Exception e){

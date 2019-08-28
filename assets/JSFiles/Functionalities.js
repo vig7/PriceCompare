@@ -216,7 +216,6 @@ function showInitialPage(){
     };
     xmlhttp.open("GET",url, true);
     xmlhttp.send();
-    
     showMobilePage();
 }
  //fetching and showing specific mobile phone specs
@@ -340,7 +339,10 @@ function showSpecifications(obj,val){
   document.getElementById("show-rec").innerHTML=text11;
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 05c3572595ffa37f983ad718bbadf88ba87531dc
 function showupdatedSpecifications(obj,val){
     var specsObj= obj.response;
     res=JSON.parse(specsObj);
@@ -370,7 +372,10 @@ function showupdatedSpecifications(obj,val){
     document.getElementById("show-compare").innerHTML='<div class="row" style="padding:20px"><div class="col-sm-3"><button class="btn btn-primary" onclick="obtainSpecs('+"'"+butvalue+"'"+')">Compare</button></div></div>';
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 05c3572595ffa37f983ad718bbadf88ba87531dc
  function obtainSpecs(id) {
     phone_id=localStorage.setItem("compare_id",id);
     window.location.href="comparePrices.html" 

@@ -235,37 +235,22 @@ public class GetPhoneSpecs {
     private static ArrayList getupdatedPhoneSpecs(int id) throws SQLException, IOException {
         Conn=new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
+        AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
+        AutoUpdatePaytm paytm=new AutoUpdatePaytm();
         String getQueryStatement = "SELECT * FROM phonedatabase where phone_id="+id;
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
+
         boolean flag=false,aflag=false;
-        rs.next();
+            rs.next();
             Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
             if (checkSnapTimestamp(last_updated_ts, rs.getString("SnapLink"), rs.getString("Name"), rs.getString("SnapStock")))
                 flag = true;
             if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
                 aflag = true;
-            if (flag != true && aflag!=true) {
-                list.add(new PhoneDetails(rs.getInt("phone_id")
-                        , rs.getString("Name")
-                        , rs.getString("Operating_System")
-                        , rs.getString("Display")
-                        , rs.getString("Camera")
-                        , rs.getString("Battery")
-                        , rs.getString("Special_Features_Mobile_Phones")
-                        , rs.getString("RAM")
-                        , rs.getString("flipkartPrice")
-                        , rs.getString("flipkartStock")
-                        , rs.getString("FlipkartLink")
-                        , rs.getString("SnapPrice")
-                        , rs.getString("SnapStock")
-                        , rs.getString("SnapLink")
-                        ,rs.getString("AmazonPrice")
-                        ,rs.getString("AmazonStock")
-                        ,rs.getString("AmazonLink")
-                        ,rs.getString("PaytmPrice")
-                        ,rs.getString("PaytmLink"),0));
-            } else {
+        flipkart.check(rs.getString("Name"));
+        paytm.check(rs.getString("Name"));
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
                 rs = PrepareStat.executeQuery();
                 rs.next();
                     list.add(new PhoneDetails(rs.getInt("phone_id")
@@ -288,7 +273,7 @@ public class GetPhoneSpecs {
                             ,rs.getString("PaytmPrice")
                             ,rs.getString("PaytmLink"),1));
 
-        }
+
         Conn.close();
         return  list;
     }
@@ -321,9 +306,9 @@ public class GetPhoneSpecs {
         ArrayList<PhoneDetails> list=new ArrayList();
         String getQueryStatement = "SELECT phone_id,Name FROM phonedatabase where soundex('"+name+"') like soundex(Name) or Name like '%"+name+"%' or Name like '"+name+"%' or MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)";
 //        String getQueryStatement="SELECT phone_id,Name FROM phonedatabase WHERE MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)";
-
         PrepareStat = Conn.prepareStatement(getQueryStatement);
-        PreparedStatement PrepareStat = Conn.prepareStatement(getQueryStatement);
+        Conn=new DBOperations().makeJDBCConnection();
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
             list.add(new PhoneDetails(rs.getInt("phone_id"),rs.getString("Name"),0));
@@ -361,8 +346,8 @@ public class GetPhoneSpecs {
         String getQueryStatement = "SELECT * FROM phonedatabase where Name = '"+name+"'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
-        AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
         AutoUpdatePaytm paytm=new AutoUpdatePaytm();
+        AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
         boolean flag=false,aflag=false,fflag=false,pflag=false;
         while(rs.next()) {
             Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
@@ -370,6 +355,7 @@ public class GetPhoneSpecs {
                 flag = true;
             if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
                 aflag = true;
+
             flipkart.check(rs.getString("Name"));
             paytm.check(rs.getString("Name"));
 

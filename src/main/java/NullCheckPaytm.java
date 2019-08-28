@@ -1,6 +1,4 @@
-import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 public class NullCheckPaytm {
     void check(String name) {
@@ -8,7 +6,6 @@ public class NullCheckPaytm {
         String[] data = paytm.test(name);
         if (!data[1].equals("-1")) {
             AddDbPaytm db = new AddDbPaytm();
-            db.makeJDBCConnection();
             String link = db.getLink(name);
             java.util.Date date = new java.util.Date();
             Timestamp databasetimestamp = new Timestamp(date.getTime());

@@ -35,7 +35,6 @@ public class CrawlSnap {
     PreparedStatement PrepareStat = null;
     HashMap<String, Model> mobileCollection=new HashMap<String, Model>();
 
-
     void test() throws SQLException {
         String getQueryStatement = "SELECT * FROM phonedatabase where phone_id>1150 ";
         String brandName ;

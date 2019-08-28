@@ -5,7 +5,6 @@ import java.util.Date;
 public class AutoUpdatePaytm {
     static  void check(String name){
         AddDbPaytm paytm=new AddDbPaytm();
-        paytm.makeJDBCConnection();
         String data=paytm.getTimestamp(name);
         java.util.Date date=new java.util.Date();
         Timestamp databasetimestamp =new Timestamp(date.getTime());
