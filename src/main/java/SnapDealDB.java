@@ -49,7 +49,7 @@ public class SnapDealDB extends DBOperations {
         try {
             Date date = new Date();
             Timestamp ts = new Timestamp(date.getTime());
-            String getQueryStatement = "Update finaltab set SnapPrice='" + bprice
+            String getQueryStatement = "Update phonedatabase set SnapPrice='" + bprice
                     + "', SnapTimestamp='" + ts
                     + "' ,SnapStock='" + bstock + "' where Name = '" + bName + "'";
             PrepareStat = Conn.prepareStatement(getQueryStatement);
