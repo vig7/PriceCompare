@@ -12,6 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="assets/JSFiles/Functionalities.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <script></script>
     </head>
 <body>
@@ -66,25 +67,23 @@
         </div>
         <br>
         <!--Body-->
+    
         <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="productDescription.html">Specification</a></li>
+            </ul>
+        </div>
+    <div class="container"  id="search-result">
+        <div class="container" >
             <div class="shadow-effect description-padding-fix mobile-view-desSet" >
-                <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="productDescription.html">Specification</a></li>
-                </ul>
-              <div class="main">
+               
+          
+              <div class="main" >
                 <h2 id="prodName"></h2>
-                <p>This sidebar is of full height (100%) and always shown.</p>
-                <p>Scroll down the page to see the result.</p>
-                <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-                <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-                <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-                <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
               </div>
               <div class="row" style="padding-top:30px">
-                  <div class="col-sm-6">
-                        <img class="pop-up "  id="description-image-size"  src="assets/images/lg.jpg" alt="" />
-                  </div>
+                  <div class="col-sm-6" id="image-pro"></div>
                   <div class="col-sm-6">
                         <div class="card">
                             <div class="row">
@@ -134,11 +133,11 @@
                                        
                                     </div>
                                 </div> 
-                                <form action="">
+                                <form method="POST">
                                     <div class="form-group"> 
                                         <label for="usr">Email:</label>
                                         <input type="email" class="form-control" id="usr"><br> <label >Ratings:</label>
-                                        <select id="ratings" onchange="giveRatings()" >
+                                        <select id="ratings" >
                                                 <option value="-">-</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -149,7 +148,8 @@
                                         <label for="comment">Feedback:</label>
                                         <textarea class="form-control" rows="4" id="comment" name="text"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" onclick="sendFeedback()">Submit</button>
+                                    <div id="feedback-button"></div>
+                                    
                                 </form>                                 
                         </div>
                    </div>
@@ -213,6 +213,7 @@
                     </div>
                 </div>
         </div>
+    </div>
         <br>
         <section id="fix-padding">
                 <div class="container">
@@ -344,10 +345,16 @@
 <script>
     $(document).ready(function(){
       $("#searchres").click(function(){
-        $('#search-result').load("searchResults.html #load-results");
+       
         var str = $('#mobile-brands').val();
-        showSearchResultPage(str);
-      
+        if(!str){
+            alert("Type in correctly");
+            return;
+        }
+        else{
+            showSearchResultPage(str);
+           
+        }
    
       });
     });

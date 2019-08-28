@@ -7,22 +7,14 @@ public class AddDbFlipkart extends  DBOperations{
 
 
     void AaddDbFlipkart(){
-
         try {
             makeJDBCConnection();
-
-//
-
             crunchifyPrepareStat.close();
             crunchifyConn.close(); // connection close
-
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
     }
-
-
     void addDataToDB(String Name,String Price, String Link,  Date Time ,Boolean stock) {
 
         try {

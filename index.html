@@ -324,28 +324,18 @@
 <script>window.onload=show;</script>
 <script>
     $(document).ready(function(){
-      $("#searchres").click(function(){
+      $("#searchres").click(function(){  
         var str = $('#mobile-brands').val();
         if(!str){
             alert("Type in correctly");
             return;
         }
         else{
-            console.log("search-"+str);
-            showSearchResultPage(str);
-        //     alert(response);
-        //    if(response===-1){
-        //        console.log(response);
-        //         $('#search-result').load("searchResults.html #load-nothing");
-        //    }
-        //     else{
-        //         console.log("1");
-                $('#search-result').load("searchResults.html #load-results");
-            // }
-
+           showSearchResultPage(str);
         }
        
-      });
+        });
+    
     });
    
 </script>
