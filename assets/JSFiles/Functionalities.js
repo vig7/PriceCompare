@@ -204,20 +204,6 @@ function addFeatures(obj){
     window.location.href="productDescription.html"
 }
 function showInitialPage(){
-    var request = new XMLHttpRequest();
-    request.open('GET', "http://172.16.172.165/getdata.php?num1=Vivo Z1 Pro", true);
-    request.onload = function () {
-        console.log(this.response);
-        console.log("dsadsa");
-         // Begin accessing JSON data here
-         var data = JSON.parse(this.response);
-        
-    }
-    request.send()
-
-}
- //fetching and showing specific mobile phone specs
- function showMobilePage() {
     var url="";
     phone_id=localStorage.getItem("prod_id");
     
@@ -226,6 +212,23 @@ function showInitialPage(){
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             showSpecifications(this); 
+        }
+    };
+    xmlhttp.open("GET",url, true);
+    xmlhttp.send();
+    
+    showMobilePage();
+}
+ //fetching and showing specific mobile phone specs
+ function showMobilePage() {
+    var url="";
+    phone_id=localStorage.getItem("prod_id");
+    
+    url= "http://localhost:4567/updatedSpecs?id="+phone_id;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            showupdatedSpecifications(this); 
         }
     };
     xmlhttp.open("GET",url, true);
@@ -338,7 +341,39 @@ function showSpecifications(obj,val){
 
 }
 
+<<<<<<< HEAD
+function showupdatedSpecifications(obj,val){
+    var specsObj= obj.response;
+    res=JSON.parse(specsObj);
+    console.log("in"+res);
+    if(Object.keys(res).length==0){
+        console.log(res);
+        document.getElementById("search-result").innerHTML='<div class="container"><p><b>Nothing relevant could be found!!!!</b></p></div>';
+        return;
+    }      
+    var text=" ";
+    if(!val)
+        var name=res[0].Name;
+    else
+        var name=val;
+    var price="Best Price:Rs.";
+    let flipPrice=res[0].flipkartPrice;
+    let snapPrice=res[0].flipkartPrice;
+    let amazonPrice=res[0].AmazonPrice;
+    let paytmprice=res[0].PaytmPrice;
+    let checkconn=res[0].setCon;
+    price+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
+    if(price=="Best Price:Rs.1000000")
+        price="Not Available"; 
+    document.getElementById("prodPrice").innerHTML=price;
+    var butvalue=localStorage.getItem("prod_id");
+    phone_name=name;
+    document.getElementById("show-compare").innerHTML='<div class="row" style="padding:20px"><div class="col-sm-3"><button class="btn btn-primary" onclick="obtainSpecs('+"'"+butvalue+"'"+')">Compare</button></div></div>';
 
+}
+=======
+
+>>>>>>> f0a9d0b0ed396aaa9a7c97275ff90e99a5f5ac0c
  function obtainSpecs(id) {
     phone_id=localStorage.setItem("compare_id",id);
     window.location.href="comparePrices.html" 

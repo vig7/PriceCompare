@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AutoUpdateFlipkart {
-    static  void check(String name){
+     void check(String name){
 
         AddDbFlipkart flipk=new AddDbFlipkart();
         flipk.makeJDBCConnection();

@@ -33,7 +33,9 @@ form.example button {
 form.example button:hover {
   background: #0b7dda;
 }
-
+.input-group-addon{
+cursor: pointer;
+}
 form.example::after {
   content: "";
   clear: both;

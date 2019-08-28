@@ -16,7 +16,7 @@ public class flipkartinsert {
         else {
             try {
 
-                Document document = Jsoup.connect("https://www." + link).get();
+                Document document = Jsoup.connect( link).get();
                 String price = document.select("div._3qQ9m1").text();
                 String look = document.select("div._9-sL7L").text();
                 Date date = new Date();

@@ -386,29 +386,30 @@ public class GetPhoneSpecs {
                 aflag = true;
             flipkart.check(rs.getString("Name"));
             paytm.check(rs.getString("Name"));
-            if (flag == true && aflag == true) {
-                rs = PrepareStat.executeQuery();
+
+            rs = PrepareStat.executeQuery();
+            while (rs.next()) {
+                list.add(new PhoneDetails(rs.getInt("phone_id")
+                        , rs.getString("Name")
+                        , rs.getString("Operating_System")
+                        , rs.getString("Display")
+                        , rs.getString("Camera")
+                        , rs.getString("Battery")
+                        , rs.getString("Special_Features_Mobile_Phones")
+                        , rs.getString("RAM")
+                        , rs.getString("flipkartPrice")
+                        , rs.getString("flipkartStock")
+                        , rs.getString("FlipkartLink")
+                        , rs.getString("SnapPrice")
+                        , rs.getString("SnapStock")
+                        , rs.getString("SnapLink")
+                        ,rs.getString("AmazonPrice")
+                        ,rs.getString("AmazonStock")
+                        ,rs.getString("AmazonLink")
+                        ,rs.getString("PaytmPrice")
+                        ,rs.getString("PaytmLink"),1));
+
             }
-            rs.next();
-            list.add(new PhoneDetails(rs.getInt("phone_id")
-                    , rs.getString("Name")
-                    , rs.getString("Operating_System")
-                    , rs.getString("Display")
-                    , rs.getString("Camera")
-                    , rs.getString("Battery")
-                    , rs.getString("Special_Features_Mobile_Phones")
-                    , rs.getString("RAM")
-                    , rs.getString("flipkartPrice")
-                    , rs.getString("flipkartStock")
-                    , rs.getString("FlipkartLink")
-                    , rs.getString("SnapPrice")
-                    , rs.getString("SnapStock")
-                    , rs.getString("SnapLink")
-                    , rs.getString("AmazonPrice")
-                    , rs.getString("AmazonStock")
-                    , rs.getString("AmazonLink")
-                    , rs.getString("PaytmPrice")
-                    , rs.getString("PaytmLink"), 1));
         }
         Conn.close();
         return  list;
