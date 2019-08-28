@@ -6,7 +6,6 @@ import java.util.Date;
 public class AddDbAmazon  extends  DBOperations{
     String getTimestamp(String name) {
         String data="";
-
         String getQueryStatement = "SELECT * from phonedatabase where name='"+name+"'";
         System.out.println(getQueryStatement);
         try{

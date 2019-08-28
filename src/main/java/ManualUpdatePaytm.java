@@ -10,6 +10,7 @@ public class ManualUpdatePaytm {
         Jdbc jdbc=new Jdbc();
         AddDbPaytm paytm=new AddDbPaytm();
         CrawlPaytm paytmc=new CrawlPaytm();
+        DBOperations db=new DBOperations();
         try {
             //File file = new File("PriceSpec.csv");
             CSVReader reader = new CSVReader(new FileReader("FinalSpec.csv"));
@@ -30,7 +31,7 @@ public class ManualUpdatePaytm {
                     d[2]=null;
                 }
 
-                paytm.makeJDBCConnection();
+                db.makeJDBCConnection();
                 java.util.Date date=new java.util.Date();
                 Timestamp Time =new Timestamp(date.getTime());
                 paytm.addDataToDB(d[0],d[1],d[2],Time);

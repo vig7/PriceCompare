@@ -216,7 +216,6 @@ function showInitialPage(){
     };
     xmlhttp.open("GET",url, true);
     xmlhttp.send();
-    
     showMobilePage();
 }
  //fetching and showing specific mobile phone specs

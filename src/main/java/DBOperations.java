@@ -6,10 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DBOperations {
-     Connection crunchifyConn = null;
-     PreparedStatement crunchifyPrepareStat = null;
+     static Connection crunchifyConn = null;
+     static PreparedStatement crunchifyPrepareStat = null;
 
      Connection makeJDBCConnection() {
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Congrats - Seems your MySQL JDBC Driver Registered!");

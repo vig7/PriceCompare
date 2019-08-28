@@ -92,7 +92,7 @@ public class GetPhoneSpecs {
     private static ArrayList getPhoneDetails() throws SQLException {
         ArrayList<PhoneDetails> list=new ArrayList();
 
-        Conn =DBOperations.makeJDBCConnection();
+        Conn =new DBOperations().makeJDBCConnection();
         String getQueryStatement = "SELECT phone_id,Name,flipkartPrice,flipkartStock,SnapPrice,SnapStock,AmazonStock,AmazonPrice,PaytmPrice FROM phonedatabase limit 8 ";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
@@ -195,15 +195,14 @@ public class GetPhoneSpecs {
     }
 
     private static ArrayList getPhoneSpecs(int id) throws SQLException, IOException {
-        Conn=DBOperations.makeJDBCConnection();
+        Conn=new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
         String getQueryStatement = "SELECT * FROM phonedatabase where phone_id="+id;
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         boolean flag=false,aflag=false;
+        rs.next();
             if (flag != true && aflag!=true) {
-                rs.next();
-
                 list.add(new PhoneDetails(rs.getInt("phone_id")
                         , rs.getString("Name")
                         , rs.getString("Operating_System")
@@ -250,7 +249,7 @@ public class GetPhoneSpecs {
         return  list;
     }
     private static ArrayList getupdatedPhoneSpecs(int id) throws SQLException, IOException {
-        Conn=DBOperations.makeJDBCConnection();
+        Conn=new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
         AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
         AutoUpdatePaytm paytm=new AutoUpdatePaytm();
@@ -260,7 +259,6 @@ public class GetPhoneSpecs {
 
         boolean flag=false,aflag=false;
             rs.next();
-            System.out.println(rs.getTimestamp("TimeStamp"));
             Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
             if (checkSnapTimestamp(last_updated_ts, rs.getString("SnapLink"), rs.getString("Name"), rs.getString("SnapStock")))
                 flag = true;
@@ -268,7 +266,7 @@ public class GetPhoneSpecs {
                 aflag = true;
         flipkart.check(rs.getString("Name"));
         paytm.check(rs.getString("Name"));
-        Conn=DBOperations.makeJDBCConnection();
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
                 rs = PrepareStat.executeQuery();
                 rs.next();
                     list.add(new PhoneDetails(rs.getInt("phone_id")
@@ -298,7 +296,7 @@ public class GetPhoneSpecs {
 
 
     private static ArrayList getFullDetails(String name) throws SQLException {
-        Conn=DBOperations.makeJDBCConnection();
+        Conn=new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
         String getQueryStatement = "SELECT * FROM phonedatabase where Name like '"+name+"%'";
 //        String getQueryStatement="SELECT * FROM phonedatabase WHERE MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)";
@@ -320,13 +318,13 @@ public class GetPhoneSpecs {
     }
 
     private static ArrayList getSearchResults(String name) throws SQLException {
-        Conn=DBOperations.makeJDBCConnection();
+        Conn=new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement = "SELECT phone_id,Name FROM phonedatabase where Name like '"+name+"%'";
+        String getQueryStatement = "SELECT phone_id,Name FROM phonedatabase where soundex('"+name+"') like soundex(Name) or Name like '%"+name+"%' or Name like '"+name+"%' or MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)";
 //        String getQueryStatement="SELECT phone_id,Name FROM phonedatabase WHERE MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)";
-
         PrepareStat = Conn.prepareStatement(getQueryStatement);
-        PreparedStatement PrepareStat = Conn.prepareStatement(getQueryStatement);
+        Conn=new DBOperations().makeJDBCConnection();
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
             list.add(new PhoneDetails(rs.getInt("phone_id"),rs.getString("Name"),0));
@@ -336,7 +334,7 @@ public class GetPhoneSpecs {
     }
 
     private static ArrayList getprice(String name) throws SQLException {
-        Conn=DBOperations.makeJDBCConnection();
+        Conn=new DBOperations().makeJDBCConnection();
         ArrayList<String> list = new ArrayList();
         String getQueryStatement = "SELECT * FROM phonedatabase where name ='" + name + "'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
@@ -359,11 +357,13 @@ public class GetPhoneSpecs {
     }
 
     private static ArrayList getSearchSpecificResults(String name) throws SQLException, IOException {
-        Conn=DBOperations.makeJDBCConnection();
+        Conn=new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
         String getQueryStatement = "SELECT * FROM phonedatabase where Name = '"+name+"'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
+        AutoUpdatePaytm paytm=new AutoUpdatePaytm();
+        AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
         boolean flag=false,aflag=false,fflag=false,pflag=false;
         while(rs.next()) {
             Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
@@ -371,6 +371,10 @@ public class GetPhoneSpecs {
                 flag = true;
             if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
                 aflag = true;
+
+            flipkart.check(rs.getString("Name"));
+            paytm.check(rs.getString("Name"));
+
             rs = PrepareStat.executeQuery();
             while (rs.next()) {
                 list.add(new PhoneDetails(rs.getInt("phone_id")
@@ -392,13 +396,14 @@ public class GetPhoneSpecs {
                         ,rs.getString("AmazonLink")
                         ,rs.getString("PaytmPrice")
                         ,rs.getString("PaytmLink"),1));
+
             }
         }
         Conn.close();
         return  list;
     }
     private static  int  addFeedback(String email,String comment,int rating,int id) throws SQLException {
-        Conn=DBOperations.makeJDBCConnection();
+        Conn=new DBOperations().makeJDBCConnection();
         String getQueryStatement="INSERT INTO User_Feedback (User_Email,product_id,feedback,rating) VALUES (?,?,?,?)";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         PrepareStat.setString(1,email);
