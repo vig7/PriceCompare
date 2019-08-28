@@ -77,7 +77,6 @@ public class GetPhoneSpecs {
         corsHeaders.put("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
         corsHeaders.put("Access-Control-Allow-Credentials", "true");
     }
-
     public final static void apply() {
         Filter filter = new Filter() {
             @Override
@@ -203,11 +202,6 @@ public class GetPhoneSpecs {
         ResultSet rs = PrepareStat.executeQuery();
         boolean flag=false,aflag=false;
         while(rs.next()) {
-            Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
-            if (checkSnapTimestamp(last_updated_ts, rs.getString("SnapLink"), rs.getString("Name"), rs.getString("SnapStock")))
-                flag = true;
-            if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
-                aflag = true;
             if (flag != true && aflag!=true) {
                 list.add(new PhoneDetails(rs.getInt("phone_id")
                         , rs.getString("Name")
@@ -256,6 +250,69 @@ public class GetPhoneSpecs {
         Conn.close();
         return  list;
     }
+    private static ArrayList getupdatedPhoneSpecs(int id) throws SQLException, IOException {
+        Conn=DBOperations.makeJDBCConnection();
+        ArrayList<PhoneDetails> list=new ArrayList();
+        String getQueryStatement = "SELECT * FROM phonedatabase where phone_id="+id;
+        PrepareStat = Conn.prepareStatement(getQueryStatement);
+        ResultSet rs = PrepareStat.executeQuery();
+        boolean flag=false,aflag=false;
+        while(rs.next()) {
+            Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
+            if (checkSnapTimestamp(last_updated_ts, rs.getString("SnapLink"), rs.getString("Name"), rs.getString("SnapStock")))
+                flag = true;
+            if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
+                aflag = true;
+            if (flag != true && aflag!=true) {
+                list.add(new PhoneDetails(rs.getInt("phone_id")
+                        , rs.getString("Name")
+                        , rs.getString("Operating_System")
+                        , rs.getString("Display")
+                        , rs.getString("Camera")
+                        , rs.getString("Battery")
+                        , rs.getString("Special_Features_Mobile_Phones")
+                        , rs.getString("RAM")
+                        , rs.getString("flipkartPrice")
+                        , rs.getString("flipkartStock")
+                        , rs.getString("FlipkartLink")
+                        , rs.getString("SnapPrice")
+                        , rs.getString("SnapStock")
+                        , rs.getString("SnapLink")
+                        ,rs.getString("AmazonPrice")
+                        ,rs.getString("AmazonStock")
+                        ,rs.getString("AmazonLink")
+                        ,rs.getString("PaytmPrice")
+                        ,rs.getString("PaytmLink"),0));
+            } else {
+                rs = PrepareStat.executeQuery();
+                System.out.println(rs);
+                while (rs.next()) {
+                    list.add(new PhoneDetails(rs.getInt("phone_id")
+                            , rs.getString("Name")
+                            , rs.getString("Operating_System")
+                            , rs.getString("Display")
+                            , rs.getString("Camera")
+                            , rs.getString("Battery")
+                            , rs.getString("Special_Features_Mobile_Phones")
+                            , rs.getString("RAM")
+                            , rs.getString("flipkartPrice")
+                            , rs.getString("flipkartStock")
+                            , rs.getString("FlipkartLink")
+                            , rs.getString("SnapPrice")
+                            , rs.getString("SnapStock")
+                            , rs.getString("SnapLink")
+                            ,rs.getString("AmazonPrice")
+                            ,rs.getString("AmazonStock")
+                            ,rs.getString("AmazonLink")
+                            ,rs.getString("PaytmPrice")
+                            ,rs.getString("PaytmLink"),1));
+                }
+            }
+        }
+        Conn.close();
+        return  list;
+    }
+
 
     private static ArrayList getFullDetails(String name) throws SQLException {
         Conn=DBOperations.makeJDBCConnection();
@@ -324,35 +381,18 @@ public class GetPhoneSpecs {
         String getQueryStatement = "SELECT * FROM phonedatabase where Name = '"+name+"'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
-        boolean flag=false,aflag=false;
+        AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
+        AutoUpdatePaytm paytm=new AutoUpdatePaytm();
+        boolean flag=false,aflag=false,fflag=false,pflag=false;
         while(rs.next()) {
             Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
             if (checkSnapTimestamp(last_updated_ts, rs.getString("SnapLink"), rs.getString("Name"), rs.getString("SnapStock")))
                 flag = true;
             if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
                 aflag = true;
-            if (flag != true && aflag!=true) {
-                list.add(new PhoneDetails(rs.getInt("phone_id")
-                        , rs.getString("Name")
-                        , rs.getString("Operating_System")
-                        , rs.getString("Display")
-                        , rs.getString("Camera")
-                        , rs.getString("Battery")
-                        , rs.getString("Special_Features_Mobile_Phones")
-                        , rs.getString("RAM")
-                        , rs.getString("flipkartPrice")
-                        , rs.getString("flipkartStock")
-                        , rs.getString("FlipkartLink")
-                        , rs.getString("SnapPrice")
-                        , rs.getString("SnapStock")
-                        , rs.getString("SnapLink")
-                        ,rs.getString("AmazonPrice")
-                        ,rs.getString("AmazonStock")
-                        ,rs.getString("AmazonLink")
-                        ,rs.getString("PaytmPrice")
-                        ,rs.getString("PaytmLink"),0));
-            } else {
-                rs = PrepareStat.executeQuery();
+            flipkart.check(rs.getString("Name"));
+            paytm.check(rs.getString("Name"));
+            rs = PrepareStat.executeQuery();
                 while (rs.next()) {
                     list.add(new PhoneDetails(rs.getInt("phone_id")
                             , rs.getString("Name")
@@ -375,7 +415,6 @@ public class GetPhoneSpecs {
                             ,rs.getString("PaytmLink"),1));
                 }
             }
-        }
         Conn.close();
         return  list;
     }
@@ -415,6 +454,12 @@ public class GetPhoneSpecs {
             Spark.get("/MobileSpecs", (request, response) -> {
                 int id = Integer.parseInt(request.queryParams("id"));
                 ArrayList list = getPhoneSpecs(id);
+                gson = new Gson();
+                return gson.toJson(list);
+            });
+            Spark.get("/updatedSpecs", (request, response) -> {
+                int id = Integer.parseInt(request.queryParams("id"));
+                ArrayList list = getupdatedPhoneSpecs(id);
                 gson = new Gson();
                 return gson.toJson(list);
             });

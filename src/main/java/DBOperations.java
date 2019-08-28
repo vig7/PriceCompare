@@ -1,7 +1,9 @@
 
 
-import java.sql.*;
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class DBOperations {
     static Connection crunchifyConn = null;
@@ -19,7 +21,7 @@ public class DBOperations {
 
         try {
             // DriverManager: The basic service for managing a set of JDBC drivers.
-            crunchifyConn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/HHs0I2HNbt?useSSL=false", "HHs0I2HNbt", "Z4x5imlcY7");
+            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hhs0i2hnbt", "root", "");
             if (crunchifyConn != null) {
                 System.out.println("Connection Successful! Enjoy. Now it's time to push data");
             } else {
