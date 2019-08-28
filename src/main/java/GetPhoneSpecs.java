@@ -91,7 +91,6 @@ public class GetPhoneSpecs {
 
     private static ArrayList getPhoneDetails() throws SQLException {
         ArrayList<PhoneDetails> list=new ArrayList();
-
         Conn =new DBOperations().makeJDBCConnection();
         String getQueryStatement = "SELECT phone_id,Name,flipkartPrice,flipkartStock,SnapPrice,SnapStock,AmazonStock,AmazonPrice,PaytmPrice FROM phonedatabase limit 8 ";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
@@ -115,35 +114,20 @@ public class GetPhoneSpecs {
         Thread t=null;
         try {
             if (!url.isEmpty()) {
-                //  Runnable runnable = () -> {
-
                 try {
                     new CrawlSnapUrl().crawl(url, name);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
-//                t = new Thread(runnable);
-//                System.out.println(t.getId()+" started");
-//                t.start();
             } else {
-//                Runnable runnable = () -> {
                 try {
                     new CrawlSnap().test(name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-//                };
-//                 t = new Thread(runnable);
-//                t.start();
-//                System.out.println(t.getId()+" started");
             }
         }catch (Exception e){
             System.out.println(e);
-        }
-        finally{
-//            System.out.println(t.getId()+" stopped");
-//            t.stop();
         }
     }
     private static boolean checkSnapTimestamp(Timestamp last_updated_ts,String url,String name,String stock) throws SQLException {
