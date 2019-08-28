@@ -12,7 +12,7 @@ public class SearchDatabase {
         // Input keys (use only 'a' through 'z' and lower case)
         String output[] = {"Not present in trie", "Present in trie"};
         try {
-            Conn = DBOperations.makeJDBCConnection();
+            Conn = new DBOperations().makeJDBCConnection();
             String getQueryStatement = "SELECT Name FROM phonedatabase limit 100";
             PrepareStat = Conn.prepareStatement(getQueryStatement);
             ResultSet rs = PrepareStat.executeQuery();

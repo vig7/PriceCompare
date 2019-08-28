@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class AmazonProductDetails {
     DBOperations db = new DBOperations();
-    java.sql.Connection Conn =db.makeJDBCConnection();
+
     PreparedStatement PrepareStat = null;
     Date date= new Date();
     Timestamp ts = new Timestamp(date.getTime());
@@ -97,6 +97,7 @@ public class AmazonProductDetails {
     }
 
     private void updatePrice(String bName) throws SQLException {
+        java.sql.Connection Conn =new DBOperations().makeJDBCConnection();
         try {
             String getQueryStatement = "Update phonedatabase set Timestamp='" + ts +"' where Name = '" + bName + "'";
             PrepareStat = Conn.prepareStatement(getQueryStatement);
@@ -113,6 +114,7 @@ public class AmazonProductDetails {
     }
 
     private void updatePrice(String bName,String bprice,String bstock,String burl) throws SQLException {
+        java.sql.Connection Conn =new DBOperations().makeJDBCConnection();
         try {
             String getQueryStatement = "Update phonedatabase set AmazonPrice='" + bprice
                     +"', Timestamp='" + ts
@@ -133,6 +135,7 @@ public class AmazonProductDetails {
     }
 
     private void updatePrice(String bprice,String bstock,String bName) throws SQLException {
+        java.sql.Connection Conn =new DBOperations().makeJDBCConnection();
         try {
             Date date= new Date();
             Timestamp ts = new Timestamp(date.getTime());
