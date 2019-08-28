@@ -111,28 +111,28 @@ public class GetPhoneSpecs {
         return  list;
     }
 
-   private static void crawlSnap(String url,String name){
+    private static void crawlSnap(String url,String name){
         Thread t=null;
         try {
             if (!url.isEmpty()) {
-              //  Runnable runnable = () -> {
+                //  Runnable runnable = () -> {
 
-                    try {
-                        new CrawlSnapUrl().crawl(url, name);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    new CrawlSnapUrl().crawl(url, name);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
 //                t = new Thread(runnable);
 //                System.out.println(t.getId()+" started");
 //                t.start();
             } else {
 //                Runnable runnable = () -> {
-                    try {
-                        new CrawlSnap().test(name);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    new CrawlSnap().test(name);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 //                };
 //                 t = new Thread(runnable);
 //                t.start();
@@ -145,7 +145,7 @@ public class GetPhoneSpecs {
 //            System.out.println(t.getId()+" stopped");
 //            t.stop();
         }
-   }
+    }
     private static boolean checkSnapTimestamp(Timestamp last_updated_ts,String url,String name,String stock) throws SQLException {
         Timestamp current_ts=new Timestamp(new Date().getTime());
         if(last_updated_ts.getDate()<current_ts.getDate()){
@@ -173,7 +173,7 @@ public class GetPhoneSpecs {
                 //new AmazonProductDetails().getAmazonPrice(name);
             }
             else if(!url.isEmpty()){
-               // new AmazonProductDetails().setAmazonPrice(name,url);
+                // new AmazonProductDetails().setAmazonPrice(name,url);
             }
             return true;
         }
@@ -201,7 +201,6 @@ public class GetPhoneSpecs {
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         boolean flag=false,aflag=false;
-        while(rs.next()) {
             if (flag != true && aflag!=true) {
                 list.add(new PhoneDetails(rs.getInt("phone_id")
                         , rs.getString("Name")
@@ -224,7 +223,6 @@ public class GetPhoneSpecs {
                         ,rs.getString("PaytmLink"),0));
             } else {
                 rs = PrepareStat.executeQuery();
-                while (rs.next()) {
                     list.add(new PhoneDetails(rs.getInt("phone_id")
                             , rs.getString("Name")
                             , rs.getString("Operating_System")
@@ -245,8 +243,7 @@ public class GetPhoneSpecs {
                             ,rs.getString("PaytmPrice")
                             ,rs.getString("PaytmLink"),1));
                 }
-            }
-        }
+
         Conn.close();
         return  list;
     }
@@ -257,7 +254,6 @@ public class GetPhoneSpecs {
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         boolean flag=false,aflag=false;
-        while(rs.next()) {
             Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
             if (checkSnapTimestamp(last_updated_ts, rs.getString("SnapLink"), rs.getString("Name"), rs.getString("SnapStock")))
                 flag = true;
@@ -286,7 +282,6 @@ public class GetPhoneSpecs {
             } else {
                 rs = PrepareStat.executeQuery();
                 System.out.println(rs);
-                while (rs.next()) {
                     list.add(new PhoneDetails(rs.getInt("phone_id")
                             , rs.getString("Name")
                             , rs.getString("Operating_System")
@@ -306,8 +301,7 @@ public class GetPhoneSpecs {
                             ,rs.getString("AmazonLink")
                             ,rs.getString("PaytmPrice")
                             ,rs.getString("PaytmLink"),1));
-                }
-            }
+
         }
         Conn.close();
         return  list;
@@ -393,28 +387,28 @@ public class GetPhoneSpecs {
             flipkart.check(rs.getString("Name"));
             paytm.check(rs.getString("Name"));
             rs = PrepareStat.executeQuery();
-                while (rs.next()) {
-                    list.add(new PhoneDetails(rs.getInt("phone_id")
-                            , rs.getString("Name")
-                            , rs.getString("Operating_System")
-                            , rs.getString("Display")
-                            , rs.getString("Camera")
-                            , rs.getString("Battery")
-                            , rs.getString("Special_Features_Mobile_Phones")
-                            , rs.getString("RAM")
-                            , rs.getString("flipkartPrice")
-                            , rs.getString("flipkartStock")
-                            , rs.getString("FlipkartLink")
-                            , rs.getString("SnapPrice")
-                            , rs.getString("SnapStock")
-                            , rs.getString("SnapLink")
-                            ,rs.getString("AmazonPrice")
-                            ,rs.getString("AmazonStock")
-                            ,rs.getString("AmazonLink")
-                            ,rs.getString("PaytmPrice")
-                            ,rs.getString("PaytmLink"),1));
-                }
+            while (rs.next()) {
+                list.add(new PhoneDetails(rs.getInt("phone_id")
+                        , rs.getString("Name")
+                        , rs.getString("Operating_System")
+                        , rs.getString("Display")
+                        , rs.getString("Camera")
+                        , rs.getString("Battery")
+                        , rs.getString("Special_Features_Mobile_Phones")
+                        , rs.getString("RAM")
+                        , rs.getString("flipkartPrice")
+                        , rs.getString("flipkartStock")
+                        , rs.getString("FlipkartLink")
+                        , rs.getString("SnapPrice")
+                        , rs.getString("SnapStock")
+                        , rs.getString("SnapLink")
+                        ,rs.getString("AmazonPrice")
+                        ,rs.getString("AmazonStock")
+                        ,rs.getString("AmazonLink")
+                        ,rs.getString("PaytmPrice")
+                        ,rs.getString("PaytmLink"),1));
             }
+        }
         Conn.close();
         return  list;
     }
@@ -509,12 +503,12 @@ public class GetPhoneSpecs {
         }
 
 
-            Spark.get("/UpdateFlip", (request, response) -> {
-                String Flipname=request.queryParams("Name");
-                AutoUpdateFlipkart updateflip=new AutoUpdateFlipkart();
-                updateflip.check(Flipname);
-                return "1";
-            });
+        Spark.get("/UpdateFlip", (request, response) -> {
+            String Flipname=request.queryParams("Name");
+            AutoUpdateFlipkart updateflip=new AutoUpdateFlipkart();
+            updateflip.check(Flipname);
+            return "1";
+        });
         Spark.get("/UpdatePaytm", (request, response) -> {
             String Paytmname=request.queryParams("Name");
             AutoUpdatePaytm updatepaytm=new AutoUpdatePaytm();
