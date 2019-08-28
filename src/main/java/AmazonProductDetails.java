@@ -64,7 +64,7 @@ public class AmazonProductDetails {
             }
             if (flag == true)
                 updatePrice(brandName);
-         }catch(Exception e){
+        }catch(Exception e){
             System.out.println(e);
         }
     }
@@ -153,4 +153,3 @@ public class AmazonProductDetails {
 
     }
 }
-

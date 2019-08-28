@@ -3,10 +3,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class AddDbFlipkart {
+public class AddDbFlipkart extends  DBOperations{
 
-     Connection crunchifyConn = null;
-     PreparedStatement crunchifyPrepareStat = null;
 
     void AaddDbFlipkart(){
         try {
@@ -17,39 +15,12 @@ public class AddDbFlipkart {
             e.printStackTrace();
         }
     }
-
-      void makeJDBCConnection() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            log("Congrats - Seems your MySQL JDBC Driver Registered!");
-        } catch (ClassNotFoundException e) {
-            log("Sorry, couldn't found JDBC driver. Make sure you have added JDBC Maven Dependency Correctly");
-            e.printStackTrace();
-            return;
-        }
-
-        try {
-            // DriverManager: The basic service for managing a set of JDBC drivers.
-            crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pricemobiile", "root", "");
-            if (crunchifyConn != null) {
-                log("Connection Successful! Enjoy. Now it's time to push data");
-            } else {
-                log("Failed to make connection!");
-            }
-        } catch (SQLException e) {
-            log("MySQL Connection Failed!");
-            e.printStackTrace();
-            return;
-        }
-
-    }
-
     void addDataToDB(String Name,String Price, String Link,  Date Time ,Boolean stock) {
 
         try {
 
-            String insertQueryStatement ="update finaltab set flipkartPrice='"+Price+"',FlipkartLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
-            //String insertQueryStatement ="update finaltab set flipkartStock="+stock+" where FlipkartLink='"+Link+"'";
+            String insertQueryStatement ="update phonedatabase set flipkartPrice='"+Price+"',FlipkartLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
+            //String insertQueryStatement ="update phonedatabase set flipkartStock="+stock+" where FlipkartLink='"+Link+"'";
             System.out.println(insertQueryStatement);
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
 
@@ -66,12 +37,34 @@ public class AddDbFlipkart {
             e.printStackTrace();
         }
     }
+    boolean checkIfExist(String name){
+        try {
+            String getQueryStatement ="Select count(*) from phonedatabase where Name='"+name+"' ";
+            //String insertQueryStatement ="update phonedatabase set flipkartStock="+stock+" where FlipkartLink='"+Link+"'";
+            System.out.println(getQueryStatement);
+            crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
+
+            // execute insert SQL statement
+            ResultSet rs = crunchifyPrepareStat.executeQuery();
+            if(rs.next()){
+                if(rs.getString("Count(*)").equals("0")){
+                    return false;
+                }
+                else return true;
+            }
+            // connection close
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
     void addStockandPrice(String Name,String Price,  Timestamp Time,int stock) {
 
         try {
             Price=Price.substring(1);
-            String insertQueryStatement ="update finaltab set flipkartPrice='"+Price+"',TimeStamp='"+Time+"',FlipkartStock='"+stock+"' where Name='"+Name+"' ";
-            //String insertQueryStatement ="update finaltab set flipkartStock="+stock+" where FlipkartLink='"+Link+"'";
+            String insertQueryStatement ="update phonedatabase set flipkartPrice='"+Price+"',TimeStamp='"+Time+"',FlipkartStock='"+stock+"' where Name='"+Name+"' ";
+            //String insertQueryStatement ="update phonedatabase set flipkartStock="+stock+" where FlipkartLink='"+Link+"'";
             System.out.println(insertQueryStatement);
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
 
@@ -82,9 +75,7 @@ public class AddDbFlipkart {
             log("ds" + " added successfully");
             // connection close
 
-        } catch (
-
-                Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -93,7 +84,7 @@ public class AddDbFlipkart {
     String getTimestamp(String name) {
         String data="";
 
-        String getQueryStatement = "SELECT * from finaltab where name='"+name+"'";
+        String getQueryStatement = "SELECT * from phonedatabase where name='"+name+"'";
         System.out.println(getQueryStatement);
         try{
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
@@ -115,7 +106,7 @@ public class AddDbFlipkart {
     String getLink(String name) {
         String data="";
 
-        String getQueryStatement = "SELECT * from finaltab where name='"+name+"'";
+        String getQueryStatement = "SELECT * from phonedatabase where name='"+name+"'";
         System.out.println(getQueryStatement+name);
         try{
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
@@ -138,7 +129,7 @@ public class AddDbFlipkart {
          ArrayList<String> links=new ArrayList<String>();
         try {
             // MySQL Select Query Tutorial
-            String getQueryStatement = "SELECT * from finaltab";
+            String getQueryStatement = "SELECT * from phonedatabase";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 
@@ -165,7 +156,7 @@ public class AddDbFlipkart {
         ArrayList<String> stock=new ArrayList<String>();
         try {
             // MySQL Select Query Tutorial
-            String getQueryStatement = "SELECT * from finaltab";
+            String getQueryStatement = "SELECT * from phonedatabase";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 
@@ -204,7 +195,7 @@ public class AddDbFlipkart {
     boolean checkTitle(String data){
         try {
             // MySQL Select Query Tutorial
-            String getQueryStatement = "SELECT name from finaltab where name LIKE '% "+data+" %'";
+            String getQueryStatement = "SELECT name from phonedatabase where name LIKE '% "+data+" %'";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 
@@ -228,7 +219,7 @@ public class AddDbFlipkart {
     boolean checkTitleCom(String data){
         try {
             // MySQL Select Query Tutorial
-            String getQueryStatement = "SELECT name from finaltab where name LIKE '%"+data+" %'";
+            String getQueryStatement = "SELECT name from phonedatabase where name LIKE '%"+data+" %'";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 
@@ -258,7 +249,7 @@ public class AddDbFlipkart {
                 ram="";
             if(rom.equals("-1"))
                 rom="";
-            String getQueryStatement = "SELECT name from finaltab where name LIKE '%"+data+"%%"+rom+"%'&& RAM LIKE '%"+ram+"%' order by flipkartPrice ASC";
+            String getQueryStatement = "SELECT name from phonedatabase where name LIKE '%"+data+"%%"+rom+"%'&& RAM LIKE '%"+ram+"%' order by flipkartPrice ASC";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 

@@ -1,28 +1,9 @@
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 
-public class AddDbPaytm extends  DBOperations{
-
-
-    void AaddDbFlipkart(){
-
-        try {
-            log("-------- Simple Crunchify Tutorial on how to make JDBC connection to MySQL DB locally on macOS ------------");
-            makeJDBCConnection();
-
-//            log("\n---------- Adding company 'Crunchify LLC' to DB ----------");
-//            addDataToDB("Google Inc.", "Mountain View, CA, US", 50000, "https://google.com");
-//            addDataToDB("Apple Inc.", "Cupertino, CA, US", 30000, "http://apple.com");
-
-
-            crunchifyPrepareStat.close();
-            crunchifyConn.close(); // connection close
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        }
-    }
+public class AddDbAmazon  extends  DBOperations{
     String getTimestamp(String name) {
         String data="";
 
@@ -47,7 +28,7 @@ public class AddDbPaytm extends  DBOperations{
     void addStockandPrice(String Name,String Price,  Timestamp Time) {
 
         try {
-            String insertQueryStatement ="update phonedatabase set paytmPrice='"+Price+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
+            String insertQueryStatement ="update phonedatabase set Price='"+Price+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
             System.out.println(insertQueryStatement);
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
 
@@ -89,17 +70,15 @@ public class AddDbPaytm extends  DBOperations{
     void addDataToDB(String Name,String Price, String Link,  Date Time ) {
 
         try {
-            System.out.println( Name+Price);
-            String insertQueryStatement ="update phonedatabase set PaytmPrice='"+Price+"',PaytmLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
+            System.out.println( Name+Price+Link);
+            String insertQueryStatement ="update phonedatabase set AmazonPrice='"+Price+"',AmazonLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
+            System.out.println(insertQueryStatement);
             crunchifyPrepareStat = crunchifyConn.prepareStatement(insertQueryStatement);
 
-            Thread.sleep(1000);
 
             // execute insert SQL statement
             crunchifyPrepareStat.executeUpdate();
             log("ds" + " added successfully");
-            crunchifyPrepareStat.close();
-            crunchifyConn.close(); // connection close
 
         } catch (Exception e) {
             e.printStackTrace();

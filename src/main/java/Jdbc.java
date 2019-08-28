@@ -10,7 +10,7 @@ public class Jdbc {
         try{
             Class.forName("com.sql.jdbc.Driver");
             Connection con= DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/pricemobiile","root","root");
+                    "jdbc:mysql://:3306/pricemobiile","root","root");
             //here sonoo is database name, root is username and password
             Statement stmt=con.createStatement();
             ResultSet rs=stmt.executeQuery("update pricespec set flipkartPrice="+Entry+",FlipkartLink="+Link+",FlipkartTimeStamp="+Time+"where name="+Name);

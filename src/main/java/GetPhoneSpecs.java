@@ -4,11 +4,15 @@ import spark.Request;
 import spark.Response;
 import spark.Spark;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import static spark.Spark.*;
+
+import static spark.Spark.port;
 
 class PhoneDetails{
     private int id;
@@ -64,7 +68,7 @@ public class GetPhoneSpecs {
     private static Gson gson;
     private static java.sql.Connection Conn;
     private  static PreparedStatement PrepareStat = null;
-//    ArrayList<PhoneDetails> list=new ArrayList();
+    ArrayList<PhoneDetails> list=new ArrayList();
     private static final HashMap<String, String> corsHeaders = new HashMap<String, String>();
 
     static {
@@ -88,6 +92,7 @@ public class GetPhoneSpecs {
 
     private static ArrayList getPhoneDetails() throws SQLException {
         ArrayList<PhoneDetails> list=new ArrayList();
+
         Conn =DBOperations.makeJDBCConnection();
         String getQueryStatement = "SELECT phone_id,Name,flipkartPrice,flipkartStock,SnapPrice,SnapStock,AmazonStock,AmazonPrice,PaytmPrice FROM phonedatabase limit 8 ";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
@@ -189,8 +194,10 @@ public class GetPhoneSpecs {
                     flag = true;
                 if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
                     aflag = true;
-                if (flag != true && aflag != true) {
-                    list.add(new PhoneDetails(id
+                if(flag==true && aflag==true) {
+                    rs = PrepareStat.executeQuery();
+                }
+                    list.add(new PhoneDetails(rs.getInt("phone_id")
                             , rs.getString("Name")
                             , rs.getString("Operating_System")
                             , rs.getString("Display")
@@ -209,30 +216,6 @@ public class GetPhoneSpecs {
                             , rs.getString("AmazonLink")
                             , rs.getString("PaytmPrice")
                             , rs.getString("PaytmLink"), 0));
-                } else {
-                    rs = PrepareStat.executeQuery();
-                    rs.next();
-                        list.add(new PhoneDetails(id
-                                , rs.getString("Name")
-                                , rs.getString("Operating_System")
-                                , rs.getString("Display")
-                                , rs.getString("Camera")
-                                , rs.getString("Battery")
-                                , rs.getString("Special_Features_Mobile_Phones")
-                                , rs.getString("RAM")
-                                , rs.getString("flipkartPrice")
-                                , rs.getString("flipkartStock")
-                                , rs.getString("FlipkartLink")
-                                , rs.getString("SnapPrice")
-                                , rs.getString("SnapStock")
-                                , rs.getString("SnapLink")
-                                , rs.getString("AmazonPrice")
-                                , rs.getString("AmazonStock")
-                                , rs.getString("AmazonLink")
-                                , rs.getString("PaytmPrice")
-                                , rs.getString("PaytmLink"), 1));
-
-                }
             String name = rs.getString("Name");
             String getQueryStatementRec = "SELECT * from phonedatabase where RAM in (select RAM from phonedatabase WHERE Name like '" + name + "%' and Name<>+'" + name + "' GROUP by RAM ) limit 4";
             rs = Conn.prepareStatement(getQueryStatementRec).executeQuery();
@@ -261,7 +244,8 @@ public class GetPhoneSpecs {
     private static ArrayList getFullDetails(String name) throws SQLException {
         Conn=DBOperations.makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement="SELECT * FROM phonedatabase WHERE soundex('"+name+"') like soundex(Name) OR Name LIKE '%"+name+"%' or Name LIKE '" +name+ "%' or MATCH(Name) AGAINST('"+name+"' IN NATURAL LANGUAGE MODE) limit 50";
+        String getQueryStatement = "SELECT * FROM phonedatabase where Name like '"+name+"%'";
+//        String getQueryStatement="SELECT * FROM phonedatabase WHERE MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -282,7 +266,9 @@ public class GetPhoneSpecs {
     private static ArrayList getSearchResults(String name) throws SQLException {
         Conn=DBOperations.makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement="SELECT phone_id ,Name FROM phonedatabase WHERE soundex('"+name+"')  OR Name LIKE '%"+name+"' or Name LIKE '" +name+ "%' or MATCH(Name) AGAINST('"+name+"' IN NATURAL LANGUAGE MODE) limit 50";
+        String getQueryStatement = "SELECT phone_id,Name FROM phonedatabase where Name like '"+name+"%'";
+//        String getQueryStatement="SELECT phone_id,Name FROM phonedatabase WHERE MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)";
+
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         PreparedStatement PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
@@ -296,7 +282,7 @@ public class GetPhoneSpecs {
     private static ArrayList getprice(String name) throws SQLException {
         Conn=DBOperations.makeJDBCConnection();
         ArrayList<String> list = new ArrayList();
-        String getQueryStatement = "SELECT * FROM finaltab where name ='" + name + "'";
+        String getQueryStatement = "SELECT * FROM phonedatabase where name ='" + name + "'";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -305,6 +291,12 @@ public class GetPhoneSpecs {
             list.add(rs.getString("FlipkartLink"));
             list.add(rs.getString("PaytmPrice"));
             list.add(rs.getString("PaytmLink"));
+            list.add(rs.getString("SnapPrice"));
+            list.add(rs.getString("SnapLink"));
+            list.add(rs.getString("AmazonPrice"));
+            list.add(rs.getString("AmazonLink"));
+
+
         }
         Conn.close();
         return list;
@@ -323,50 +315,29 @@ public class GetPhoneSpecs {
                 flag = true;
             if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
                 aflag = true;
-            if (flag != true && aflag!=true) {
-                list.add(new PhoneDetails(rs.getInt("phone_id")
-                        , rs.getString("Name")
-                        , rs.getString("Operating_System")
-                        , rs.getString("Display")
-                        , rs.getString("Camera")
-                        , rs.getString("Battery")
-                        , rs.getString("Special_Features_Mobile_Phones")
-                        , rs.getString("RAM")
-                        , rs.getString("flipkartPrice")
-                        , rs.getString("flipkartStock")
-                        , rs.getString("FlipkartLink")
-                        , rs.getString("SnapPrice")
-                        , rs.getString("SnapStock")
-                        , rs.getString("SnapLink")
-                        ,rs.getString("AmazonPrice")
-                        ,rs.getString("AmazonStock")
-                        ,rs.getString("AmazonLink")
-                        ,rs.getString("PaytmPrice")
-                        ,rs.getString("PaytmLink"),0));
-            } else {
+            if (flag == true && aflag == true) {
                 rs = PrepareStat.executeQuery();
-                while (rs.next()) {
-                    list.add(new PhoneDetails(rs.getInt("phone_id")
-                            , rs.getString("Name")
-                            , rs.getString("Operating_System")
-                            , rs.getString("Display")
-                            , rs.getString("Camera")
-                            , rs.getString("Battery")
-                            , rs.getString("Special_Features_Mobile_Phones")
-                            , rs.getString("RAM")
-                            , rs.getString("flipkartPrice")
-                            , rs.getString("flipkartStock")
-                            , rs.getString("FlipkartLink")
-                            , rs.getString("SnapPrice")
-                            , rs.getString("SnapStock")
-                            , rs.getString("SnapLink")
-                            ,rs.getString("AmazonPrice")
-                            ,rs.getString("AmazonStock")
-                            ,rs.getString("AmazonLink")
-                            ,rs.getString("PaytmPrice")
-                            ,rs.getString("PaytmLink"),1));
-                }
             }
+            rs.next();
+            list.add(new PhoneDetails(rs.getInt("phone_id")
+                    , rs.getString("Name")
+                    , rs.getString("Operating_System")
+                    , rs.getString("Display")
+                    , rs.getString("Camera")
+                    , rs.getString("Battery")
+                    , rs.getString("Special_Features_Mobile_Phones")
+                    , rs.getString("RAM")
+                    , rs.getString("flipkartPrice")
+                    , rs.getString("flipkartStock")
+                    , rs.getString("FlipkartLink")
+                    , rs.getString("SnapPrice")
+                    , rs.getString("SnapStock")
+                    , rs.getString("SnapLink")
+                    , rs.getString("AmazonPrice")
+                    , rs.getString("AmazonStock")
+                    , rs.getString("AmazonLink")
+                    , rs.getString("PaytmPrice")
+                    , rs.getString("PaytmLink"), 1));
         }
         Conn.close();
         return  list;
@@ -386,9 +357,11 @@ public class GetPhoneSpecs {
         return 0;
     }
 
-       public static void main(String[] arg) throws SQLException {
+    public static void main(String[] arg) throws SQLException {
         try {
-            port(5678);
+//              port(5678);
+            Port port=new Port();
+            port(port.getHerokuAssignedPort());
             GetPhoneSpecs.apply();
             Spark.get("/FeaturedPhones", (request, response) -> {
                 ArrayList list = getPhoneDetails();
@@ -431,6 +404,7 @@ public class GetPhoneSpecs {
                 ArrayList list = getprice(res);
                 System.out.println(list);
                 gson = new Gson();
+
                 return gson.toJson(list);
             });
             Spark.post("/feedback", (request, response) -> {
@@ -453,6 +427,19 @@ public class GetPhoneSpecs {
             System.out.println(e);
         }
 
+
+            Spark.get("/UpdateFlip", (request, response) -> {
+                String Flipname=request.queryParams("Name");
+                AutoUpdateFlipkart updateflip=new AutoUpdateFlipkart();
+                updateflip.check(Flipname);
+                return "1";
+            });
+        Spark.get("/UpdatePaytm", (request, response) -> {
+            String Paytmname=request.queryParams("Name");
+            AutoUpdatePaytm updatepaytm=new AutoUpdatePaytm();
+            updatepaytm.check(Paytmname);
+            return "1";
+        });
 
 //        post("/usersignup/username", (request, response) -> {
 //            String uname = request.queryParams("username");

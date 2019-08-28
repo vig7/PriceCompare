@@ -88,51 +88,51 @@ public class CrawlSnap {
 
     }
     void test(String brandName)  {
-            try {
-                brandName=brandName.replaceAll(" ","%20");
-                String url = "https://www.snapdeal.com/search?keyword=" + brandName + "&santizedKeyword=&catId=&categoryId=175&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy#bcrumbSearch" + brandName;
-                System.out.println(url);
-                Document document = Jsoup.connect(url)
-                        .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
-                        .get();
-                Elements maintag = document.select("div.product-tuple-listing");
-                int no_of_links=0;
-                for (Element link : maintag) {
-                    if (no_of_links <= 2) {
-                        Elements name = link.select("div.product-tuple-description > div.product-desc-rating > a > p");
-                        System.out.println(name.text());
-                        if (ValidateName.check(name.text(), brandName)) {
-                            System.out.println("inside-"+name.text());
-                            Elements ttl = link.select("div.product-tuple-description > div.product-tuple-image > a > span");
-                            Elements stock = link.select("div.product-tuple-image >  a > span.badge-soldout");
-                            Elements mainLink=link.select("div.product-tuple-description > div.product-desc-rating >  a.noUdLine");
-                            String linksbrand = mainLink.attr("href");
-                            Elements price = link.select("div.product-tuple-description > div.product-desc-rating > a > div.product-price-row > div.lfloat > span.product-price");
-                            if(stock.isEmpty()) {
-                                if (!price.isEmpty()) {
-                                    String prices = price.text().substring(4);
-                                    SnapDealDB.updatePrice(brandName, prices, "1", linksbrand);
-                                }
+        try {
+            brandName=brandName.replaceAll(" ","%20");
+            String url = "https://www.snapdeal.com/search?keyword=" + brandName + "&santizedKeyword=&catId=&categoryId=175&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy#bcrumbSearch" + brandName;
+            System.out.println(url);
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
+                    .get();
+            Elements maintag = document.select("div.product-tuple-listing");
+            int no_of_links=0;
+            for (Element link : maintag) {
+                if (no_of_links <= 2) {
+                    Elements name = link.select("div.product-tuple-description > div.product-desc-rating > a > p");
+                    System.out.println(name.text());
+                    if (ValidateName.check(name.text(), brandName)) {
+                        System.out.println("inside-"+name.text());
+                        Elements ttl = link.select("div.product-tuple-description > div.product-tuple-image > a > span");
+                        Elements stock = link.select("div.product-tuple-image >  a > span.badge-soldout");
+                        Elements mainLink=link.select("div.product-tuple-description > div.product-desc-rating >  a.noUdLine");
+                        String linksbrand = mainLink.attr("href");
+                        Elements price = link.select("div.product-tuple-description > div.product-desc-rating > a > div.product-price-row > div.lfloat > span.product-price");
+                        if(stock.isEmpty()) {
+                            if (!price.isEmpty()) {
+                                String prices = price.text().substring(4);
+                                SnapDealDB.updatePrice(brandName, prices, "1", linksbrand);
                             }
-                            else {
-                                    SnapDealDB.updatePrice(brandName, "", "0", linksbrand);
-                                }
-                            break;
                         }
-                        else flag=true;
-                        no_of_links++;
+                        else {
+                            SnapDealDB.updatePrice(brandName, "", "0", linksbrand);
+                        }
+                        break;
                     }
-                    else break;
-                    Thread.sleep(1000);
+                    else flag=true;
+                    no_of_links++;
                 }
-                if(flag==true)
-                    SnapDealDB.updatePrice(brandName);
-
-
-            } catch (Exception e1) {
-                e1.printStackTrace();
+                else break;
+                Thread.sleep(1000);
             }
+            if(flag==true)
+                SnapDealDB.updatePrice(brandName);
+
+
+        } catch (Exception e1) {
+            e1.printStackTrace();
         }
+    }
 
 
 }

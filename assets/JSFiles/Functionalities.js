@@ -45,7 +45,7 @@ function dynamicSearch(str){
             searchResults(this);
         }
       }
-      xmlhttp.open("GET","http://localhost:5678/SearchResults?searchKey="+str,true);
+      xmlhttp.open("GET","http://localhost:4567/SearchResults?searchKey="+str,true);
       xmlhttp.send();
 }
 
@@ -160,7 +160,7 @@ function callFeedback(proid){
                 
         //     }
         // };
-        // xmlhttp.open("GET", "http://localhost:5678/feedback?"+"email="+email+"&id="+id+"&comment="+comment+"&ratings="+ratings, true);
+        // xmlhttp.open("GET", "http://localhost:4567/feedback?"+"email="+email+"&id="+id+"&comment="+comment+"&ratings="+ratings, true);
         // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         // xmlhttp.setRequestHeader("method" , "POST");
         // xmlhttp.send();
@@ -175,7 +175,7 @@ function callFeedback(proid){
             addFeatures(this); 
         }
     };
-    xmlhttp.open("GET", "http://localhost:5678/FeaturedPhones", true);
+    xmlhttp.open("GET", "http://localhost:4567/FeaturedPhones", true);
     xmlhttp.send();
  }
 
@@ -203,13 +203,25 @@ function addFeatures(obj){
     localStorage.setItem("prod_id", val);
     window.location.href="productDescription.html"
 }
+function showInitialPage(){
+    var request = new XMLHttpRequest();
+    request.open('GET', "http://172.16.172.165/getdata.php?num1=Vivo Z1 Pro", true);
+    request.onload = function () {
+        console.log(this.response);
+        console.log("dsadsa");
+         // Begin accessing JSON data here
+         var data = JSON.parse(this.response);
+        
+    }
+    request.send()
 
+}
  //fetching and showing specific mobile phone specs
  function showMobilePage() {
     var url="";
     phone_id=localStorage.getItem("prod_id");
     
-    url= "http://localhost:5678/MobileSpecs?id="+phone_id;
+    url= "http://localhost:4567/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -222,7 +234,7 @@ function addFeatures(obj){
 
  function showSearchResultPage(val){
     var url="";
-    url="http://localhost:5678/SearchSpecificResults?searchKey="+val;
+    url="http://localhost:4567/SearchSpecificResults?searchKey="+val;
     document.getElementById("livesearch").innerHTML="";
     document.getElementById("livesearch").style.border="0px";
     var xmlhttp = new XMLHttpRequest();
@@ -243,7 +255,7 @@ function addFeatures(obj){
 
  function  showAllRelevantResults(val){
     var url="";
-    url="http://localhost:5678/SimilarPhones?searchKey="+val;
+    url="http://localhost:4567/SimilarPhones?searchKey="+val;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {      
@@ -281,7 +293,7 @@ function addFeatures(obj){
      document.getElementById("search-result").innerHTML=text;
 }
 
-
+ 
 
 function showSpecifications(obj,val){
     var specsObj= obj.response;
@@ -335,7 +347,7 @@ function showSpecifications(obj,val){
  function sendRequest(){
     var url="";
     phone_id=localStorage.getItem("compare_id");
-    url= "http://localhost:5678/MobileSpecs?id="+phone_id;
+    url= "http://localhost:4567/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

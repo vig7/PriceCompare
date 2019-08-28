@@ -18,7 +18,7 @@ public class CrawlPaytm {
                 String links=l.select("a").attr("href");
                 value[0]=name;
                 value[1]=""+price.text();
-                value[2]="paytmmall.com"+links;
+                value[2]="https://www.paytmmall.com"+links;
                 j++;
                 if(validate.check(name,dataBaseName)){
                     return value;

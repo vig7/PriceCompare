@@ -1,10 +1,6 @@
-import spark.Spark;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static spark.Spark.port;
 
 public class AutoUpdatePaytm {
     static  void check(String name){
@@ -25,15 +21,5 @@ public class AutoUpdatePaytm {
             PaytmInsert update=new PaytmInsert();
             update.hit(name);
         }
-    }
-    public  static  void  main(String args[]){
-
-        port(5678);
-        GetPhoneSpecs.apply();
-        Spark.get("/UpdatePaytm", (request, response) -> {
-            String name=request.queryParams("Name");
-            check(name);
-            return "1";
-        });
     }
 }
