@@ -1,9 +1,9 @@
-var phone_id;
+var phone_id,phone_name;
 var res;
 console.log(localStorage);
 
 //finding minimum price
-function finMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice){
+function findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice){
     var price="";
     console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
     if(flipPrice=="null")
@@ -124,15 +124,15 @@ function setSearchVal(v,id){
          text+="<p>"+deals[i]+"</p><br>";
          price+="<p>"+prices[i]+"</p><br>";
          if(prices[i]!="Not Available"){
-            if(i==1 || i==3)
-                button+='<a href="https://'+links[i]+'" class="btn btn-primary " style="margin-bottom:10px;">'+'Go to site'+'</a><br>';
-            else
+            // if(i==1 || i==3)
+            //     button+='<a href="https://'+links[i]+'" class="btn btn-primary " style="margin-bottom:10px;">'+'Go to site'+'</a><br>';
+            // else
                 button+='<a href="'+links[i]+'" class="btn btn-primary " style="margin-bottom:10px;">'+'Go to site'+'</a><br>';
         }
         else{
-            if(i==1)
-            button+='<a href="https://'+links[i]+'" class="btn btn-primary " disabled style="margin-bottom:10px; ">'+'Go to site'+'</a><br>';
-        else
+        //     if(i==1)
+        //     button+='<a href="https://'+links[i]+'" class="btn btn-primary " disabled style="margin-bottom:10px; ">'+'Go to site'+'</a><br>';
+        // else
             button+='<a href="'+links[i]+'" class="btn btn-primary "  disabled style="margin-bottom:10px;">'+'Go to site'+'</a><br>';
         }
     }
@@ -193,7 +193,7 @@ function addFeatures(obj){
         price+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice);
         if(price=="Rs.1000000")
            price="Not Available";
-       text+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" /><h5 class="card-title">'+price+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
+       text+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" /><h5 class="card-title set-font">'+price+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
     }
     document.getElementById("fix-features").innerHTML=text;
  }
@@ -208,6 +208,7 @@ function addFeatures(obj){
  function showMobilePage() {
     var url="";
     phone_id=localStorage.getItem("prod_id");
+    
     url= "http://localhost:5678/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -273,16 +274,46 @@ function addFeatures(obj){
         price+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice);
         if(price=="Rs.1000000")
            price="Not Available";
-        text+='<div class="col-sm-4 fix-sides"><div class="product-image-wrapper" style="border:1px red""><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" /><h5 class="card-title">'+price+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
+        if(!"ImageStore/"+res[i].Name)
+            imglink=""
+        text+='<div class="col-sm-4 fix-sides"><div class="product-image-wrapper" style="border:1px red""><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" /><h5 class="card-title set-font">'+price+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
     }
      document.getElementById("search-result").innerHTML=text;
 }
 
+ function showRecommendations(){
+     var id=localStorage.getItem("prod_id");
+     var url="";
+     console.log(id);
+     url="http://localhost:5678/recommendations?searchKey="+id;
+     var xmlhttp = new XMLHttpRequest();
+     xmlhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {   
+              loadRecomendations(this,id);
+            }
+     };
+     xmlhttp.open("GET",url, true);
+     xmlhttp.send();
+ }
+
+ function loadRecomendations(obj,id){
+    var res=JSON.parse(obj.response);
+    if(Object.keys(res).length==0){
+        return;
+    }
+    var text="";
+    for(i=0;i<4;i++){
+        text+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products">  <div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" alt="" /><h5 class="card-title set-font">RS. 15,000</h5><p class="card-text">'+res[i].Name+'</p><a  href="productDescription.html" class="btn btn-default add-to-cart"><i class="fa fa-shopping"></i>See details</a></div></div></div></div>';
+
+    }   
+   document.getElementById("show-rec").innerHTML=text;
+
+ }
 
 function showSpecifications(obj,val){
     var specsObj= obj.response;
     res=JSON.parse(specsObj);
-    console.log(res);
+    console.log("in"+res);
     if(Object.keys(res).length==0){
         console.log(res);
         document.getElementById("search-result").innerHTML='<div class="container"><p><b>Nothing relevant could be found!!!!</b></p></div>';
@@ -299,7 +330,7 @@ function showSpecifications(obj,val){
     let amazonPrice=res[0].AmazonPrice;
     let paytmprice=res[0].PaytmPrice;
     let checkconn=res[0].setCon;
-    price+=finMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
+    price+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
     if(price=="Best Price:Rs.1000000")
         price="Not Available"; 
     image='<div class="col-sm-6"><img class="pop-up "  id="description-image-size"  src="ImageStore/'+name+'.PNG" alt="" /></div>';   
@@ -311,10 +342,8 @@ function showSpecifications(obj,val){
     document.getElementById("image-pro").innerHTML=image;
     document.getElementById("feedback-button").innerHTML=buttonshow;
     var butvalue=localStorage.getItem("prod_id");
-    console.log(butvalue);
+    phone_name=name;
     document.getElementById("show-compare").innerHTML='<div class="row" style="padding:20px"><div class="col-sm-3"><button class="btn btn-primary" onclick="obtainSpecs('+"'"+butvalue+"'"+')">Compare</button></div></div>';
-    if(checkconn=="1")
-        showSearchResultPage(val);
 
 }
 
@@ -354,7 +383,7 @@ function showSpecifications(obj,val){
       if(key!="prod_id" && key!="compare_id"){
             val=JSON.parse(localStorage.getItem(key));
             console.log(key);
-            result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td><img src="https://www.91-img.com/sourceimg/1433150439.jpg" alt=""  class="ecom-logo"> <br><h5 class="font-italic">Rs.'+val.flipkartPrice+'</h5><button class="btn btn-primary"> Buy now </button></td></tr><tr><td><img src="https://www.91-img.com/sourceimg/1520940259.png" alt=""  class="ecom-logo"><br><h5 class="font-italic">Rs. 30000</h5><button class="btn btn-primary">Buy now </button> </td> </tr><tr><td><img src="https://images.yourstory.com/cs/wordpress/2016/09/snapdeal-new-logo.png?fm=png&auto=format" style="width:100px;height:50px" alt="" class="ecom-logo"><br><h5 class="font-italic">'+val.SnapPrice+'</h5><button class="btn btn-primary"> Buy now</button></td></tr></tbody></table></div>';
+            result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td><img src="https://www.91-img.com/sourceimg/1433150439.jpg" alt=""  class="ecom-logo"> <br><h5 class="font-italic set-font" >Rs.'+val.flipkartPrice+'</h5></tr><tr><td><img src="https://www.91-img.com/sourceimg/1520940259.png" alt=""  class="ecom-logo"><br><h5 class="font-italic set-font">Rs. 30000</h5> </td> </tr><tr><td><img src="https://images.yourstory.com/cs/wordpress/2016/09/snapdeal-new-logo.png?fm=png&auto=format" style="width:100px;height:50px" alt="" class="ecom-logo"><br><h5 class="font-italic set-font">'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
        }
      });
     document.getElementById("compareBrands").innerHTML=result;
@@ -369,8 +398,8 @@ function showSpecifications(obj,val){
         if(key!="prod_id" && key!="compare_id"){
               val=JSON.parse(localStorage.getItem(key));
               console.log(key);
-              result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td><img src="https://www.91-img.com/sourceimg/1433150439.jpg" alt="" style="width:100%; height:50%"> <br><h4 class="font-italic">Rs.'+val.flipkartPrice+'</h4><button class="btn btn-primary"> Buy now </button></td></tr><tr><td><img src="https://www.91-img.com/sourceimg/1520940259.png" alt="" style="width:100%; height:50%"><br><h4 class="font-italic">Rs. 30000</h4><button class="btn btn-primary">Buy now </button> </td> </tr><tr><td><img src="https://images.yourstory.com/cs/wordpress/2016/09/snapdeal-new-logo.png?fm=png&auto=format" style="width:100%; height:50%" alt=""><br><h4 class="font-italic">'+val.SnapPrice+'</h4><button class="btn btn-primary"> Buy now</button></td></tr></tbody></table></div>';
-         }
+              result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td><img src="https://www.91-img.com/sourceimg/1433150439.jpg" alt=""  class="ecom-logo"> <br><h5 class="font-italic set-font" >Rs.'+val.flipkartPrice+'</h5></tr><tr><td><img src="https://www.91-img.com/sourceimg/1520940259.png" alt=""  class="ecom-logo"><br><h5 class="font-italic set-font">Rs. 30000</h5> </td> </tr><tr><td><img src="https://images.yourstory.com/cs/wordpress/2016/09/snapdeal-new-logo.png?fm=png&auto=format" style="width:100px;height:50px" alt="" class="ecom-logo"><br><h5 class="font-italic set-font">'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
+            }
        });
     document.getElementById("compareBrands").innerHTML=result;     
  }
