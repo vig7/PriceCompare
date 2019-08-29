@@ -215,17 +215,23 @@
  	</footer>
  	 
       <script>window.onload=sendRequest;</script>
-     <script>
-        $(document).ready(function(){
-			$("#searchres").click(function(){
-		var str = $('#mobile-brands').val();
-		showSearchResultPage(str);
-		$('#search-result').load("searchResults.html #load-results");
-      
-   
-      });
-        });
-    </script>
+	  <script>
+			$(document).ready(function(){
+			  $("#searchres").click(function(){
+			   
+				var str = $('#mobile-brands').val();
+				if(!str){
+					alert("Type in correctly");
+					return;
+				}
+				else{
+					showInitialPage();
+					showSearchResultPage(str);  
+				}
+		   
+			  });
+			});
+		</script>
      </body>
      
  	</html>

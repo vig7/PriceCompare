@@ -1,23 +1,25 @@
 var phone_id,phone_name;
 var res;
+var domain = "localhost:4567";
 console.log(localStorage);
 
 //finding minimum price
 function findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice){
+    console.log(flipPrice+snapPrice+amazonPrice+paytmprice);
     var price="";
-    
-    if(flipPrice=="0" )
+    console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
+    if(flipPrice=="0")
          flipPrice="1000000";
     else
-        flipPrice=parseFloat(flipPrice.replace(/\,/g,""));
+        flipPrice=parseFloat(flipPrice.replace(',',''));
      if(snapPrice=="0")
          snapPrice="1000000";
     else
-        snapPrice=parseFloat(snapPrice.replace(/\,/g,""));
+        snapPrice=parseFloat(snapPrice.replace(',',''));
      if(paytmprice=="0")
          paytmprice="1000000";
     else
-        paytmprice=parseFloat(paytmprice.replace(/\,/g,""));
+        paytmprice=parseFloat(paytmprice.replace(',',''));
      if(amazonPrice=="0")
          amazonPrice="1000000";
     else
@@ -89,7 +91,7 @@ function setSearchVal(v,id){
     var text=" ";
     var price=" ";
     var button=" ";
-    
+    console.log(res);
     let flipPrice=res[0].flipkartPrice;
     let snapPrice=res[0].SnapPrice;
     let amazonPrice=res[0].AmazonPrice;
@@ -163,7 +165,7 @@ function callFeedback(proid){
                 
         //     }
         // };
-        // xmlhttp.open("GET", "http://172.16.172.39:4567/feedback?"+"email="+email+"&id="+id+"&comment="+comment+"&ratings="+ratings, true);
+        // xmlhttp.open("GET", "http://"+domain+"/feedback?"+"email="+email+"&id="+id+"&comment="+comment+"&ratings="+ratings, true);
         // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         // xmlhttp.setRequestHeader("method" , "POST");
         // xmlhttp.send();
@@ -412,11 +414,32 @@ function showupdatedSpecifications(obj,val){
      var res=obj.response;
      res=JSON.parse(res);
      var compareProd="";
+     let flipPrice=res[0].flipkartPrice;
+     let snapPrice=res[0].flipkartPrice;
+     let amazonPrice=res[0].AmazonPrice;
+     let paytmprice=res[0].PaytmPrice;
+     console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice);
+     if(flipPrice=="null")
+         flipPrice="Not available"
+    else
+        flipPrice=parseFloat(flipPrice.replace(',',''));
+     if(snapPrice=="" || snapPrice || snapPrice=="null")
+         snapPrice="Not available";
+    else
+        snapPrice=parseFloat(snapPrice.replace(',',''));
+     if(paytmprice=="null" || paytmprice)
+         paytmprice="Not available";
+    else
+        paytmprice=parseFloat(paytmprice.replace(',',''));
+     if(amazonPrice=="" || amazonPrice)
+         amazonPrice="Not available";
+    else
+         amazonPrice=parseFloat(amazonPrice.replace(',',''));
      console.log(id);
-     compareProd={id:res[0].id,Name:res[0].Name,flipkartPrice:(res[0].flipkartPrice?res[0].flipkartPrice:"Not available"),
-        SnapPrice:res[0].SnapPrice,os:res[0].operatingSystem,
+     compareProd={id:res[0].id,Name:res[0].Name,flipkartPrice:flipPrice,
+        SnapPrice:snapPrice,os:res[0].operatingSystem,
         camera:res[0].Camera,Display:res[0].Display,RAM:res[0].RAM,specialFeat:res[0].specialFeat,Battery:res[0].Battery,
-        FlipkartLink:res[0].FlipkartLink,SnapLink:res[0].SnapLink
+        FlipkartLink:res[0].FlipkartLink,SnapLink:res[0].SnapLink,paytmPrice:paytmprice,amazonPrice:amazonPrice
      };
     var result="";
     localStorage.setItem("prod"+id, JSON.stringify(compareProd));
@@ -425,7 +448,7 @@ function showupdatedSpecifications(obj,val){
       if(key!="prod_id" && key!="compare_id"){
             val=JSON.parse(localStorage.getItem(key));
             console.log(key);
-            result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td><img src="https://www.91-img.com/sourceimg/1433150439.jpg" alt=""  class="ecom-logo"> <br><h5 class="font-italic set-font" >Rs.'+val.flipkartPrice+'</h5></tr><tr><td><img src="https://www.91-img.com/sourceimg/1520940259.png" alt=""  class="ecom-logo"><br><h5 class="font-italic set-font">Rs. 30000</h5> </td> </tr><tr><td><img src="https://images.yourstory.com/cs/wordpress/2016/09/snapdeal-new-logo.png?fm=png&auto=format" style="width:100px;height:50px" alt="" class="ecom-logo"><br><h5 class="font-italic set-font">'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
+            result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td> <br><h5 class="font-italic set-font" >'+val.flipkartPrice+'</h5></td></tr><tr><td> <br><h5 class="font-italic set-font" >'+val.amazonPrice+'</h5></td></tr><tr><td><h5>'+val.paytmPrice+'</h5> </td> </tr><tr><td><br><h5 class="font-italic set-font">'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
        }
      });
     document.getElementById("compareBrands").innerHTML=result;

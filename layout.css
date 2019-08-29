@@ -36,6 +36,9 @@ form.example button:hover {
 .input-group-addon{
 cursor: pointer;
 }
+#clickRes {
+  cursor: pointer;
+}
 form.example::after {
   content: "";
   clear: both;

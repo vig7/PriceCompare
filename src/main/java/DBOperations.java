@@ -22,6 +22,7 @@ public class DBOperations {
 
         try {
             // DriverManager: The basic service for managing a set of JDBC drivers.
+
             crunchifyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test1?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
             if (crunchifyConn != null) {
                 System.out.println("Connection Successful! Enjoy. Now it's time to push data");
