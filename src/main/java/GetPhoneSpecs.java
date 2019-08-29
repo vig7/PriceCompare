@@ -333,16 +333,16 @@ public class GetPhoneSpecs {
         AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
         boolean flag=false,aflag=false,fflag=false,pflag=false;
         while(rs.next()) {
-            Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
-            if (checkSnapTimestamp(last_updated_ts, rs.getString("SnapLink"), rs.getString("Name"), rs.getString("SnapStock")))
-                flag = true;
-            if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
-                aflag = true;
+//            Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
+          //  if (checkSnapTimestamp(last_updated_ts, rs.getString("SnapLink"), rs.getString("Name"), rs.getString("SnapStock")))
+              //  flag = true;
+           // if (checkAmazonTimestamp(last_updated_ts, rs.getString("AmazonLink"), rs.getString("Name"), rs.getString("AmazonStock")))
+             //   aflag = true;
 
             flipkart.check(rs.getString("Name"));
             paytm.check(rs.getString("Name"));
 
-            rs = PrepareStat.executeQuery();
+//            rs = PrepareStat.executeQuery();
             while (rs.next()) {
                 list.add(new PhoneDetails(rs.getInt("phone_id")
                         , rs.getString("Name")

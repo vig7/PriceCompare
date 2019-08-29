@@ -323,7 +323,10 @@
 </footer>
 
 
-<script>window.onload=show;</script>
+<script>window.onload = function() {
+    show();
+   
+}</script>
 <script>
     $(document).ready(function(){
       $("#searchres").click(function(){  
@@ -333,6 +336,7 @@
             return;
         }
         else{
+            // showInitialPage();
            showSearchResultPage(str);
         }
        
@@ -346,7 +350,6 @@
             
 
         }
-       
        
         });
     

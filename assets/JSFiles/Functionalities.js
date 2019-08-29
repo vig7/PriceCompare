@@ -6,23 +6,23 @@ console.log(localStorage);
 function findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice){
     var price="";
     
-    if(flipPrice=="null" )
+    if(flipPrice=="0" )
          flipPrice="1000000";
     else
         flipPrice=parseFloat(flipPrice.replace(/\,/g,""));
-     if(snapPrice=="" || snapPrice)
+     if(snapPrice=="0")
          snapPrice="1000000";
     else
         snapPrice=parseFloat(snapPrice.replace(/\,/g,""));
-     if(paytmprice=="null" || !paytmprice)
+     if(paytmprice=="0")
          paytmprice="1000000";
     else
         paytmprice=parseFloat(paytmprice.replace(/\,/g,""));
-     if(amazonPrice=="" || amazonPrice)
+     if(amazonPrice=="0")
          amazonPrice="1000000";
     else
          amazonPrice=parseFloat(amazonPrice.replace(/\,/g,""));
-         console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
+        //  console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
     price+=Math.min(flipPrice,snapPrice,amazonPrice,paytmprice);
     return price;
 }
@@ -46,7 +46,7 @@ function dynamicSearch(str){
             searchResults(this);
         }
       }
-      xmlhttp.open("GET","http://localhost:4567/SearchResults?searchKey="+str,true);
+      xmlhttp.open("GET","http://172.16.172.39:4567/SearchResults?searchKey="+str,true);
       xmlhttp.send();
 }
 
@@ -95,28 +95,28 @@ function setSearchVal(v,id){
     let amazonPrice=res[0].AmazonPrice;
     let paytmprice=res[0].PaytmPrice;
     console.log("modal"+flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice);
-    if(amazonPrice!="" &&  amazonPrice!="null"){
+    if(amazonPrice!="0" ){
         prices[0]=amazonPrice;
         links[0]=res[0].AmazonLink;
     }
     else{
         prices[0]="Not Available";
     }
-    if(flipPrice!="null"){
+    if(flipPrice!="0"){
         prices[1]=flipPrice;
         links[1]=res[0].FlipkartLink;
     }
     else{
         prices[1]="Not Available";
     }
-    if(snapPrice!="" ){
+    if(snapPrice!="0" ){
         prices[2]=snapPrice;
         links[2]=res[0].SnapLink;
     }
     else{
         prices[2]="Not Available";
     }
-    if(paytmprice!="null" && paytmprice){
+    if(paytmprice!="0"){
         prices[3]=paytmprice;
         links[3]=res[0].PaytmLink;
     }
@@ -163,7 +163,7 @@ function callFeedback(proid){
                 
         //     }
         // };
-        // xmlhttp.open("GET", "http://localhost:4567/feedback?"+"email="+email+"&id="+id+"&comment="+comment+"&ratings="+ratings, true);
+        // xmlhttp.open("GET", "http://172.16.172.39:4567/feedback?"+"email="+email+"&id="+id+"&comment="+comment+"&ratings="+ratings, true);
         // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         // xmlhttp.setRequestHeader("method" , "POST");
         // xmlhttp.send();
@@ -178,7 +178,7 @@ function callFeedback(proid){
             addFeatures(this); 
         }
     };
-    xmlhttp.open("GET", "http://localhost:4567/FeaturedPhones", true);
+    xmlhttp.open("GET", "http://172.16.172.39:4567/FeaturedPhones", true);
     xmlhttp.send();
  }
 
@@ -211,7 +211,7 @@ function showInitialPage(){
     var url="";
     phone_id=localStorage.getItem("prod_id");
     var result;
-    url= "http://localhost:4567/MobileSpecs?id="+phone_id;
+    url= "http://172.16.172.39:4567/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -230,7 +230,7 @@ function showInitialPage(){
     var url="";
     phone_id=localStorage.getItem("prod_id");
     
-    url= "http://localhost:4567/updatedSpecs?id="+phone_id;
+    url= "http://172.16.172.39:4567/updatedSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -246,7 +246,7 @@ function showInitialPage(){
  function showSearchResultPage(val){
     // alert(val);
     var url="";
-    url="http://localhost:4567/SearchSpecificResults?searchKey="+val;
+    url="http://172.16.172.39:4567/SearchSpecificResults?searchKey="+val;
     document.getElementById("livesearch").innerHTML="";
     document.getElementById("livesearch").style.border="0px";
     var xmlhttp = new XMLHttpRequest();
@@ -267,7 +267,7 @@ function showInitialPage(){
 
  function  showAllRelevantResults(val){
     var url="";
-    url="http://localhost:4567/SimilarPhones?searchKey="+val;
+    url="http://172.16.172.39:4567/SimilarPhones?searchKey="+val;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {      
@@ -327,6 +327,7 @@ function showSpecifications(obj,val){
     let amazonPrice=res[0].AmazonPrice;
     let paytmprice=res[0].PaytmPrice;
     price+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
+    console.log(price);
     if(price=="Best Price:Rs.1000000")
         price="Not Available"; 
     image='<div class="col-sm-6"><img class="pop-up "  id="description-image-size"  src="ImageStore/'+name+'.PNG" alt="" /></div>';   
@@ -396,7 +397,7 @@ function showupdatedSpecifications(obj,val){
  function sendRequest(){
     var url="";
     phone_id=localStorage.getItem("compare_id");
-    url= "http://localhost:4567/MobileSpecs?id="+phone_id;
+    url= "http://172.16.172.39:4567/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
