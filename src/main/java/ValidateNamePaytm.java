@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class ValidateNamePaytm {
                 break;
             }
         }
-        if(brokenD[0]!="oneplus"){
+        if(!brokenD[0].equals("oneplus")){
         for (int i=0;i<brokenN.length;i++){
             if(webbroken.indexOf(brokenN[i])==-1)
                 val++;
@@ -39,5 +38,10 @@ public class ValidateNamePaytm {
         return true;
         else
             return false;
+    }
+
+    public static void main(String[] args) {
+        ValidateNamePaytm paytm=new ValidateNamePaytm();
+        System.out.println( paytm.check("Redmi Note 7 Pro 4 GB 64 GB Space Black","OnePlus 7"));
     }
 }
