@@ -5,23 +5,24 @@ console.log(localStorage);
 //finding minimum price
 function findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice){
     var price="";
-    console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
-    if(flipPrice=="null")
+    
+    if(flipPrice=="null" )
          flipPrice="1000000";
     else
-        flipPrice=parseFloat(flipPrice.replace(',',''));
+        flipPrice=parseFloat(flipPrice.replace(/\,/g,""));
      if(snapPrice=="" || snapPrice)
          snapPrice="1000000";
     else
-        snapPrice=parseFloat(snapPrice.replace(',',''));
+        snapPrice=parseFloat(snapPrice.replace(/\,/g,""));
      if(paytmprice=="null" || !paytmprice)
          paytmprice="1000000";
     else
-        paytmprice=parseFloat(paytmprice.replace(',',''));
+        paytmprice=parseFloat(paytmprice.replace(/\,/g,""));
      if(amazonPrice=="" || amazonPrice)
          amazonPrice="1000000";
     else
-         amazonPrice=parseFloat(amazonPrice.replace(',',''));
+         amazonPrice=parseFloat(amazonPrice.replace(/\,/g,""));
+         console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
     price+=Math.min(flipPrice,snapPrice,amazonPrice,paytmprice);
     return price;
 }
@@ -58,7 +59,7 @@ function searchResults(obj){
         for(i=0;i<10;i++){
             let name= responseSearch[i].Name
             console.log(name);
-            text+='<li><ul><h5 id="clickRes" style="display:block;border:1px #A5ACB2" onclick="setSearchVal('+"'"+name+"',"+"'"+ responseSearch[i].id+"'"+')">'+name+'</h5></ul></li>';
+            text+='<div class="highlight"><li><ul><h5 id="clickRes" style="display:block;border:1px #A5ACB2" onclick="setSearchVal('+"'"+name+"',"+"'"+ responseSearch[i].id+"'"+')">'+name+'</h5></ul></li></div>';
             document.getElementById("livesearch").innerHTML=text;
         }
     }
@@ -88,10 +89,12 @@ function setSearchVal(v,id){
     var text=" ";
     var price=" ";
     var button=" ";
+    
     let flipPrice=res[0].flipkartPrice;
     let snapPrice=res[0].SnapPrice;
     let amazonPrice=res[0].AmazonPrice;
     let paytmprice=res[0].PaytmPrice;
+    console.log("modal"+flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice);
     if(amazonPrice!="" &&  amazonPrice!="null"){
         prices[0]=amazonPrice;
         links[0]=res[0].AmazonLink;
@@ -113,7 +116,7 @@ function setSearchVal(v,id){
     else{
         prices[2]="Not Available";
     }
-    if(paytmprice!="null" || !paytmprice){
+    if(paytmprice!="null" && paytmprice){
         prices[3]=paytmprice;
         links[3]=res[0].PaytmLink;
     }
@@ -184,6 +187,7 @@ function addFeatures(obj){
     res= obj.response;
     res=JSON.parse(res);
     var price;
+    console.log(res)
     for(i=0;i<8;i++){
        let flipPrice=res[i].flipkartPrice;
        let snapPrice=res[i].SnapPrice;
@@ -206,17 +210,20 @@ function addFeatures(obj){
 function showInitialPage(){
     var url="";
     phone_id=localStorage.getItem("prod_id");
-    
+    var result;
     url= "http://localhost:4567/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             showSpecifications(this); 
+            
         }
     };
     xmlhttp.open("GET",url, true);
     xmlhttp.send();
-    showMobilePage();
+    // if(result==1)
+    //         showMobilePage();
+   
 }
  //fetching and showing specific mobile phone specs
  function showMobilePage() {
@@ -228,13 +235,16 @@ function showInitialPage(){
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             showupdatedSpecifications(this); 
+            
         }
     };
     xmlhttp.open("GET",url, true);
     xmlhttp.send();
+    
  }
 
  function showSearchResultPage(val){
+    // alert(val);
     var url="";
     url="http://localhost:4567/SearchSpecificResults?searchKey="+val;
     document.getElementById("livesearch").innerHTML="";
@@ -316,7 +326,6 @@ function showSpecifications(obj,val){
     let snapPrice=res[0].flipkartPrice;
     let amazonPrice=res[0].AmazonPrice;
     let paytmprice=res[0].PaytmPrice;
-    let checkconn=res[0].setCon;
     price+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
     if(price=="Best Price:Rs.1000000")
         price="Not Available"; 
@@ -331,25 +340,34 @@ function showSpecifications(obj,val){
     var butvalue=localStorage.getItem("prod_id");
     phone_name=name;
     document.getElementById("show-compare").innerHTML='<div class="row" style="padding:20px"><div class="col-sm-3"><button class="btn btn-primary" onclick="obtainSpecs('+"'"+butvalue+"'"+')">Compare</button></div></div>';
+    console.log(res);
+    if(Object.keys(res).length==1)
+        return;
     var text11="";
-    for(i=1;i<5;i++){
-       text11+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products">  <div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" alt="" /><h5 class="card-title set-font">RS. 15,000</h5><p class="card-text">'+res[i].Name+'</p><a  href="productDescription.html" class="btn btn-default add-to-cart"><i class="fa fa-shopping"></i>See details</a></div></div></div></div>';
+    for(i=1;i<Object.keys(res).length;i++){
+        var minprice="Best Price:Rs.";
+        let flipPrice=res[i].flipkartPrice;
+        let snapPrice=res[i].flipkartPrice;
+        let amazonPrice=res[i].AmazonPrice;
+        let paytmprice=res[i].PaytmPrice;
+        console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice);
+        minprice+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
+        console.log(minprice);
+        if(minprice=="Best Price:Rs.1000000")
+           minprice="Not Available"; 
+           text11+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" /><h5 class="card-title set-font">'+minprice+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
 
    }   
   document.getElementById("show-rec").innerHTML=text11;
-
+// showMobilePage();
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 05c3572595ffa37f983ad718bbadf88ba87531dc
 function showupdatedSpecifications(obj,val){
     var specsObj= obj.response;
     res=JSON.parse(specsObj);
     console.log("in"+res);
     if(Object.keys(res).length==0){
-        console.log(res);
-        document.getElementById("search-result").innerHTML='<div class="container"><p><b>Nothing relevant could be found!!!!</b></p></div>';
+        
         return;
     }      
     var text=" ";
@@ -358,24 +376,18 @@ function showupdatedSpecifications(obj,val){
     else
         var name=val;
     var price="Best Price:Rs.";
-    let flipPrice=res[0].flipkartPrice;
-    let snapPrice=res[0].flipkartPrice;
-    let amazonPrice=res[0].AmazonPrice;
-    let paytmprice=res[0].PaytmPrice;
-    let checkconn=res[0].setCon;
+    let flipPrice=res[0];
+    let snapPrice=res[1];
+    let amazonPrice=res[2];
+    let paytmprice=res[3];
     price+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
+    console.log(price);
     if(price=="Best Price:Rs.1000000")
         price="Not Available"; 
+    alert("New price available");
     document.getElementById("prodPrice").innerHTML=price;
-    var butvalue=localStorage.getItem("prod_id");
-    phone_name=name;
-    document.getElementById("show-compare").innerHTML='<div class="row" style="padding:20px"><div class="col-sm-3"><button class="btn btn-primary" onclick="obtainSpecs('+"'"+butvalue+"'"+')">Compare</button></div></div>';
-
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 05c3572595ffa37f983ad718bbadf88ba87531dc
  function obtainSpecs(id) {
     phone_id=localStorage.setItem("compare_id",id);
     window.location.href="comparePrices.html" 

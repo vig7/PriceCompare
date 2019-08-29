@@ -37,7 +37,7 @@
                     <div class="shop-menu pull-right collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav navbar-right">
                              <li><a href=""><i class="fa fa-crosshairs"></i> Help</a></li>
-                             <li><a href="comparePrices.html"><i class="fa fa-shopping-cart"></i> Compare</a></li>
+                             <!-- <li><a href="comparePrices.html"><i class="fa fa-shopping-cart"></i> Compare</a></li> -->
                              <li><a href=""><i class="fa fa-user"></i> Deals</a></li>
                              <li><a href=""><i class="fa fa-lock"></i> Feedback</a></li>
                             
@@ -55,10 +55,12 @@
                         <form id="form">
                             
                             <div class="col-sm-12 input-group">
+                            
                                 <input type="text" class="form-control" id="mobile-brands" onkeyup="dynamicSearch(this.value)"  placeholder="Search for brands.." title="Type in a mobile brand" autocomplete="off" required>        
                                 <span class="input-group-addon" id="searchres">
                                         <i class="fa fa-search"></i>
                                 </span>
+                                <!-- <input type="submit" class="btn btn-primary" id="searchres"> -->
                             </div>
                             <div  class= "col-sm-12" id="livesearch"></div>
                         </form>
@@ -333,6 +335,18 @@
         else{
            showSearchResultPage(str);
         }
+       
+        });
+    $(document).on("keyup",function(e){  
+        if(e.which==13){
+           
+            var str = $('#mobile-brands').val();
+                alert(str);
+                showSearchResultPage(str);
+            
+
+        }
+       
        
         });
     
