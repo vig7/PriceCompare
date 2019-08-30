@@ -38,7 +38,7 @@ public class Extension {
                 }
             }
             phoneName=phoneName.trim();
-            if(phoneName.length()==0||phoneName.equals("on"))
+            if(phoneName.length()==0||phoneName.equals("on")||!phoneName.contains(" "))
                 return "-1";
             title.indexOf("gb");
             int r=-1;

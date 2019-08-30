@@ -1,6 +1,6 @@
 var phone_id,phone_name;
 var res;
-var domain = "localhost:4567";
+var domain = "172.16.172.39:4567";
 console.log(localStorage);
 
 //finding minimum price
@@ -8,23 +8,22 @@ function findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice){
     console.log(flipPrice+snapPrice+amazonPrice+paytmprice);
     var price="";
     console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
-    if(flipPrice=="0")
-         flipPrice="1000000";
+    if(flipPrice=="0"||flipPrice==undefined||flipPrice=="null"||flipPrice=="")
+    flipPrice="1000000";
     else
-        flipPrice=parseFloat(flipPrice.replace(',',''));
-     if(snapPrice=="0")
-         snapPrice="1000000";
+    flipPrice=parseFloat(flipPrice.replace(',',''));
+    if(snapPrice=="0"||snapPrice==undefined||snapPrice=="null"||snapPrice=="")
+    snapPrice="1000000";
     else
-        snapPrice=parseFloat(snapPrice.replace(',',''));
-     if(paytmprice=="0")
-         paytmprice="1000000";
+    snapPrice=parseFloat(snapPrice.replace(',',''));
+    if(paytmprice=="0"||paytmprice==undefined||snapPrice=="null"||snapPrice=="")
+    paytmprice="1000000";
     else
-        paytmprice=parseFloat(paytmprice.replace(',',''));
-     if(amazonPrice=="0")
-         amazonPrice="1000000";
+    paytmprice=parseFloat(paytmprice.replace(',',''));
+    if(amazonPrice=="0"||amazonPrice==undefined||amazonPrice=="null"||amazonPrice=="")
+    amazonPrice="1000000";
     else
-         amazonPrice=parseFloat(amazonPrice.replace(/\,/g,""));
-        //  console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice+" "+price);
+    amazonPrice=parseFloat(amazonPrice.replace(',',''));
     price+=Math.min(flipPrice,snapPrice,amazonPrice,paytmprice);
     return price;
 }
@@ -91,36 +90,51 @@ function setSearchVal(v,id){
     var text=" ";
     var price=" ";
     var button=" ";
-    console.log(res);
-    let flipPrice=res[0].flipkartPrice;
-    let snapPrice=res[0].SnapPrice;
-    let amazonPrice=res[0].AmazonPrice;
-    let paytmprice=res[0].PaytmPrice;
+    let flipPrice;
+    let snapPrice;
+    let amazonPrice;
+    let paytmprice;
+    if(Object.keys(res).length==4){
+        console.log("hello");
+     flipPrice=res[0];
+     snapPrice=res[1];
+     amazonPrice=res[2];
+     paytmprice=res[3];
+
+    }
+    else{
+    flipPrice=res[0].flipkartPrice;
+     snapPrice=res[0].SnapPrice;
+     amazonPrice=res[0].AmazonPrice;
+     paytmprice=res[0].PaytmPrice;
+
+    }
+     
     console.log("modal"+flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice);
     if(amazonPrice!="0" ){
         prices[0]=amazonPrice;
-        links[0]=res[0].AmazonLink;
+        links[0]=localStorage.getItem("AmazonLink");
     }
     else{
         prices[0]="Not Available";
     }
     if(flipPrice!="0"){
         prices[1]=flipPrice;
-        links[1]=res[0].FlipkartLink;
+        links[1]=localStorage.getItem("FlipkartLink");
     }
     else{
         prices[1]="Not Available";
     }
     if(snapPrice!="0" ){
         prices[2]=snapPrice;
-        links[2]=res[0].SnapLink;
+        links[2]=localStorage.getItem("SnapLink");
     }
     else{
         prices[2]="Not Available";
     }
     if(paytmprice!="0"){
         prices[3]=paytmprice;
-        links[3]=res[0].PaytmLink;
+        links[3]=localStorage.getItem("PaytmLink");
     }
     else{
         prices[3]="Not Available";
@@ -154,21 +168,6 @@ function callFeedback(proid){
         var ratings=document.getElementById("ratings").value;
         var id=proid;
         console.log(email+" "+comment+" "+ratings+" "+id);
-        // var xmlhttp = new XMLHttpRequest();
-        // xmlhttp.onreadystatechange = function() {
-        //     console.log(this.readyState+" "+this.status);
-        //     if (this.readyState == 4 && this.status == 200) {
-        //         res= this.response;
-        //         console.log(res);
-               
-        //         alert("Thankyou for giving your valuable feedback.. ");
-                
-        //     }
-        // };
-        // xmlhttp.open("GET", "http://"+domain+"/feedback?"+"email="+email+"&id="+id+"&comment="+comment+"&ratings="+ratings, true);
-        // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        // xmlhttp.setRequestHeader("method" , "POST");
-        // xmlhttp.send();
        
 }
 
@@ -188,6 +187,7 @@ function addFeatures(obj){
     var text=" ";
     res= obj.response;
     res=JSON.parse(res);
+    console.log(res);
     var price;
     console.log(res)
     for(i=0;i<8;i++){
@@ -223,8 +223,6 @@ function showInitialPage(){
     };
     xmlhttp.open("GET",url, true);
     xmlhttp.send();
-    // if(result==1)
-    //         showMobilePage();
    
 }
  //fetching and showing specific mobile phone specs
@@ -246,25 +244,26 @@ function showInitialPage(){
  }
 
  function showSearchResultPage(val){
-    // alert(val);
-    var url="";
-    url="http://172.16.172.39:4567/SearchSpecificResults?searchKey="+val;
+
+    // var url="";
+    // url="http://172.16.172.39:4567/SearchSpecificResults?searchKey="+val;
     document.getElementById("livesearch").innerHTML="";
     document.getElementById("livesearch").style.border="0px";
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            if(Object.keys(JSON.parse(this.response)).length==1){
-                var res=JSON.parse(this.response);
-                console.log("in"+res);
-                loadDetails(res[0].id);
-            }
-            else 
+    // var xmlhttp = new XMLHttpRequest();
+    // xmlhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //         console.log(Object.keys(JSON.parse(this.response)).length);
+            // if(Object.keys(JSON.parse(this.response)).length==1){
+            //     var res1=JSON.parse(this.response);
+            //     console.log("in"+res1);
+            //     loadDetails(res1[0].id);
+            // }
+            // else 
                 showAllRelevantResults(val);
-             }
-    };
-    xmlhttp.open("GET",url, true);
-    xmlhttp.send();
+            //  }
+    // };
+    // xmlhttp.open("GET",url, true);
+    // xmlhttp.send();
  }
 
  function  showAllRelevantResults(val){
@@ -332,9 +331,21 @@ function showSpecifications(obj,val){
     console.log(price);
     if(price=="Best Price:Rs.1000000")
         price="Not Available"; 
+    localStorage.setItem("price",price);
+    localStorage.setItem("name",name);
+    localStorage.setItem("os",res[0].operatingSystem);
+    localStorage.setItem("camera",res[0].Camera);
+    localStorage.setItem("battery",res[0].Battery);
+    localStorage.setItem("display",res[0].Display);
+    localStorage.setItem("special_feat",res[0].specialFeat);
+    localStorage.setItem("RAM",res[0].RAM);
+    localStorage.setItem("AmazonLink",res[0].AmazonLink);
+    localStorage.setItem("FlipkartLink",res[0].FlipkartLink);
+    localStorage.setItem("SnapLink",res[0].SnapLink);
+    localStorage.setItem("PaytmLink",res[0].PaytmLink);
     image='<div class="col-sm-6"><img class="pop-up "  id="description-image-size"  src="ImageStore/'+name+'.PNG" alt="" /></div>';   
-    text=' <table class="table table-bordered"> <tbody> <tr style="border: none"><td >Model Name</td><td>'+res[0].Name+'</td></tr><tr><td>Operating System</td><td>'+res[0].operatingSystem+'</td></tr><tr><td>Camera</td><td>'+res[0].Camera+'</td></tr><tr><td>Display</td><td>'+res[0].Display+'</td></tr><tr><td>Battery</td><td>'+res[0].Battery+'</td></tr><tr><td>Special Features</td><td>'+res[0].specialFeat+'</td></tr><tr><td>RAM</td><td>'+res[0].RAM+'</td></tr></tbody></table>';
-    buttonshow='<button type="submit" class="btn btn-primary" onclick="callFeedback('+"'"+res[0].id+"'"+')">Submit</button>';
+    text=' <table class="table table-bordered"> <tbody> <tr style="border: none"><td >Model Name</td><td>'+res[0].Name+'</td></tr><tr><td>Operating System</td><td>'+localStorage.getItem("os")+'</td></tr><tr><td>Camera</td><td>'+localStorage.getItem("camera")+'</td></tr><tr><td>Display</td><td>'+localStorage.getItem("display")+'</td></tr><tr><td>Battery</td><td>'+localStorage.getItem("battery")+'</td></tr><tr><td>Special Features</td><td>'+localStorage.getItem("special_feat")+'</td></tr><tr><td>RAM</td><td>'+localStorage.getItem("RAM")+'</td></tr></tbody></table>';
+    buttonshow='<button type="submit" class="btn btn-primary" onclick="callFeedback('+"'"+localStorage.getItem("prod_id")+"'"+')">Submit</button>';
     document.getElementById("prodName").innerHTML=name;
     document.getElementById("prodPrice").innerHTML=price;
     document.getElementById("showSpecifications").innerHTML=text;
@@ -347,6 +358,7 @@ function showSpecifications(obj,val){
     if(Object.keys(res).length==1)
         return;
     var text11="";
+    document.getElementById("similar-prod").innerHTML="Similar Products";
     for(i=1;i<Object.keys(res).length;i++){
         var minprice="Best Price:Rs.";
         let flipPrice=res[i].flipkartPrice;
@@ -355,40 +367,35 @@ function showSpecifications(obj,val){
         let paytmprice=res[i].PaytmPrice;
         console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice);
         minprice+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
-        console.log(minprice);
         if(minprice=="Best Price:Rs.1000000")
            minprice="Not Available"; 
            text11+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" /><h5 class="card-title set-font">'+minprice+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
 
    }   
   document.getElementById("show-rec").innerHTML=text11;
+  console.log(minprice)
 // showMobilePage();
 }
 
 function showupdatedSpecifications(obj,val){
     var specsObj= obj.response;
     res=JSON.parse(specsObj);
-    console.log("in"+res);
+    console.log(res);
     if(Object.keys(res).length==0){
-        
         return;
     }      
-    var text=" ";
-    if(!val)
-        var name=res[0].Name;
-    else
-        var name=val;
     var price="Best Price:Rs.";
     let flipPrice=res[0];
     let snapPrice=res[1];
     let amazonPrice=res[2];
     let paytmprice=res[3];
+    console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice);
     price+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
     console.log(price);
     if(price=="Best Price:Rs.1000000")
         price="Not Available"; 
-    alert("New price available");
     document.getElementById("prodPrice").innerHTML=price;
+    // alert("New price available");
 }
 
  function obtainSpecs(id) {
@@ -419,23 +426,22 @@ function showupdatedSpecifications(obj,val){
      let amazonPrice=res[0].AmazonPrice;
      let paytmprice=res[0].PaytmPrice;
      console.log(flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice);
-     if(flipPrice=="null")
-         flipPrice="Not available"
+     if(flipPrice=="0")
+        flipPrice="Not available";
     else
-        flipPrice=parseFloat(flipPrice.replace(',',''));
-     if(snapPrice=="" || snapPrice || snapPrice=="null")
-         snapPrice="Not available";
+      flipPrice="Rs."+parseFloat(flipPrice.replace(',',''));
+    if(snapPrice=="0")
+        snapPrice="Not available";
     else
-        snapPrice=parseFloat(snapPrice.replace(',',''));
-     if(paytmprice=="null" || paytmprice)
-         paytmprice="Not available";
+        snapPrice="Rs."+parseFloat(snapPrice.replace(',',''));
+    if(paytmprice=="0")
+        paytmprice="Not available";
     else
-        paytmprice=parseFloat(paytmprice.replace(',',''));
-     if(amazonPrice=="" || amazonPrice)
-         amazonPrice="Not available";
+        paytmprice="Rs."+parseFloat(paytmprice.replace(',',''));
+    if(amazonPrice=="0")
+        amazonPrice="Not available";
     else
-         amazonPrice=parseFloat(amazonPrice.replace(',',''));
-     console.log(id);
+        amazonPrice="Rs."+parseFloat(amazonPrice.replace(/\,/g,""));
      compareProd={id:res[0].id,Name:res[0].Name,flipkartPrice:flipPrice,
         SnapPrice:snapPrice,os:res[0].operatingSystem,
         camera:res[0].Camera,Display:res[0].Display,RAM:res[0].RAM,specialFeat:res[0].specialFeat,Battery:res[0].Battery,
@@ -443,29 +449,32 @@ function showupdatedSpecifications(obj,val){
      };
     var result="";
     localStorage.setItem("prod"+id, JSON.stringify(compareProd));
-    console.log(localStorage);
     Object.keys(localStorage).forEach(function(key){
-      if(key!="prod_id" && key!="compare_id"){
+        if(key!="AmazonLink" && key!="FlipkartLink" && key!="SnapLink" && key!="PaytmLink" && key!="prod_id" && key!="compare_id" && key!="os" && key!="display" && key!="RAM" && key!="battery" && key!="special_feat" && key!="name" && key!="price" && key!="camera"){
             val=JSON.parse(localStorage.getItem(key));
             console.log(key);
-            result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td> <br><h5 class="font-italic set-font" >'+val.flipkartPrice+'</h5></td></tr><tr><td> <br><h5 class="font-italic set-font" >'+val.amazonPrice+'</h5></td></tr><tr><td><h5>'+val.paytmPrice+'</h5> </td> </tr><tr><td><br><h5 class="font-italic set-font">'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
+            result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td> <br><h5 class="font-italic set-font" >Flipkart:'+val.flipkartPrice+'</h5></td></tr><tr><td> <br><h5 class="font-italic set-font" >Amazon :'+val.amazonPrice+'</h5></td></tr><tr><td><h5 class="font-italic set-font">Paytm Mall :'+val.paytmPrice+'</h5> </td> </tr><tr><td><br><h5 class="font-italic set-font">SnapDeal:'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
        }
      });
     document.getElementById("compareBrands").innerHTML=result;
  }
 
  function clearCompare(val){
-     console.log("compare"+val);
+     if(localStorage.length==10){
+         document.getElementById("compareBrands").innerHTML="Nothing to compare";
+         return;
+     }
     localStorage.removeItem("prod"+val);
     console.log(localStorage);
     var result="";
     Object.keys(localStorage).forEach(function(key){
-        if(key!="prod_id" && key!="compare_id"){
-              val=JSON.parse(localStorage.getItem(key));
+        if(key!="AmazonLink" && key!="FlipkartLink" && key!="SnapLink" && key!="PaytmLink" && key!="prod_id" && key!="compare_id" && key!="os" && key!="display" && key!="RAM" && key!="battery" && key!="special_feat" && key!="name" && key!="price" && key!="camera"){
+            val=JSON.parse(localStorage.getItem(key));
               console.log(key);
-              result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td><img src="https://www.91-img.com/sourceimg/1433150439.jpg" alt=""  class="ecom-logo"> <br><h5 class="font-italic set-font" >Rs.'+val.flipkartPrice+'</h5></tr><tr><td><img src="https://www.91-img.com/sourceimg/1520940259.png" alt=""  class="ecom-logo"><br><h5 class="font-italic set-font">Rs. 30000</h5> </td> </tr><tr><td><img src="https://images.yourstory.com/cs/wordpress/2016/09/snapdeal-new-logo.png?fm=png&auto=format" style="width:100px;height:50px" alt="" class="ecom-logo"><br><h5 class="font-italic set-font">'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
+              result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td> <br><h5 class="font-italic set-font" >Flipkart:'+val.flipkartPrice+'</h5></td></tr><tr><td> <br><h5 class="font-italic set-font" >Amazon :'+val.amazonPrice+'</h5></td></tr><tr><td><h5 class="font-italic set-font">Paytm Mall :'+val.paytmPrice+'</h5> </td> </tr><tr><td><br><h5 class="font-italic set-font">SnapDeal:'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
             }
        });
     document.getElementById("compareBrands").innerHTML=result;     
+
  }
  

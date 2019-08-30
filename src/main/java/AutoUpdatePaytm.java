@@ -16,9 +16,7 @@ public class AutoUpdatePaytm {
             // look the origin of excption
         }
         Timestamp currenttime =new Timestamp(date.getTime());
-        if(databasetimestamp.before(currenttime)){
             PaytmInsert update=new PaytmInsert();
             update.hit(name);
-        }
     }
 }

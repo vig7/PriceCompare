@@ -18,9 +18,8 @@ public class AutoUpdateFlipkart {
             // look the origin of excption
         }
         Timestamp currenttime =new Timestamp(date.getTime());
-        if(databasetimestamp.before(currenttime)){
                flipkartinsert insert=new flipkartinsert();
                insert.hit(name);
-        }
+
     }
 }

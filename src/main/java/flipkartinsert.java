@@ -9,7 +9,11 @@ public class flipkartinsert {
         AddDbFlipkart flipk=new AddDbFlipkart();
         flipk.makeJDBCConnection();
         String link=flipk.getLink(name);
-        if(link.equals("null")){
+        if(link==null){
+            NullCheckPaytm check = new NullCheckPaytm();
+            check.check(name);
+        }
+        else if(!link.contains("https://")){
             NullCheckFlip check=new NullCheckFlip();
             check.check(name);
         }

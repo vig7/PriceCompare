@@ -18,6 +18,10 @@ public class AddDbFlipkart extends  DBOperations{
     void addDataToDB(String Name,String Price, String Link,  Date Time ,Boolean stock) {
 
         try {
+            if(!Price.equals("null"))
+                Price=Price.substring(1);
+            if(Price.equals("null"))
+                Price="0";
 
             String insertQueryStatement ="update phonedatabase set flipkartPrice='"+Price+"',FlipkartLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
             //String insertQueryStatement ="update phonedatabase set flipkartStock="+stock+" where FlipkartLink='"+Link+"'";
@@ -29,7 +33,7 @@ public class AddDbFlipkart extends  DBOperations{
             // execute insert SQL statement
             crunchifyPrepareStat.executeUpdate();
             log("ds" + " added successfully");
-             // connection close
+            // connection close
 
         } catch (
 
@@ -62,7 +66,11 @@ public class AddDbFlipkart extends  DBOperations{
     void addStockandPrice(String Name,String Price,  Timestamp Time,int stock) {
 
         try {
-            Price=Price.substring(1);
+
+            if(!Price.equals("null"))
+                Price=Price.substring(1);
+            if(Price.equals("null"))
+                Price="0";
             String insertQueryStatement ="update phonedatabase set flipkartPrice='"+Price+"',TimeStamp='"+Time+"',FlipkartStock='"+stock+"' where Name='"+Name+"' ";
             //String insertQueryStatement ="update phonedatabase set flipkartStock="+stock+" where FlipkartLink='"+Link+"'";
             System.out.println(insertQueryStatement);
@@ -80,7 +88,7 @@ public class AddDbFlipkart extends  DBOperations{
         }
     }
 
-//checktimestamp
+    //checktimestamp
     String getTimestamp(String name) {
         String data="";
 
@@ -125,8 +133,8 @@ public class AddDbFlipkart extends  DBOperations{
 
     }
 
-        ArrayList<String> getDataFromDB() {
-         ArrayList<String> links=new ArrayList<String>();
+    ArrayList<String> getDataFromDB() {
+        ArrayList<String> links=new ArrayList<String>();
         try {
             // MySQL Select Query Tutorial
             String getQueryStatement = "SELECT * from phonedatabase";
@@ -135,7 +143,7 @@ public class AddDbFlipkart extends  DBOperations{
 
             // Execute the Query, and get a java ResultSet
             ResultSet rs = crunchifyPrepareStat.executeQuery();
-                        // Let's iterate through the java ResultSet
+            // Let's iterate through the java ResultSet
             while (rs.next()) {
                 String link = rs.getString("flipkartlink");
                 String stock = rs.getString("flipkartStock");
@@ -249,7 +257,7 @@ public class AddDbFlipkart extends  DBOperations{
                 ram="";
             if(rom.equals("-1"))
                 rom="";
-            String getQueryStatement = "SELECT name from phonedatabase where name LIKE '%"+data+"%%"+rom+"%'&& RAM LIKE '%"+ram+"%' order by flipkartPrice ASC";
+            String getQueryStatement = "SELECT name from phonedatabase where name LIKE '%"+data+"%%"+rom+"%'&& RAM LIKE '%"+ram+"%'";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 
@@ -263,14 +271,15 @@ public class AddDbFlipkart extends  DBOperations{
 
                 // Simply Print the results
 
-               return s;
+                return s;
 
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    return null;
+        return null;
     }
 
 }
+

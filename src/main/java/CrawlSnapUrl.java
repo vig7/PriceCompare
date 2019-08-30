@@ -18,7 +18,7 @@ public class CrawlSnapUrl {
             System.out.println(price.text());
             CrawlSnapUrl csu=new CrawlSnapUrl();
             if(price.isEmpty())
-                SnapDealDB.updatePrice("","1",name);
+                SnapDealDB.updatePrice("0","1",name);
             else {
                 String prices=price.text().substring(4);
                 SnapDealDB.updatePrice(prices, "0", name);

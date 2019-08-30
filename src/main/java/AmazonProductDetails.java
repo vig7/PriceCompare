@@ -10,7 +10,6 @@ import java.util.Date;
 
 public class AmazonProductDetails {
     DBOperations db = new DBOperations();
-
     PreparedStatement PrepareStat = null;
     Date date= new Date();
     Timestamp ts = new Timestamp(date.getTime());
@@ -19,7 +18,7 @@ public class AmazonProductDetails {
     void getAmazonPrice(String brandName) throws SQLException {
         try {
             Connection.Response response =
-                    Jsoup.connect("https://www.amazon.in/s?k=" + brandName + "&ref=nb_sb_noss_2")
+                    Jsoup.connect("/www.amazon.in/s?k=" + brandName + "&ref=nb_sb_noss_2")
                             .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
                             .timeout(10 * 1000)
                             .method(Connection.Method.GET)
@@ -43,13 +42,14 @@ public class AmazonProductDetails {
                     Elements prodStock = doc.select("#availability");
                     Elements otherprice=doc.select("#olp_feature_div > #olp-new > span.olp-padding-right >span > span");
                     if (ValidateName.check(prodName.text(), brandName)) {
-                        System.out.println("true match");
+                        System.out.println();
                         if (prodPrice.isEmpty() && !otherprice.isEmpty()) {
                             String price=prodPrice.text().substring(2,otherprice.text().length()-1);
+                            System.out.println(price);
                             updatePrice(brandName, price, "0", url);
                         }
                         else if(otherprice.isEmpty() && prodPrice.isEmpty()){
-                            updatePrice(brandName, "", "0", url);
+                            updatePrice(brandName, "0", "0", url);
                         }
                         else {
                             String price=prodPrice.text().substring(2,prodPrice.text().length()-1);
@@ -84,6 +84,7 @@ public class AmazonProductDetails {
             System.out.println(prodPrice);
             if (prodPrice.isEmpty() && !otherprice.isEmpty()) {
                 String price = prodPrice.text().substring(2, otherprice.text().length() - 1);
+                System.out.println(price);
                 updatePrice(price, "0", brandName);
             } else if (prodPrice.isEmpty() && otherprice.isEmpty())
                 updatePrice("", "0", brandName);

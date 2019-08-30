@@ -9,10 +9,16 @@ public class PaytmInsert {
         AddDbPaytm paytm=new AddDbPaytm();
 
         String link=paytm.getLink(name);
-        if(link.equals("null")||link.length()==0){
-            NullCheckPaytm check=new NullCheckPaytm();
+        System.out.println(link);
+        if(link==null){
+            NullCheckPaytm check = new NullCheckPaytm();
             check.check(name);
         }
+        else if (!link.contains("https://")) {
+                NullCheckPaytm check = new NullCheckPaytm();
+                check.check(name);
+        }
+
         else {
             {
                 try {

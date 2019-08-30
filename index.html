@@ -325,7 +325,7 @@
 
 <script>window.onload = function() {
     
-    show();
+   show();
    
 }</script>
 <script>
@@ -342,18 +342,17 @@
         }
        
         });
-    $(document).on("keyup",function(e){  
-        if(e.which==13){
-           
-            var str = $('#mobile-brands').val();
-                alert(str);
-                showSearchResultPage(str);
-            
-
-        }
-       
-        });
     
+});
+  
+$(document).keypress(function(event){
+	
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+        $("#searchres").click();
+    }  
+    
+       
     });
    
 </script>

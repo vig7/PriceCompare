@@ -49,6 +49,10 @@ public class AddDbPaytm {
 
         try {
             db.makeJDBCConnection();
+
+            if(Price.equals("null"))
+                Price="0";
+
             String insertQueryStatement ="update phonedatabase set paytmPrice='"+Price+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
             System.out.println(insertQueryStatement);
             db.crunchifyPrepareStat = db.crunchifyConn.prepareStatement(insertQueryStatement);
@@ -92,6 +96,9 @@ public class AddDbPaytm {
 
         try {
             System.out.println( Name+Price);
+
+            if(Price.equals("null"))
+                Price="0";
             String insertQueryStatement ="update phonedatabase set PaytmPrice='"+Price+"',PaytmLink='"+Link+"',TimeStamp='"+Time+"' where Name='"+Name+"' ";
             db.crunchifyPrepareStat = db.crunchifyConn.prepareStatement(insertQueryStatement);
 

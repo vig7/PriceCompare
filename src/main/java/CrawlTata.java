@@ -6,7 +6,7 @@ public class CrawlTata {
     void test() {
         String product = "redmi note 7";
         try {
-            String url = "https://www.tatacliq.com/search/?searchCategory=all&text=" + product;
+            String url = "/www.tatacliq.com/search/?searchCategory=all&text=" + product;
             Document document = Jsoup.connect(url).get();
             System.out.println(document);
             Elements links = document.select("div.dKCupF_5rtgdFHZiQ3xpQ");
