@@ -10,8 +10,12 @@ public class CrawlSnapUrl {
         try {
 //                String url = "https://www.snapdeal.com/product/nokia-red-1-8gb/5764608151593451586";
             String url=snapurl;
+//            Document document = Jsoup.connect(url)
+////                    .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
+//                    .get();
+//            Elements price = document.select("div.pdp-e-i-PAY-r > span.pdp-final-price > span.payBlkBig");
+//            Elements stock = document.select("div.pdp-elec-topcenter-inner > span.sold-out-err");
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
                     .get();
             Elements price = document.select("div.pdp-e-i-PAY-r > span.pdp-final-price > span.payBlkBig");
             Elements stock = document.select("div.pdp-elec-topcenter-inner > span.sold-out-err");

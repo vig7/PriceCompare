@@ -1,6 +1,6 @@
 var phone_id,phone_name;
 var res;
-var domain = "172.16.172.39:4567";
+var domain = "172.16.172.28:4567";
 console.log(localStorage);
 
 //finding minimum price
@@ -47,7 +47,7 @@ function dynamicSearch(str){
             searchResults(this);
         }
       }
-      xmlhttp.open("GET","http://172.16.172.39:4567/SearchResults?searchKey="+str,true);
+      xmlhttp.open("GET","http://172.16.172.28:4567/SearchResults?searchKey="+str,true);
       xmlhttp.send();
 }
 
@@ -179,7 +179,7 @@ function callFeedback(proid){
             addFeatures(this); 
         }
     };
-    xmlhttp.open("GET", "http://172.16.172.39:4567/FeaturedPhones", true);
+    xmlhttp.open("GET", "http://172.16.172.28:4567/FeaturedPhones", true);
     xmlhttp.send();
  }
 
@@ -213,7 +213,7 @@ function showInitialPage(){
     var url="";
     phone_id=localStorage.getItem("prod_id");
     var result;
-    url= "http://172.16.172.39:4567/MobileSpecs?id="+phone_id;
+    url= "http://172.16.172.28:4567/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -230,7 +230,7 @@ function showInitialPage(){
     var url="";
     phone_id=localStorage.getItem("prod_id");
     
-    url= "http://172.16.172.39:4567/updatedSpecs?id="+phone_id;
+    url= "http://172.16.172.28:4567/updatedSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -246,7 +246,7 @@ function showInitialPage(){
  function showSearchResultPage(val){
 
     // var url="";
-    // url="http://172.16.172.39:4567/SearchSpecificResults?searchKey="+val;
+    // url="http://172.16.172.28:4567/SearchSpecificResults?searchKey="+val;
     document.getElementById("livesearch").innerHTML="";
     document.getElementById("livesearch").style.border="0px";
     // var xmlhttp = new XMLHttpRequest();
@@ -268,7 +268,7 @@ function showInitialPage(){
 
  function  showAllRelevantResults(val){
     var url="";
-    url="http://172.16.172.39:4567/SimilarPhones?searchKey="+val;
+    url="http://172.16.172.28:4567/SimilarPhones?searchKey="+val;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {      
@@ -299,11 +299,11 @@ function showInitialPage(){
         price+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice);
         if(price=="Rs.1000000")
            price="Not Available";
-        if(!"ImageStore/"+res[i].Name)
-            imglink=""
-        text+='<div class="col-sm-4 fix-sides"><div class="product-image-wrapper" style="border:1px red""><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" /><h5 class="card-title set-font">'+price+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
+            imglink="ImageStore/google-pixel.jpg";
+        text+='<div class="col-sm-4 fix-sides"><div class="product-image-wrapper" style="border:1px red""><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" onerror="this.onerror=null; this.src=\'ImageStore/google-pixel.jpg\'" /><h5 class="card-title set-font">'+price+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
     }
      document.getElementById("search-result").innerHTML=text;
+   //  document.getElementById("listingTable").innerHTML='<a href="javascript:prevPage()" id="btn_prev">Prev</a><a href="javascript:nextPage()" id="btn_next">Next</a>page: <span id="page"></span>';
 }
 
  
@@ -343,7 +343,7 @@ function showSpecifications(obj,val){
     localStorage.setItem("FlipkartLink",res[0].FlipkartLink);
     localStorage.setItem("SnapLink",res[0].SnapLink);
     localStorage.setItem("PaytmLink",res[0].PaytmLink);
-    image='<div class="col-sm-6"><img class="pop-up "  id="description-image-size"  src="ImageStore/'+name+'.PNG" alt="" /></div>';   
+    image='<div class="col-sm-6"><img class="pop-up "  id="description-image-size"  src="ImageStore/'+name+'.PNG" onerror="this.onerror=null; this.src=\'ImageStore/google-pixel.jpg\'"  alt="" /></div>';   
     text=' <table class="table table-bordered"> <tbody> <tr style="border: none"><td >Model Name</td><td>'+res[0].Name+'</td></tr><tr><td>Operating System</td><td>'+localStorage.getItem("os")+'</td></tr><tr><td>Camera</td><td>'+localStorage.getItem("camera")+'</td></tr><tr><td>Display</td><td>'+localStorage.getItem("display")+'</td></tr><tr><td>Battery</td><td>'+localStorage.getItem("battery")+'</td></tr><tr><td>Special Features</td><td>'+localStorage.getItem("special_feat")+'</td></tr><tr><td>RAM</td><td>'+localStorage.getItem("RAM")+'</td></tr></tbody></table>';
     buttonshow='<button type="submit" class="btn btn-primary" onclick="callFeedback('+"'"+localStorage.getItem("prod_id")+"'"+')">Submit</button>';
     document.getElementById("prodName").innerHTML=name;
@@ -406,7 +406,7 @@ function showupdatedSpecifications(obj,val){
  function sendRequest(){
     var url="";
     phone_id=localStorage.getItem("compare_id");
-    url= "http://172.16.172.39:4567/MobileSpecs?id="+phone_id;
+    url= "http://172.16.172.28:4567/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -453,7 +453,7 @@ function showupdatedSpecifications(obj,val){
         if(key!="AmazonLink" && key!="FlipkartLink" && key!="SnapLink" && key!="PaytmLink" && key!="prod_id" && key!="compare_id" && key!="os" && key!="display" && key!="RAM" && key!="battery" && key!="special_feat" && key!="name" && key!="price" && key!="camera"){
             val=JSON.parse(localStorage.getItem(key));
             console.log(key);
-            result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td> <br><h5 class="font-italic set-font" >Flipkart:'+val.flipkartPrice+'</h5></td></tr><tr><td> <br><h5 class="font-italic set-font" >Amazon :'+val.amazonPrice+'</h5></td></tr><tr><td><h5 class="font-italic set-font">Paytm Mall :'+val.paytmPrice+'</h5> </td> </tr><tr><td><br><h5 class="font-italic set-font">SnapDeal:'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
+            result+= '<div class="ComapreTable table-dark col-sm-3 compare-section"><button class= " col-sm-6 btn btn-primary" id ="compare-button" type="submit" value="'+val.id+'" onclick="clearCompare(this.value)">Clear</button><table class="table table table-striped table-dark"><thead><tr><th class="PName" scope="col">'+val.Name+'</th> </tr></thead><tbody><tr><td>'+val.os+'</td></tr><tr><td>'+val.Display+'</td></tr><tr><td>'+val.camera+'</td></tr><tr><td>'+val.Battery+'</td></tr><tr><td>'+val.specialFeat+'</td></tr><tr><td>'+val.RAM+'</td></tr><tr><td> <br><h5 class="font-italic set-font" >Flipkart:'+val.flipkartPrice+'</h5></td></tr><tr><td> <br><h5 class="font-italic set-font" >Amazon :'+val.amazonPrice+'</h5></td></tr><tr><td><h5 class="font-italic set-font">Paytm Mall :'+val.paytmPrice+'</h5> </td> </tr><tr><td><br><h5 class="font-italic set-font">SnapDeal:'+val.SnapPrice+'</h5></td></tr></tbody></table></div>';
        }
      });
     document.getElementById("compareBrands").innerHTML=result;

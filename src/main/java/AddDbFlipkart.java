@@ -257,7 +257,7 @@ public class AddDbFlipkart extends  DBOperations{
                 ram="";
             if(rom.equals("-1"))
                 rom="";
-            String getQueryStatement = "SELECT name from phonedatabase where name LIKE '%"+data+"%%"+rom+"%'&& RAM LIKE '%"+ram+"%'";
+            String getQueryStatement = "SELECT name from phonedatabase where name LIKE '%"+data+"%%"+rom+"%'&& RAM LIKE '%"+ram+"%' ORDER BY CHAR_LENGTH(Name) ASC";
 
             crunchifyPrepareStat = crunchifyConn.prepareStatement(getQueryStatement);
 

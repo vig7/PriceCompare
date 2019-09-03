@@ -6,9 +6,8 @@ import spark.Spark;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.HashMap;
 
 import static spark.Spark.port;
 
@@ -128,13 +127,13 @@ public class GetPhoneSpecs {
         try {
             if (!url.isEmpty()) {
                 try {
-                   // new CrawlSnapUrl().crawl(url, name);
+                    new CrawlSnapUrl().crawl(url, name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                   // new CrawlSnap().test(name);
+                    new CrawlSnap().test(name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -145,20 +144,23 @@ public class GetPhoneSpecs {
     }
 
     private static boolean checkSnapTimestamp(Timestamp last_updated_ts, String url, String name, String stock) throws SQLException {
-        Timestamp current_ts = new Timestamp(new Date().getTime());
-
-        if (last_updated_ts.getDate() < current_ts.getDate()) {
-            crawlSnap(url, name);
-            return true;
-        } else if (last_updated_ts.getDate() == current_ts.getDate()) {
-            int time_diff = last_updated_ts.getHours() - current_ts.getHours();
-            int min_diff = last_updated_ts.getMinutes() - current_ts.getMinutes();
-            int sec_diff = last_updated_ts.getSeconds() - current_ts.getSeconds();
-            if (time_diff > 0 && min_diff > 0 && sec_diff > 0) {
-                crawlSnap(url, name);
+        Timestamp current_ts = new Timestamp(new Date().getDate());
+        Date d1=new Date(last_updated_ts.getTime());
+        Date d2=new Date();
+        if (d1.compareTo(d2)<0) {
+                 crawlSnap(url, name);
+                return true;
             }
-            return true;
-        }
+        else if (d1.getDay()==d2.getDay()) {
+
+            int time_diff = d1.getHours() - d2.getHours();
+            int min_diff = d1.getMinutes() - d2.getMinutes();
+            int sec_diff = d1.getSeconds() - d2.getSeconds();
+            if (time_diff > 0 && min_diff > 0 && sec_diff > 0) {
+                 crawlSnap(url, name);
+            }
+                return true;
+            }
         return false;
     }
 
@@ -242,17 +244,17 @@ public class GetPhoneSpecs {
     }
 
     private static ArrayList getupdatedPhoneSpecs(int id) throws SQLException, IOException {
-        System.out.println(id);
         Conn=new DBOperations().makeJDBCConnection();
         ArrayList<String> list=new ArrayList();
         AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
         AutoUpdatePaytm paytm=new AutoUpdatePaytm();
         String getQueryStatement = "SELECT * FROM phonedatabase where phone_id="+id;
-        System.out.println(getQueryStatement);
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         boolean flag=false,aflag=false;
-            rs.next();
+
+        if(!rs.next())
+            return list;
             Timestamp last_updated_ts = rs.getTimestamp("Timestamp");
             String name=rs.getString("Name");
             String snapurl=rs.getString("SnapLink");
@@ -261,10 +263,10 @@ public class GetPhoneSpecs {
             String amazonstock=rs.getString("AmazonStock");
             if (checkSnapTimestamp(last_updated_ts, snapurl, name, snapstock))
                 flag = true;
-            if (checkAmazonTimestamp(last_updated_ts, amazonlink, name,amazonstock))
-                aflag = true;
+//            if (checkAmazonTimestamp(last_updated_ts, amazonlink, name,amazonstock))
+//                aflag = true;
 
-        if(flag==true && aflag==true) {
+        if(flag==true ) {
             flipkart.check(name);
             paytm.check(name);
             list=runSelect(id);
@@ -274,6 +276,7 @@ public class GetPhoneSpecs {
         Conn.close();
         return list;
     }
+
     private static  ArrayList runSelect(int id) throws SQLException {
         Connection Conn=new DBOperations().makeJDBCConnection();
         ArrayList<String> list=new ArrayList<>();
@@ -290,34 +293,69 @@ public class GetPhoneSpecs {
         return list;
     }
 
-//    private  static  ArrayList getnewlist(int id) {
-//    }
+
+public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
+{
+    List<Map.Entry<String, Integer> > list =
+            new LinkedList<Map.Entry<String, Integer> >(hm.entrySet());
+    Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
+        public int compare(Map.Entry<String, Integer> o1,
+                           Map.Entry<String, Integer> o2)
+        {
+            return (o1.getValue()).compareTo(o2.getValue());
+        }
+    });
+    HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
+    for (Map.Entry<String, Integer> aa : list) {
+        temp.put(aa.getKey(), aa.getValue());
+    }
+    return temp;
+}
     private static ArrayList getlevenResults(String name) throws SQLException{
         Conn =new DBOperations().makeJDBCConnection();
-        ArrayList<String> list=new ArrayList();
-        String queryStatement="select Name from phonedatabase where Name like '"+name.charAt(0)+"%'";
+        HashMap <String ,Integer> hm=new HashMap<>();
+        ArrayList<PhoneDetails> listphones=new ArrayList<>();
+        String firstName=name.split(" ")[0];
+        String queryStatement="(select Name from phonedatabase where Name like '"+firstName+"%') " +
+                "union (select Name from phonedatabase where Name like '%"+firstName+"%')";
         PrepareStat=Conn.prepareStatement(queryStatement);
         ResultSet rs=PrepareStat.executeQuery();
-        CallableStatement pstat;
+//        if(!rs.next())
+//            return listphones;
+        boolean flag=false;
+        CallableStatement pstat=null;
         while (rs.next()){
+            flag=true;
             String n=rs.getString("Name");
             pstat = Conn.prepareCall("{ ? = call levenshtein('"+name+"','"+n+"')}");
             int count = 0;
             pstat.registerOutParameter(1, Types.INTEGER);
             pstat.execute();
             count = pstat.getInt(1);
-            if(count <20)
-                list.add(n);
+            if(count <=11)
+                hm.put(n,count);
         }
-        ArrayList<PhoneDetails> listphones=new ArrayList<>();
-        for(int i=0;i<list.size();i++){
-            queryStatement="select Name,phone_id from phonedatabase where Name = '"+list.get(i)+"'";
+        Map<String, Integer> hm1 = sortByValue(hm);
+        if(flag==false)
+            return listphones;
+        for (Map.Entry<String, Integer> en : hm1.entrySet()) {
+            queryStatement="select * from phonedatabase where Name = '"+en.getKey()+"'";
             PrepareStat=Conn.prepareStatement(queryStatement);
             rs=PrepareStat.executeQuery();
-            rs.next();
-            listphones.add(new PhoneDetails(rs.getInt("phone_id"),rs.getString("Name"),0));
+            if(rs.next()==true){
+                listphones.add(new PhoneDetails(rs.getInt("phone_id"),rs.getString("Name")
+                        , rs.getString("flipkartPrice")
+                        , rs.getString("flipkartStock")
+                        , rs.getString("SnapPrice")
+                        , rs.getString("SnapStock")
+                        , rs.getString("AmazonStock")
+                        , rs.getString("AmazonPrice")
+                        , rs.getString("PaytmPrice"),0));
+            }
+
         }
         rs.close();
+        pstat.close();
         return listphones;
     }
 
@@ -345,7 +383,7 @@ public class GetPhoneSpecs {
     private static ArrayList getSearchResults(String name) throws SQLException {
         Conn=new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement="(SELECT * FROM phonedatabase where soundex('"+name+"') like soundex(Name) )union (select * from phonedatabase  where Name like '%"+name+"%' ) union (select * from phonedatabase where Name like '"+name+"%') union (select * from phonedatabase where  MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)) ";
+        String getQueryStatement="(SELECT * FROM phonedatabase where Name ='"+name+"') union (SELECT * FROM phonedatabase where soundex('"+name+"') like soundex(Name) )union (select * from phonedatabase  where Name like '%"+name+"%' ) union (select * from phonedatabase where Name like '"+name+"%') union (select * from phonedatabase where  MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)) ";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -419,7 +457,7 @@ public class GetPhoneSpecs {
             });
 
             Spark.get("/SimilarPhones", (request, response) -> {
-                ArrayList list = getFullDetails(request.queryParams("searchKey"));
+                ArrayList list = getlevenResults(request.queryParams("searchKey"));
                 gson = new Gson();
                 return gson.toJson(list);
 
@@ -448,6 +486,7 @@ public class GetPhoneSpecs {
             Spark.get("/SearchSpecificResults", (request, response) -> {
                 String serachKey = request.queryParams("searchKey");
                 ArrayList list = getSearchSpecificResults(serachKey);
+
                 gson = new Gson();
                 return gson.toJson(list);
             });
