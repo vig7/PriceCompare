@@ -297,19 +297,19 @@ public class GetPhoneSpecs {
         return list;
     }
 
-    public static HashMap<String, Double> sortByValue(HashMap<String, Double> hm)
+    public static HashMap<PhoneDetails, Double> sortByValue(HashMap<PhoneDetails, Double> hm)
     {
-    List<Map.Entry<String, Double> > list =
-            new LinkedList<Map.Entry<String, Double> >(hm.entrySet());
-    Collections.sort(list, new Comparator<Map.Entry<String, Double> >() {
-        public int compare(Map.Entry<String, Double> o1,
-                           Map.Entry<String, Double> o2)
+    List<Map.Entry<PhoneDetails, Double> > list =
+            new LinkedList<Map.Entry<PhoneDetails, Double> >(hm.entrySet());
+    Collections.sort(list, new Comparator<Map.Entry<PhoneDetails, Double> >() {
+        public int compare(Map.Entry<PhoneDetails, Double> o1,
+                           Map.Entry<PhoneDetails, Double> o2)
         {
             return (o2.getValue()).compareTo(o1.getValue());
         }
     });
-    HashMap<String, Double> temp = new LinkedHashMap<String, Double>();
-    for (Map.Entry<String, Double> aa : list) {
+    HashMap<PhoneDetails, Double> temp = new LinkedHashMap<PhoneDetails, Double>();
+    for (Map.Entry<PhoneDetails, Double> aa : list) {
         temp.put(aa.getKey(), aa.getValue());
     }
     return temp;
@@ -318,52 +318,39 @@ public class GetPhoneSpecs {
 
     private static ArrayList getlevenResults(String name) throws SQLException{
         Conn =new DBOperations().makeJDBCConnection();
-        HashMap <String ,Double> hm=new HashMap<>();
+        HashMap <PhoneDetails ,Double> hm=new HashMap<>();
         ArrayList<PhoneDetails> listphones=new ArrayList<>();
         char firstName=name.charAt(0);
-        System.out.println("firstname"+firstName);
-        String queryStatement="(select Name from phonedatabase where Name like '"+firstName+"%') " +
-                "union (select Name from phonedatabase where Name like '%"+firstName+"%')";
+        String queryStatement="(select * from phonedatabase where Name like '"+firstName+"%') " +
+                "union (select * from phonedatabase where Name like '%"+firstName+"%')";
         PrepareStat=Conn.prepareStatement(queryStatement);
         ResultSet rs=PrepareStat.executeQuery();
         boolean flag=false;
-        CallableStatement pstat=null;
         jaroDistance js=new jaroDistance();
             while (rs.next()){
                 flag=true;
                 String n=rs.getString("Name");
-
-//                pstat = Conn.prepareCall("{?=call JaroDistance('"+n+"','"+name+"')}");
-//                //System.out.println(pstat);
-//                pstat.registerOutParameter(1, Types.DOUBLE);
-//                pstat.execute();
-//                Double count = pstat.getDouble(1);
+                String fp=rs.getString("flipkartPrice") ;
+                String fs= rs.getString("flipkartStock");
+                String snapprice=rs.getString("SnapPrice") ;
+                String snapstock=rs.getString("SnapStock");
+                String amazonstock=rs.getString("AmazonStock");
+                String amazonprice= rs.getString("AmazonPrice");
+                String paytmprice=rs.getString("PaytmPrice");
                 Double count=js.apply(name,n);
                 if(count>=50) {
-                    System.out.println(count);
-                    hm.put(n, count);
+                    hm.put(new PhoneDetails(rs.getInt("phone_id"),
+                           n,fp,fs,snapprice,snapstock,amazonstock,amazonprice,paytmprice,0 ), count);
                 }
         }
-        Map<String, Double> hm1 = sortByValue(hm);
+        Map<PhoneDetails, Double> hm1 = sortByValue(hm);
         if(flag==false)
             return listphones;
-        for (Map.Entry<String, Double> en : hm1.entrySet()) {
-            queryStatement="select * from phonedatabase where Name = '"+en.getKey()+"'";
-            PrepareStat=Conn.prepareStatement(queryStatement);
-            rs=PrepareStat.executeQuery();
-            if(rs.next()==true){
-                listphones.add(new PhoneDetails(rs.getInt("phone_id"),rs.getString("Name")
-                        , rs.getString("flipkartPrice")
-                        , rs.getString("flipkartStock")
-                        , rs.getString("SnapPrice")
-                        , rs.getString("SnapStock")
-                        , rs.getString("AmazonStock")
-                        , rs.getString("AmazonPrice")
-                        , rs.getString("PaytmPrice"),0));
-            }
+        for (Map.Entry<PhoneDetails, Double> en : hm1.entrySet()) {
+            listphones.add(en.getKey());
         }
         rs.close();
-//        pstat.close();
+        Conn.close();
         return listphones;
     }
 
@@ -448,12 +435,13 @@ public class GetPhoneSpecs {
 
     private static int addFeedback(String email, String comment, int rating, int id) throws SQLException {
         Conn = new DBOperations().makeJDBCConnection();
-        String getQueryStatement = "INSERT INTO User_Feedback (User_Email,product_id,feedback,rating) VALUES (?,?,?,?)";
+        String getQueryStatement = "INSERT INTO feedback (User_Email,product_id,feedback,rating) VALUES (?,?,?,?)";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         PrepareStat.setString(1, email);
+        PrepareStat.setInt(2, id);
         PrepareStat.setString(3, comment);
         PrepareStat.setInt(4, rating);
-        PrepareStat.setInt(2, id);
+
         int count = PrepareStat.executeUpdate();
         Conn.close();
         if (count > 0)
@@ -518,19 +506,32 @@ public class GetPhoneSpecs {
                 return gson.toJson(list);
             });
             Spark.post("/feedback", (request, response) -> {
-                int id = Integer.parseInt(request.queryParams("proid"));
-                System.out.println(id);
-                String email = request.queryParams("email");
-                String comment = request.queryParams("comment");
-                int rating = Integer.parseInt(request.queryParams("ratings"));
-                System.out.println(email);
-                int res = addFeedback(email, comment, rating, id);
-
-                response.body("Successfully added");
-                response.status((200));
-
-                if (res == 1)
+                String requestfeedback=request.body();
+                String parts[]=requestfeedback.split("&");
+                String subparts[]=new String[4];
+                int k=0;
+                for(int i=0;i<parts.length;i++){
+                    subparts[i]=parts[i].split("=")[1];
+                    System.out.println(subparts[i]);
+                }
+                int id = Integer.parseInt(subparts[0]);
+                String email = subparts[1];
+                String comment = subparts[2];
+                email=email.split("%40")[0]+"@"+email.split("%40")[1];
+                StringBuilder sb=new StringBuilder();
+                if(comment.length()>1) {
+                    String commentarr[]=comment.split("%20");
+                    for(int i=0;i<commentarr.length;i++){
+                        sb.append(commentarr[i]+" ");
+                    }
+                }
+                int rating = Integer.parseInt(subparts[3]);
+                int res = addFeedback(email, sb.toString(), rating, id);
+                if (res == 1) {
+                    response.body("Successfully added");
+                    response.status((200));
                     return 1;
+                }
                 return 0;
             });
         } catch (Exception e) {
@@ -551,18 +552,6 @@ public class GetPhoneSpecs {
             updatepaytm.check(Paytmname);
             return "1";
         });
-
-//        post("/usersignup/username", (request, response) -> {
-//            String uname = request.queryParams("username");
-//            String password = request.queryParams("password");
-//            Authentication.User user1 = gson.fromJson(request.body(), Authentication.User.class);
-//
-//            // userid=userid+1;
-//            //User user=new User(user1.getusername(),uname,password);
-//            response.body("Successfully Signed up");
-//            response.status(201);
-//             return userid;
-//        });
 
     }
 }

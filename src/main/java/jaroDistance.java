@@ -32,7 +32,7 @@ public class jaroDistance {
                         matches / ((double) second.length()) +
                         (matches - transpositionsval) / ((double) matches)) / 3.0;
         System.out.println(dist);
-        double jaroWinkler = (dist + (0.1 * findLongestCommonPrefix(first, second) * (1 - dist))) * 100;
+        double jaroWinkler = (dist + (0.05 * findLongestCommonPrefix(first, second) )) * 100;
         return jaroWinkler;
     }
 
