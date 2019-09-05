@@ -1,4 +1,6 @@
 import com.google.gson.Gson;
+import org.apache.commons.text.similarity.CosineSimilarity;
+import org.apache.commons.text.similarity.JaroWinklerDistance;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -148,7 +150,8 @@ public class GetPhoneSpecs {
         Date d1=new Date(last_updated_ts.getTime());
         Date d2=new Date();
         if (d1.compareTo(d2)<0) {
-                 crawlSnap(url, name);
+            crawlSnap(url, name);
+           // new AmazonProductDetails().getAmazonPrice(name);
                 return true;
             }
         else if (d1.getDay()==d2.getDay()) {
@@ -158,6 +161,7 @@ public class GetPhoneSpecs {
             int sec_diff = d1.getSeconds() - d2.getSeconds();
             if (time_diff > 0 && min_diff > 0 && sec_diff > 0) {
                  crawlSnap(url, name);
+             //   new AmazonProductDetails().setAmazonPrice(name,url);
             }
                 return true;
             }
@@ -218,7 +222,7 @@ public class GetPhoneSpecs {
                     , rs.getString("AmazonLink")
                     , rs.getString("PaytmPrice")
                     , rs.getString("PaytmLink"), 1));
-            String getQueryStatementRec = "SELECT * from phonedatabase where RAM in (select RAM from phonedatabase WHERE   Name<>+'" + name + "'and Name like '" + name.split(" ")[0] + "%' ) GROUP BY RAM limit 4";
+            String getQueryStatementRec = "select * from phonedatabase where name like '"+name.split(" ")[0]+"%' and name <> '"+name+"' and  RAM >=(select RAM from phonedatabase  where name = '"+name+"' ) limit 4";
             PrepareStat = Conn.prepareStatement(getQueryStatementRec);
             ResultSet rs1 = PrepareStat.executeQuery();
             while(rs1.next()){
@@ -267,8 +271,8 @@ public class GetPhoneSpecs {
 //                aflag = true;
 
         if(flag==true ) {
-            flipkart.check(name);
-            paytm.check(name);
+//            flipkart.check(name);
+//            paytm.check(name);
             list=runSelect(id);
 
         }
@@ -293,52 +297,57 @@ public class GetPhoneSpecs {
         return list;
     }
 
-
-public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
-{
-    List<Map.Entry<String, Integer> > list =
-            new LinkedList<Map.Entry<String, Integer> >(hm.entrySet());
-    Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
-        public int compare(Map.Entry<String, Integer> o1,
-                           Map.Entry<String, Integer> o2)
+    public static HashMap<String, Double> sortByValue(HashMap<String, Double> hm)
+    {
+    List<Map.Entry<String, Double> > list =
+            new LinkedList<Map.Entry<String, Double> >(hm.entrySet());
+    Collections.sort(list, new Comparator<Map.Entry<String, Double> >() {
+        public int compare(Map.Entry<String, Double> o1,
+                           Map.Entry<String, Double> o2)
         {
-            return (o1.getValue()).compareTo(o2.getValue());
+            return (o2.getValue()).compareTo(o1.getValue());
         }
     });
-    HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
-    for (Map.Entry<String, Integer> aa : list) {
+    HashMap<String, Double> temp = new LinkedHashMap<String, Double>();
+    for (Map.Entry<String, Double> aa : list) {
         temp.put(aa.getKey(), aa.getValue());
     }
     return temp;
 }
+
+
     private static ArrayList getlevenResults(String name) throws SQLException{
         Conn =new DBOperations().makeJDBCConnection();
-        HashMap <String ,Integer> hm=new HashMap<>();
+        HashMap <String ,Double> hm=new HashMap<>();
         ArrayList<PhoneDetails> listphones=new ArrayList<>();
-        String firstName=name.split(" ")[0];
+        char firstName=name.charAt(0);
+        System.out.println("firstname"+firstName);
         String queryStatement="(select Name from phonedatabase where Name like '"+firstName+"%') " +
                 "union (select Name from phonedatabase where Name like '%"+firstName+"%')";
         PrepareStat=Conn.prepareStatement(queryStatement);
         ResultSet rs=PrepareStat.executeQuery();
-//        if(!rs.next())
-//            return listphones;
         boolean flag=false;
         CallableStatement pstat=null;
-        while (rs.next()){
-            flag=true;
-            String n=rs.getString("Name");
-            pstat = Conn.prepareCall("{ ? = call levenshtein('"+name+"','"+n+"')}");
-            int count = 0;
-            pstat.registerOutParameter(1, Types.INTEGER);
-            pstat.execute();
-            count = pstat.getInt(1);
-            if(count <=11)
-                hm.put(n,count);
+        jaroDistance js=new jaroDistance();
+            while (rs.next()){
+                flag=true;
+                String n=rs.getString("Name");
+
+//                pstat = Conn.prepareCall("{?=call JaroDistance('"+n+"','"+name+"')}");
+//                //System.out.println(pstat);
+//                pstat.registerOutParameter(1, Types.DOUBLE);
+//                pstat.execute();
+//                Double count = pstat.getDouble(1);
+                Double count=js.apply(name,n);
+                if(count>=50) {
+                    System.out.println(count);
+                    hm.put(n, count);
+                }
         }
-        Map<String, Integer> hm1 = sortByValue(hm);
+        Map<String, Double> hm1 = sortByValue(hm);
         if(flag==false)
             return listphones;
-        for (Map.Entry<String, Integer> en : hm1.entrySet()) {
+        for (Map.Entry<String, Double> en : hm1.entrySet()) {
             queryStatement="select * from phonedatabase where Name = '"+en.getKey()+"'";
             PrepareStat=Conn.prepareStatement(queryStatement);
             rs=PrepareStat.executeQuery();
@@ -352,10 +361,9 @@ public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
                         , rs.getString("AmazonPrice")
                         , rs.getString("PaytmPrice"),0));
             }
-
         }
         rs.close();
-        pstat.close();
+//        pstat.close();
         return listphones;
     }
 
@@ -383,7 +391,9 @@ public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
     private static ArrayList getSearchResults(String name) throws SQLException {
         Conn=new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list=new ArrayList();
-        String getQueryStatement="(SELECT * FROM phonedatabase where Name ='"+name+"') union (SELECT * FROM phonedatabase where soundex('"+name+"') like soundex(Name) )union (select * from phonedatabase  where Name like '%"+name+"%' ) union (select * from phonedatabase where Name like '"+name+"%') union (select * from phonedatabase where  MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)) ";
+        String getQueryStatement="(SELECT * FROM phonedatabase where Name ='"+name+"') " +
+                "union (select * from phonedatabase where  Name like '"+name+"%') " +
+                "union (select * from phonedatabase where  Name like '%"+name+"%')";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -417,15 +427,21 @@ public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
 
     private static ArrayList getSearchSpecificResults(String name) throws SQLException, IOException {
         Conn = new DBOperations().makeJDBCConnection();
-        System.out.println(name);
         ArrayList<PhoneDetails> list = new ArrayList();
-        String getQueryStatement = "SELECT phone_id FROM phonedatabase where Name = '" + name + "'";
+        String getQueryStatement = "SELECT * FROM phonedatabase where Operating_System like '" + name + "%' or " +
+                "Operating_System like '%"+name+"%' limit 10";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
-//        rs.next();
-        if(!rs.next())
-            return list;
-        list=getPhoneSpecs(rs.getInt("phone_id"));
+       while(rs.next()){
+           list.add(new PhoneDetails(rs.getInt("phone_id"),rs.getString("Name")
+                   , rs.getString("flipkartPrice")
+                   , rs.getString("flipkartStock")
+                   , rs.getString("SnapPrice")
+                   , rs.getString("SnapStock")
+                   , rs.getString("AmazonStock")
+                   , rs.getString("AmazonPrice")
+                   , rs.getString("PaytmPrice"),0));
+       }
         Conn.close();
         return list;
     }
@@ -460,7 +476,6 @@ public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
                 ArrayList list = getlevenResults(request.queryParams("searchKey"));
                 gson = new Gson();
                 return gson.toJson(list);
-
             });
 
             Spark.get("/MobileSpecs", (request, response) -> {
@@ -469,6 +484,7 @@ public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
                 gson = new Gson();
                 return gson.toJson(list);
             });
+
             Spark.get("/updatedSpecs", (request, response) -> {
                 int id = Integer.parseInt(request.queryParams("id"));
                 ArrayList list = getupdatedPhoneSpecs(id);
@@ -486,17 +502,10 @@ public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
             Spark.get("/SearchSpecificResults", (request, response) -> {
                 String serachKey = request.queryParams("searchKey");
                 ArrayList list = getSearchSpecificResults(serachKey);
-
                 gson = new Gson();
                 return gson.toJson(list);
             });
 
-            Spark.get("/SimilarResults", (request, response) -> {
-                String serachKey = request.queryParams("searchKey");
-                ArrayList list = getlevenResults(serachKey);
-                gson = new Gson();
-                return gson.toJson(list);
-            });
             Spark.get("/Extension", (request, response) -> {
                 String serachKey = request.queryParams("Title");
                 Extension ext = new Extension();
@@ -509,10 +518,11 @@ public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
                 return gson.toJson(list);
             });
             Spark.post("/feedback", (request, response) -> {
+                int id = Integer.parseInt(request.queryParams("proid"));
+                System.out.println(id);
                 String email = request.queryParams("email");
-                int id = Integer.parseInt(request.queryParams("id"));
                 String comment = request.queryParams("comment");
-                int rating = Integer.parseInt(request.queryParams("rating"));
+                int rating = Integer.parseInt(request.queryParams("ratings"));
                 System.out.println(email);
                 int res = addFeedback(email, comment, rating, id);
 

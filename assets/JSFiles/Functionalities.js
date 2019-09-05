@@ -95,22 +95,19 @@ function setSearchVal(v,id){
     let amazonPrice;
     let paytmprice;
     if(Object.keys(res).length==4){
-        console.log("hello");
-     flipPrice=res[0];
-     snapPrice=res[1];
-     amazonPrice=res[2];
-     paytmprice=res[3];
+        flipPrice=res[0];
+        snapPrice=res[1];
+        amazonPrice=res[2];
+        paytmprice=res[3];
 
     }
     else{
-    flipPrice=res[0].flipkartPrice;
-     snapPrice=res[0].SnapPrice;
-     amazonPrice=res[0].AmazonPrice;
-     paytmprice=res[0].PaytmPrice;
-
+        flipPrice=res[0].flipkartPrice;
+        snapPrice=res[0].SnapPrice;
+        amazonPrice=res[0].AmazonPrice;
+        paytmprice=res[0].PaytmPrice;
     }
      
-    console.log("modal"+flipPrice+" "+snapPrice+" "+amazonPrice+" "+paytmprice);
     if(amazonPrice!="0" ){
         prices[0]=amazonPrice;
         links[0]=localStorage.getItem("AmazonLink");
@@ -143,15 +140,9 @@ function setSearchVal(v,id){
          text+="<p>"+deals[i]+"</p><br>";
          price+="<p>"+prices[i]+"</p><br>";
          if(prices[i]!="Not Available"){
-            // if(i==1 || i==3)
-            //     button+='<a href="https://'+links[i]+'" class="btn btn-primary " style="margin-bottom:10px;">'+'Go to site'+'</a><br>';
-            // else
                 button+='<a href="'+links[i]+'" class="btn btn-primary " style="margin-bottom:10px;">'+'Go to site'+'</a><br>';
         }
         else{
-        //     if(i==1)
-        //     button+='<a href="https://'+links[i]+'" class="btn btn-primary " disabled style="margin-bottom:10px; ">'+'Go to site'+'</a><br>';
-        // else
             button+='<a href="'+links[i]+'" class="btn btn-primary "  disabled style="margin-bottom:10px;">'+'Go to site'+'</a><br>';
         }
     }
@@ -168,7 +159,33 @@ function callFeedback(proid){
         var ratings=document.getElementById("ratings").value;
         var id=proid;
         console.log(email+" "+comment+" "+ratings+" "+id);
-       
+        var XHR = new XMLHttpRequest();
+        var FD  = new FormData();
+        // var data=
+        var data={proid:proid,email:email, comment:comment,ratings:ratings};
+        console.log(data);
+        for(name in data) {
+            console.log(name+" "+data[name]);
+            FD.append(name, data[name]);
+            
+        }
+        console.log(FD.getAll);
+
+  // Define what happens on successful data submission
+        XHR.addEventListener('load', function(event) {
+            alert('Yeah! Data sent and response loaded.');
+        });
+
+  // Define what happens in case of error
+        XHR.addEventListener('error', function(event) {
+            alert('Oops! Something went wrong.');
+        });
+
+  // Set up our request
+   XHR.open('POST', 'http://172.16.172.28:4567/feedback');
+
+  // Send our FormData object; HTTP headers are set automatically
+    XHR.send(FD);
 }
 
  //Adding featured mobiles
@@ -369,7 +386,7 @@ function showSpecifications(obj,val){
         minprice+=findMinPrice(flipPrice,snapPrice,amazonPrice,paytmprice)
         if(minprice=="Best Price:Rs.1000000")
            minprice="Not Available"; 
-           text11+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" /><h5 class="card-title set-font">'+minprice+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
+           text11+='<div class="col-sm-3 fix-sides"><div class="product-image-wrapper"><div class="single-products"><div class="card text-center"><img class="pop-up" style="height:200px" src="ImageStore/'+res[i].Name+'.PNG" onerror="this.onerror=null; this.src=\'ImageStore/google-pixel.jpg\'" /><h5 class="card-title set-font">'+minprice+'</h5><p class="card-text">'+res[i].Name+'</p><button class="btn btn-default add-to-cart" value ="'+res[i].id+'"  onclick="loadDetails(this.value)"><i class="fa fa-shopping"></i>See details</button></div>  </div></div></div>';
 
    }   
   document.getElementById("show-rec").innerHTML=text11;

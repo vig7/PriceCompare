@@ -1,3 +1,4 @@
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,22 +14,25 @@ public class CrawlSnapUrl {
 //            Document document = Jsoup.connect(url)
 ////                    .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
 //                    .get();
+//            String html = Connection.Response.body().toString();
 //            Elements price = document.select("div.pdp-e-i-PAY-r > span.pdp-final-price > span.payBlkBig");
 //            Elements stock = document.select("div.pdp-elec-topcenter-inner > span.sold-out-err");
             Document document = Jsoup.connect(url)
                     .get();
-            Elements price = document.select("div.pdp-e-i-PAY-r > span.pdp-final-price > span.payBlkBig");
+            Elements price = document.select("span.payBlkBig");
             Elements stock = document.select("div.pdp-elec-topcenter-inner > span.sold-out-err");
             System.out.println(price.text());
             CrawlSnapUrl csu=new CrawlSnapUrl();
-            if(price.isEmpty())
-                SnapDealDB.updatePrice("0","1",name);
+            if(price.isEmpty()) {
+                 SnapDealDB.updatePrice("0","1",name);
+            }
             else {
-                String prices=price.text().substring(4);
-                SnapDealDB.updatePrice(prices, "0", name);
+
+                SnapDealDB.updatePrice(price.text(), "0", name);
             }
         } catch (Exception e1) {
             e1.printStackTrace();
         }
     }
+
 }

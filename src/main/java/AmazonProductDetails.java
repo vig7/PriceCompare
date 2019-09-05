@@ -71,29 +71,31 @@ public class AmazonProductDetails {
 
     void setAmazonPrice(String brandName,String url) {
         try {
-            Connection.Response response1 = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2")
-                    .timeout(10 * 1000)
-                    .method(Connection.Method.GET)
-                    .execute();
-            Document doc = response1.parse();
-            Elements prodName = doc.select("#titleSection > h1 > span");
-            Elements prodPrice = doc.select("#priceblock_ourprice");
-            Elements prodStock = doc.select("#availability");
-            Elements otherprice = doc.select("#olp_feature_div > #olp-new > span.olp-padding-right >span > span");
-            System.out.println(prodPrice);
-            if (prodPrice.isEmpty() && !otherprice.isEmpty()) {
-                String price = prodPrice.text().substring(2, otherprice.text().length() - 1);
-                System.out.println(price);
-                updatePrice(price, "0", brandName);
-            } else if (prodPrice.isEmpty() && otherprice.isEmpty())
-                updatePrice("", "0", brandName);
-            else {
-                String price = prodPrice.text().substring(2, prodPrice.text().length() - 1);
-                updatePrice(price, "1", brandName);
-            }
-        }catch(Exception e){
-            System.out.println("Something went wrong.."+e);
+//            UserAgentManager userAgentManager = new RandomUserAgentManager();
+//            CrawlerConfig crawlerConfig = new DefaultCrawlerConfig("TestCrawlApp", userAgentManager, false);
+//            AsyncCrawler asyncCrawler = new AsyncCrawler();
+//
+//            ListenableFuture<AsyncCrawlResponse> future = asyncCrawler.crawl(url, crawlerConfig);
+
+//  //          String document=""+future.get().getContent();
+//            Document doc= Jsoup.parse(document);
+//            Elements prodName = doc.select("#titleSection > h1 > span");
+//            Elements prodPrice = doc.select("#priceblock_ourprice");
+//            Elements prodStock = doc.select("#availability");
+//            Elements otherprice = doc.select("#olp_feature_div > #olp-new > span.olp-padding-right >span > span");
+//            System.out.println(prodPrice);
+//            if (prodPrice.isEmpty() && !otherprice.isEmpty()) {
+//                String price = prodPrice.text().substring(2, otherprice.text().length() - 1);
+//                updatePrice(price, "0", brandName);
+//            } else if (prodPrice.isEmpty() && otherprice.isEmpty())
+//                updatePrice("", "0", brandName);
+//            else {
+//                String price = prodPrice.text().substring(2, prodPrice.text().length() - 1);
+//                updatePrice(price, "1", brandName);
+//            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -155,5 +157,8 @@ public class AmazonProductDetails {
             Conn.close();
         }
 
+    }
+    public static void main(String args[]){
+        new AmazonProductDetails().setAmazonPrice("Xiaomi Redmi Note 7 Pro","hh");
     }
 }
