@@ -3,7 +3,6 @@ public class jaroDistance {
     public double apply(String first, String second) {
         first = first.replaceAll("\\s", "").trim();
         second = second.replaceAll("\\s", "").trim();
-        System.out.println(first + " " + second);
         first = first.toLowerCase();
         second = second.toLowerCase();
         int s_len = first.length();
@@ -43,17 +42,32 @@ public class jaroDistance {
                 transpositions++;
         }
         transpositions /= 2;
-        System.out.println(transpositions);
         return transpositions;
     }
 
     private int findLongestCommonPrefix(String s1, String s2) {
         int prefixCount = 0;
-        for (int i = 0; i < Math.min(s1.length(), s2.length()); i++) {
-            if (s1.charAt(i) != s2.charAt(i))
-                break;
-            prefixCount++;
+        String longer,shorter;
+        if(s1.length()>s2.length()) {
+            shorter=s2;
+            longer = s1;
         }
+        else{
+            shorter=s1;
+            longer=s2;
+        }
+        for(int j=0;j<Math.max(s1.length(),s2.length());j++){
+            for (int i = 0; i < Math.min(s1.length(), s2.length());i++) {
+                if(j<Math.max(s1.length(),s2.length())) {
+                    if (longer.charAt(j) != shorter.charAt(i))
+                        break;
+
+                    prefixCount++;
+                    j++;
+                }
+            }
+        }
+//        System.out.println(prefixCount);
         return prefixCount;
     }
 }

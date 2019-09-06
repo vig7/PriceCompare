@@ -33,15 +33,6 @@
                         </button>
                 
                     </div>
-                    <div class="shop-menu pull-right collapse navbar-collapse" id="myNavbar">
-                        <ul class="nav navbar-nav navbar-right">
-                             <li><a href=""><i class="fa fa-crosshairs"></i> Help</a></li>
-                             <!-- <li><a href="comparePrices.html"><i class="fa fa-shopping-cart"></i> Compare</a></li> -->
-                             <li><a href=""><i class="fa fa-user"></i> Deals</a></li>
-                             <li><a href=""><i class="fa fa-lock"></i> Feedback</a></li>
-                            
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -299,10 +290,11 @@
 }
 // window.onload=showMobilePage;</script>
 <script>
+    var str;
     $(document).ready(function(){
       $("#searchres").click(function(){
        
-        var str = $('#mobile-brands').val();
+         str = $('#mobile-brands').val();
         if(!str){
             alert("Type in correctly");
             return;
@@ -313,6 +305,18 @@
         }
    
       });
+    });
+    $(document).keypress(function(event){
+	
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+        str= $('#mobile-brands').val();
+        
+        // document.getElementById("livesearch").innerHTML="";
+        event.preventDefault();
+        $("#searchres").click();
+        $('#mobile-brands').val(" ");
+    }  
     });
 </script>
 </body>

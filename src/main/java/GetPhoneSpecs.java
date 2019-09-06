@@ -168,31 +168,6 @@ public class GetPhoneSpecs {
         return false;
     }
 
-    private static boolean checkAmazonTimestamp(Timestamp last_updated_ts, String url, String name, String stock) throws SQLException, IOException {
-        Timestamp current_ts = new Timestamp(new Date().getTime());
-        if (last_updated_ts.getDate() < current_ts.getDate()) {
-            if (url.isEmpty()) {
-              //  new AmazonProductDetails().getAmazonPrice(name);
-            } else if (!url.isEmpty()) {
-                // new AmazonProductDetails().setAmazonPrice(name,url);
-            }
-            return true;
-        } else if (last_updated_ts.getDate() == current_ts.getDate()) {
-            int time_diff = last_updated_ts.getHours() - current_ts.getHours();
-            int min_diff = last_updated_ts.getMinutes() - current_ts.getMinutes();
-            int sec_diff = last_updated_ts.getSeconds() - current_ts.getSeconds();
-            if (time_diff > 0 && min_diff > 0 && sec_diff > 0) {
-                if (url.isEmpty()) {
-                  //  new AmazonProductDetails().getAmazonPrice(name);
-                } else if (!url.isEmpty()) {
-                    //new AmazonProductDetails().setAmazonPrice(name,url);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
     private static ArrayList getPhoneSpecs(int id) throws SQLException, IOException {
         Connection Conn=new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list = new ArrayList();
@@ -267,14 +242,10 @@ public class GetPhoneSpecs {
             String amazonstock=rs.getString("AmazonStock");
             if (checkSnapTimestamp(last_updated_ts, snapurl, name, snapstock))
                 flag = true;
-//            if (checkAmazonTimestamp(last_updated_ts, amazonlink, name,amazonstock))
-//                aflag = true;
-
         if(flag==true ) {
-//            flipkart.check(name);
-//            paytm.check(name);
+            flipkart.check(name);
+            paytm.check(name);
             list=runSelect(id);
-
         }
         rs.close();
         Conn.close();
@@ -316,7 +287,7 @@ public class GetPhoneSpecs {
 }
 
 
-    private static ArrayList getlevenResults(String name) throws SQLException{
+    private static ArrayList getlevenResults(String name) throws SQLException, IOException {
         Conn =new DBOperations().makeJDBCConnection();
         HashMap <PhoneDetails ,Double> hm=new HashMap<>();
         ArrayList<PhoneDetails> listphones=new ArrayList<>();
@@ -338,7 +309,7 @@ public class GetPhoneSpecs {
                 String amazonprice= rs.getString("AmazonPrice");
                 String paytmprice=rs.getString("PaytmPrice");
                 Double count=js.apply(name,n);
-                if(count>=50) {
+                if(count>=70) {
                     hm.put(new PhoneDetails(rs.getInt("phone_id"),
                            n,fp,fs,snapprice,snapstock,amazonstock,amazonprice,paytmprice,0 ), count);
                 }
@@ -357,7 +328,7 @@ public class GetPhoneSpecs {
     private static ArrayList getFullDetails(String name) throws SQLException {
         Conn = new DBOperations().makeJDBCConnection();
         ArrayList<PhoneDetails> list = new ArrayList();
-        String getQueryStatement="(SELECT * FROM phonedatabase where soundex('"+name+"') like soundex(Name) )union (select * from phonedatabase  where Name like '%"+name+"%' ) union (select * from phonedatabase where Name like '"+name+"%') union (select * from phonedatabase where  MATCH (Name) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE)) ";
+        String getQueryStatement="(SELECT * FROM phonedatabase where Name like '"+name+"%' )";
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
         while (rs.next()) {
@@ -441,7 +412,6 @@ public class GetPhoneSpecs {
         PrepareStat.setInt(2, id);
         PrepareStat.setString(3, comment);
         PrepareStat.setInt(4, rating);
-
         int count = PrepareStat.executeUpdate();
         Conn.close();
         if (count > 0)
@@ -487,6 +457,13 @@ public class GetPhoneSpecs {
                 return gson.toJson(list);
             });
 
+            Spark.get("/getAllPhones", (request, response) -> {
+                String serachKey = request.queryParams("searchKey");
+                ArrayList list = getFullDetails(serachKey);
+                gson = new Gson();
+                return gson.toJson(list);
+            });
+
             Spark.get("/SearchSpecificResults", (request, response) -> {
                 String serachKey = request.queryParams("searchKey");
                 ArrayList list = getSearchSpecificResults(serachKey);
@@ -502,31 +479,27 @@ public class GetPhoneSpecs {
                 ArrayList list = getprice(res);
                 System.out.println(list);
                 gson = new Gson();
-
                 return gson.toJson(list);
             });
+
             Spark.post("/feedback", (request, response) -> {
                 String requestfeedback=request.body();
                 String parts[]=requestfeedback.split("&");
                 String subparts[]=new String[4];
                 int k=0;
-                for(int i=0;i<parts.length;i++){
+                for(int i=0;i<parts.length;i++)
                     subparts[i]=parts[i].split("=")[1];
-                    System.out.println(subparts[i]);
-                }
+
                 int id = Integer.parseInt(subparts[0]);
                 String email = subparts[1];
                 String comment = subparts[2];
-                email=email.split("%40")[0]+"@"+email.split("%40")[1];
-                StringBuilder sb=new StringBuilder();
+                email=email.replaceAll("%40","@");
+//                email=email.split("%40")[0]+"@"+email.split("%40")[1];
                 if(comment.length()>1) {
-                    String commentarr[]=comment.split("%20");
-                    for(int i=0;i<commentarr.length;i++){
-                        sb.append(commentarr[i]+" ");
-                    }
+                   comment= comment.replaceAll("%20"," ");
                 }
                 int rating = Integer.parseInt(subparts[3]);
-                int res = addFeedback(email, sb.toString(), rating, id);
+                int res = addFeedback(email, comment, rating, id);
                 if (res == 1) {
                     response.body("Successfully added");
                     response.status((200));

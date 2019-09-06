@@ -34,15 +34,6 @@
                         </button>
                 
                     </div>
-                    <div class="shop-menu pull-right collapse navbar-collapse" id="myNavbar">
-                        <ul class="nav navbar-nav navbar-right">
-                             <li><a href=""><i class="fa fa-crosshairs"></i> Help</a></li>
-                             <!-- <li><a href="comparePrices.html"><i class="fa fa-shopping-cart"></i> Compare</a></li> -->
-                             <li><a href=""><i class="fa fa-user"></i> Deals</a></li>
-                             <li><a href=""><i class="fa fa-lock"></i> Feedback</a></li>
-                            
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -52,7 +43,7 @@
             <div class="row search-area-fix">
                 <div class="col-sm-12">
                     <div clas="search-area-fix">
-                        <form id="form">
+                        
                             
                             <div class="col-sm-12 input-group">
                             
@@ -63,7 +54,7 @@
                                 <!-- <input type="submit" class="btn btn-primary" id="searchres"> -->
                             </div>
                             <div  class= "col-sm-12" id="livesearch"></div>
-                        </form>
+                        
                     </div>
                 </div>    
             </div>
@@ -158,7 +149,7 @@
                                                    
                                                     <div class="card text-center">
                                                         <img style="height:75px" src="assets/images/mi.JPG" alt="" />
-                                                        <h5 class="card-title">Xiaomi</h5>
+                                                        <h5 id="brands" class="card-title" onclick="showAll('xiaomi')">Xiaomi</h5>
                                                     </div>
                                                     
                                             </div>
@@ -171,7 +162,7 @@
                                                        
                                                         <div class="card text-center">
                                                             <img style="height:75px" src="assets/images/vivo.JPG" alt="" />
-                                                            <h5 class="card-title">VIVO</h5>
+                                                            <h5 id="brands" class="card-title" onclick="showAll('vivo')">VIVO</h5>
                                                         </div>
                                                         
                                                 </div>
@@ -184,7 +175,7 @@
                                                        
                                                         <div class="card text-center">
                                                             <img style="height:75px" src="assets/images/oppo.JPG" alt="" />
-                                                            <h5 class="card-title">OPPO</h5>
+                                                            <h5 id="brands" class="card-title" onclick="showAll('oppo')">OPPO</h5>
                                                         </div>
                                                         
                                                 </div>
@@ -197,7 +188,7 @@
                                                            
                                                             <div class="card text-center">
                                                                 <img style="height:75px" src="assets/images/nokiaBrand.JPG" alt="" />
-                                                                <h5 class="card-title">Nokia</h5>
+                                                                <h5 id="brands" class="card-title" onclick="showAll('nokia')">Nokia</h5>
                                                     
                                                             </div>
                                                             
@@ -213,7 +204,7 @@
                                                                
                                                                 <div class="card text-center">
                                                                     <img style="height:75px" src="assets/images/samsung.JPG" alt="" />
-                                                                    <h5 class="card-title">SAMSUNG</h5>
+                                                                    <h5 id="brands" class="card-title" onclick="showAll('samsung')">SAMSUNG</h5>
                                                                    
                                                                 </div>
                                                                 
@@ -227,7 +218,7 @@
                                                                
                                                                 <div class="card text-center">
                                                                     <img style="height:75px" src="assets/images/Realme.JPG" alt="" />
-                                                                    <h5 class="card-title">Realme</h5>
+                                                                    <h5 id="brands" class="card-title" onclick="showAll('realme')">Realme</h5>
                                                                    
                                                                 </div>
                                                                 
@@ -241,7 +232,7 @@
                                                                
                                                                 <div class="card text-center">
                                                                     <img style="height:75px" src="assets/images/Motorola.JPG" alt="" />
-                                                                    <h5 class="card-title">Motorola</h5>
+                                                                    <h5 id="brands" class="card-title" onclick="showAll('moto')">Motorola</h5>
                                                                  
                                                                 </div>
                                                                 
@@ -255,7 +246,7 @@
                                                                
                                                                 <div class="card text-center">
                                                                     <img style="height:75px" src="assets/images/huwaeiBrand.JPG" alt="" />
-                                                                    <h5 class="card-title">Huwaei</h5>
+                                                                    <h5 id="brands" class="card-title" onclick="showAll('huwaei')">Huwaei</h5>
                                                                    
                                                                 </div>
                                                                 
@@ -333,30 +324,36 @@
    
 }</script>
 <script>
+     var str ;
     $(document).ready(function(){
       $("#searchres").click(function(){  
-        var str = $('#mobile-brands').val();
+        str= $('#mobile-brands').val();
         if(!str){
             alert("Type in correctly");
             return;
         }
         else{
+           
+            console.log(str);
+           
             // showInitialPage();
            showSearchResultPage(str);
         }
        
-        });
-    
+    });
 });
   
 $(document).keypress(function(event){
 	
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
+        str= $('#mobile-brands').val();
+        
+        // document.getElementById("livesearch").innerHTML="";
+        event.preventDefault();
         $("#searchres").click();
+        $('#mobile-brands').val(" ");
     }  
-    
-       
     });
    
 </script>

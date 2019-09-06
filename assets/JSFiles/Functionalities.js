@@ -154,38 +154,29 @@ function setSearchVal(v,id){
 function callFeedback(proid){
   
         var email=document.getElementById("usr").value;
-        alert(email)
         var comment=document.getElementById("comment").value;
         var ratings=document.getElementById("ratings").value;
-        var id=proid;
-        console.log(email+" "+comment+" "+ratings+" "+id);
         var XHR = new XMLHttpRequest();
-        var FD  = new FormData();
-        // var data=
+        // if(email==" ")
+            
+        var urlEncodedData = "";
+        var urlEncodedDataPairs = [];
         var data={proid:proid,email:email, comment:comment,ratings:ratings};
         console.log(data);
         for(name in data) {
             console.log(name+" "+data[name]);
-            FD.append(name, data[name]);
-            
+            urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));   
         }
-        console.log(FD.getAll);
-
-  // Define what happens on successful data submission
+        urlEncodedData = urlEncodedDataPairs.join('&');
+        console.log(urlEncodedData);
         XHR.addEventListener('load', function(event) {
             alert('Yeah! Data sent and response loaded.');
         });
-
-  // Define what happens in case of error
         XHR.addEventListener('error', function(event) {
             alert('Oops! Something went wrong.');
         });
-
-  // Set up our request
    XHR.open('POST', 'http://172.16.172.28:4567/feedback');
-
-  // Send our FormData object; HTTP headers are set automatically
-    XHR.send(FD);
+    XHR.send(urlEncodedData);
 }
 
  //Adding featured mobiles
@@ -246,7 +237,7 @@ function showInitialPage(){
  function showMobilePage() {
     var url="";
     phone_id=localStorage.getItem("prod_id");
-    
+
     url= "http://172.16.172.28:4567/updatedSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -261,29 +252,27 @@ function showInitialPage(){
  }
 
  function showSearchResultPage(val){
-
-    // var url="";
-    // url="http://172.16.172.28:4567/SearchSpecificResults?searchKey="+val;
     document.getElementById("livesearch").innerHTML="";
     document.getElementById("livesearch").style.border="0px";
-    // var xmlhttp = new XMLHttpRequest();
-    // xmlhttp.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         console.log(Object.keys(JSON.parse(this.response)).length);
-            // if(Object.keys(JSON.parse(this.response)).length==1){
-            //     var res1=JSON.parse(this.response);
-            //     console.log("in"+res1);
-            //     loadDetails(res1[0].id);
-            // }
-            // else 
-                showAllRelevantResults(val);
-            //  }
-    // };
-    // xmlhttp.open("GET",url, true);
-    // xmlhttp.send();
+    showAllRelevantResults(val);
  }
-
+ function showAll(val){
+    var url="";
+    url="http://172.16.172.28:4567/getAllPhones?searchKey="+val;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {      
+                showSpecsCard(this,val); 
+             }
+    };
+    xmlhttp.open("GET",url, true);
+    xmlhttp.send();
+ 
+   
+ }
+ 
  function  showAllRelevantResults(val){
+   
     var url="";
     url="http://172.16.172.28:4567/SimilarPhones?searchKey="+val;
     var xmlhttp = new XMLHttpRequest();
@@ -322,8 +311,6 @@ function showInitialPage(){
      document.getElementById("search-result").innerHTML=text;
    //  document.getElementById("listingTable").innerHTML='<a href="javascript:prevPage()" id="btn_prev">Prev</a><a href="javascript:nextPage()" id="btn_next">Next</a>page: <span id="page"></span>';
 }
-
- 
 
 function showSpecifications(obj,val){
     var specsObj= obj.response;

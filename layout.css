@@ -17,6 +17,10 @@ form.example input[type=text] {
   font-weight: bold;
 }
 
+#brands{
+  cursor:pointer;
+}
+
 #compare-button{
    margin-left: 20%;
    margin-top:10%; 
