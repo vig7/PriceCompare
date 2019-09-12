@@ -1,8 +1,10 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class PaytmInsert {
     void  hit(String name){
@@ -23,9 +25,16 @@ public class PaytmInsert {
             {
                 try {
                     System.out.println(link);
-                    Document document = Jsoup.connect(link).get();
+                    System.setProperty("webdriver.gecko.driver","geckodriver.exe");
+                    FirefoxDriver driver = new FirefoxDriver();
+                    driver.navigate().to(link);
+                    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                    String stringdoc=driver.getPageSource();
+                    driver.close();
+                    Document document = Jsoup.parse(stringdoc);
+                  //  Document document=Jsoup.connect(link)
                     String price = document.select("span._1V3w").text();
-                    System.out.println(price);
+                    System.out.println(price +"paytm");
                     Date date = new Date();
                     Timestamp timestamp = new Timestamp(date.getTime());
                     System.out.println(price + name);

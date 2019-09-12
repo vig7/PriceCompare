@@ -11,6 +11,7 @@ public class Redis {
         Jedis jedis = getRedisConnection();
         Type listType = new TypeToken<ArrayList<PhoneDetails>>(){}.getType();
         ArrayList<PhoneDetails> phoneDetails = new Gson().fromJson(jedis.get("topTrendingPhones"), listType);
+        jedis.expire("topTrendingPhones",432000);
         jedis.close();
         return phoneDetails;
     }

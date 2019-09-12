@@ -1,6 +1,4 @@
 import com.google.gson.Gson;
-import org.apache.commons.text.similarity.CosineSimilarity;
-import org.apache.commons.text.similarity.JaroWinklerDistance;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -8,8 +6,8 @@ import spark.Spark;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.*;
 import java.util.Date;
+import java.util.*;
 
 import static spark.Spark.port;
 
@@ -225,8 +223,6 @@ public class GetPhoneSpecs {
     private static ArrayList getupdatedPhoneSpecs(int id) throws SQLException, IOException {
         Conn=new DBOperations().makeJDBCConnection();
         ArrayList<String> list=new ArrayList();
-        AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart();
-        AutoUpdatePaytm paytm=new AutoUpdatePaytm();
         String getQueryStatement = "SELECT * FROM phonedatabase where phone_id="+id;
         PrepareStat = Conn.prepareStatement(getQueryStatement);
         ResultSet rs = PrepareStat.executeQuery();
@@ -243,8 +239,13 @@ public class GetPhoneSpecs {
             if (checkSnapTimestamp(last_updated_ts, snapurl, name, snapstock))
                 flag = true;
         if(flag==true ) {
-            flipkart.check(name);
-            paytm.check(name);
+
+            AutoUpdateFlipkart flipkart=new AutoUpdateFlipkart(name);
+            AutoUpdatePaytm paytm=new AutoUpdatePaytm(name);
+            AmazonProductDetails amazon=new AmazonProductDetails(name,amazonlink);
+            flipkart.start();
+            paytm.start();
+            amazon.start();
             list=runSelect(id);
         }
         rs.close();
@@ -472,6 +473,7 @@ public class GetPhoneSpecs {
             });
 
             Spark.get("/Extension", (request, response) -> {
+
                 String serachKey = request.queryParams("Title");
                 Extension ext = new Extension();
                 System.out.println(serachKey);
@@ -515,14 +517,14 @@ public class GetPhoneSpecs {
 
         Spark.get("/UpdateFlip", (request, response) -> {
             String Flipname = request.queryParams("Name");
-            AutoUpdateFlipkart updateflip = new AutoUpdateFlipkart();
-            updateflip.check(Flipname);
+            AutoUpdateFlipkart updateflip = new AutoUpdateFlipkart(Flipname);
+            updateflip.start();
             return "1";
         });
         Spark.get("/UpdatePaytm", (request, response) -> {
             String Paytmname = request.queryParams("Name");
-            AutoUpdatePaytm updatepaytm = new AutoUpdatePaytm();
-            updatepaytm.check(Paytmname);
+            AutoUpdatePaytm updatepaytm = new AutoUpdatePaytm(Paytmname);
+            updatepaytm.start();
             return "1";
         });
 

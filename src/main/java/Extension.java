@@ -76,7 +76,8 @@ public class Extension {
                     res+=title.charAt(i);
                     i--;
                     b=false;
-
+                    if(i==0)
+                        break;
                 }
                 if(!b){
                     String temp="";

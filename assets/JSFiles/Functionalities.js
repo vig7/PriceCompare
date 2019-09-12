@@ -1,6 +1,6 @@
 var phone_id,phone_name;
 var res;
-var domain = "172.16.172.28:4567";
+var domain = "localhost:4567";
 console.log(localStorage);
 
 //finding minimum price
@@ -47,7 +47,7 @@ function dynamicSearch(str){
             searchResults(this);
         }
       }
-      xmlhttp.open("GET","http://172.16.172.28:4567/SearchResults?searchKey="+str,true);
+      xmlhttp.open("GET","http://localhost:4567/SearchResults?searchKey="+str,true);
       xmlhttp.send();
 }
 
@@ -175,7 +175,7 @@ function callFeedback(proid){
         XHR.addEventListener('error', function(event) {
             alert('Oops! Something went wrong.');
         });
-   XHR.open('POST', 'http://172.16.172.28:4567/feedback');
+   XHR.open('POST', 'http://localhost:4567/feedback');
     XHR.send(urlEncodedData);
 }
 
@@ -187,7 +187,7 @@ function callFeedback(proid){
             addFeatures(this); 
         }
     };
-    xmlhttp.open("GET", "http://172.16.172.28:4567/FeaturedPhones", true);
+    xmlhttp.open("GET", "http://localhost:4567/FeaturedPhones", true);
     xmlhttp.send();
  }
 
@@ -221,7 +221,7 @@ function showInitialPage(){
     var url="";
     phone_id=localStorage.getItem("prod_id");
     var result;
-    url= "http://172.16.172.28:4567/MobileSpecs?id="+phone_id;
+    url= "http://localhost:4567/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -238,7 +238,7 @@ function showInitialPage(){
     var url="";
     phone_id=localStorage.getItem("prod_id");
 
-    url= "http://172.16.172.28:4567/updatedSpecs?id="+phone_id;
+    url= "http://localhost:4567/updatedSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -258,7 +258,7 @@ function showInitialPage(){
  }
  function showAll(val){
     var url="";
-    url="http://172.16.172.28:4567/getAllPhones?searchKey="+val;
+    url="http://localhost:4567/getAllPhones?searchKey="+val;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {      
@@ -274,7 +274,7 @@ function showInitialPage(){
  function  showAllRelevantResults(val){
    
     var url="";
-    url="http://172.16.172.28:4567/SimilarPhones?searchKey="+val;
+    url="http://localhost:4567/SimilarPhones?searchKey="+val;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {      
@@ -410,7 +410,7 @@ function showupdatedSpecifications(obj,val){
  function sendRequest(){
     var url="";
     phone_id=localStorage.getItem("compare_id");
-    url= "http://172.16.172.28:4567/MobileSpecs?id="+phone_id;
+    url= "http://localhost:4567/MobileSpecs?id="+phone_id;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

@@ -3,12 +3,19 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class AmazonProductDetails {
+public class AmazonProductDetails extends  Thread{
+    String setname,seturl;
+    public AmazonProductDetails(String setname,String seturl){
+        this.setname=setname;
+        this.seturl=seturl;
+    }
     DBOperations db = new DBOperations();
     PreparedStatement PrepareStat = null;
     Date date= new Date();
@@ -69,30 +76,30 @@ public class AmazonProductDetails {
         }
     }
 
-    void setAmazonPrice(String brandName,String url) {
+    public void run() {
         try {
-//            UserAgentManager userAgentManager = new RandomUserAgentManager();
-//            CrawlerConfig crawlerConfig = new DefaultCrawlerConfig("TestCrawlApp", userAgentManager, false);
-//            AsyncCrawler asyncCrawler = new AsyncCrawler();
-//
-//            ListenableFuture<AsyncCrawlResponse> future = asyncCrawler.crawl(url, crawlerConfig);
-
-//  //          String document=""+future.get().getContent();
-//            Document doc= Jsoup.parse(document);
-//            Elements prodName = doc.select("#titleSection > h1 > span");
-//            Elements prodPrice = doc.select("#priceblock_ourprice");
-//            Elements prodStock = doc.select("#availability");
-//            Elements otherprice = doc.select("#olp_feature_div > #olp-new > span.olp-padding-right >span > span");
-//            System.out.println(prodPrice);
-//            if (prodPrice.isEmpty() && !otherprice.isEmpty()) {
-//                String price = prodPrice.text().substring(2, otherprice.text().length() - 1);
-//                updatePrice(price, "0", brandName);
-//            } else if (prodPrice.isEmpty() && otherprice.isEmpty())
-//                updatePrice("", "0", brandName);
-//            else {
-//                String price = prodPrice.text().substring(2, prodPrice.text().length() - 1);
-//                updatePrice(price, "1", brandName);
-//            }
+            if(seturl.length()==0||seturl.equals("null")||seturl==null)
+                return;
+            System.setProperty("webdriver.gecko.driver","geckodriver.exe");
+            FirefoxDriver driver = new FirefoxDriver();
+            driver.navigate().to(seturl);
+            String stringdoc=driver.getPageSource();
+            driver.close();
+            Document doc= Jsoup.parse(stringdoc);
+            Elements prodName = doc.select("#titleSection > h1 > span");
+            Elements prodPrice = doc.select("#priceblock_ourprice");
+            Elements prodStock = doc.select("#availability");
+            Elements otherprice = doc.select("#olp_feature_div > #olp-new > span.olp-padding-right >span > span");
+            System.out.println(prodPrice);
+            if (prodPrice.isEmpty() && !otherprice.isEmpty()) {
+                String price = prodPrice.text().substring(2, otherprice.text().length() - 1);
+                updatePrice(price, "0", setname);
+            } else if (prodPrice.isEmpty() && otherprice.isEmpty())
+                updatePrice("", "0", setname);
+            else {
+                String price = prodPrice.text().substring(2, prodPrice.text().length() - 1);
+                updatePrice(price, "1", setname);
+            }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -158,7 +165,5 @@ public class AmazonProductDetails {
         }
 
     }
-    public static void main(String args[]){
-        new AmazonProductDetails().setAmazonPrice("Xiaomi Redmi Note 7 Pro","hh");
-    }
+
 }
